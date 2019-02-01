@@ -1,0 +1,1 @@
+Part of the project which consist to get cards from an external API, save it in a nice file format and sort them.

@@ -1,0 +1,1 @@
+Part of the project which consiste to emulate current game state, and try plays for the futur IA

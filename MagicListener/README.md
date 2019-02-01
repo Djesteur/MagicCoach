@@ -1,0 +1,1 @@
+Part of the project which consist to get informations from the game for getting the current game state
