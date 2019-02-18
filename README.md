@@ -6,3 +6,5 @@ Members of the team:
 	BESSON Natdanaï
 	DI GIOVANI Thomas
 	DESGENETEZ Clément
+
+Supervising teacher: BOURREAU Eric
