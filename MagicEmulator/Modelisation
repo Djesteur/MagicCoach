@@ -79,15 +79,16 @@ ECS:
 		- Coût converti de mana (CCM) 		| tableau d'énumération
 		- Coût supplémentaire 				| action
 		- Légendaire						| booléen
+		- Cibles							| tableau de cibles
 
 		---------------------(Pour équipement)-----------------------
 
 		- Coût d'équipement 				| tableau d'énumération
-		- Cible 							| créature
+		- Cible 							| cible
 
 		---------------------(Pour aura)-----------------------------
 
-		- Cible 							| permanent
+		- Cible 							| cible
 
 		---------------------(Pour capacité déclenché)---------------
 
@@ -97,3 +98,30 @@ ECS:
 		---------------------(Pour capacité activé)---------------
 
 		- Effet lors de l'activation		| script
+
+
+
+		Besoin de composants:
+
+			- entier
+			- booléen
+			- énumération:
+				- zone actuelle
+			- tableau d'énumération:
+				- coût en mana
+				- types
+				- mots clès
+			- tableau de mots
+			- script
+			- script retournant un booléen
+			- cible
+			- tableau de cibles
+
+	Systèmes:
+
+		- Combat
+		- Déclenchement de capacités déclenchées
+		- Déclenchement de capacités activées
+		- Vérification des actions d'état
+		- Gestion de la pile ( + action spéciale: terrain)
+		- Réserve de mana
