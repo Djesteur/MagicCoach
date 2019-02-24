@@ -1,0 +1,99 @@
+Parties d'une carte intéressantes:
+
+	- nom
+	- coût de mana
+	- indicateur de couleur
+	- ligne de type
+	- encadré du texte
+	- force et endurance
+	- loyauté
+
+Liste des zones:
+
+	- Terrain de jeu
+	- Cimetière
+	- Exil
+	- Bibliothèque
+	- Main
+	- Zone de commandement
+	- Pile (commune à tous)
+
+Types:
+
+	- Terrain
+	- Créature
+	- Artéfact
+	- Enchantement
+	- Planeswalker
+	- Rituel
+	- Ephemère
+
+Autres "types" à traiter:
+
+	- Jeton (un des types de permanent)
+	- Emblèmes (objet)
+
+ECS:
+
+	Composants:
+
+		-------------------------------------------------------------
+
+		- Force de base						| entier
+		- Endurance de base					| entier
+		- Loyauté de base					| entier
+		- Types de base						| tableau d'énumération
+		- Sous-types de base				| tableau de mots
+		- Mot clès de base					| tableau d'énumération
+		- Coût de mana de base				| tableau d'énumération
+		- Texte lorsque lancé				| script		
+		- Capacités déclenchés de base		| script
+		- Capacités activés de base			| script
+		- Capacités continues de base		| script
+
+		-------------------------------------------------------------
+
+		- Force actuelle					| entier
+		- Endurance actuelle				| entier
+		- Loyauté actuelle					| entier
+		- Types actuels						| tableau d'énumération
+		- Sous-types actuels				| tableau de mots
+		- Mot clès actuels					| tableau d'énumération
+		- Coût de mana actuel				| tableau d'énumération	
+		- Capacités déclenchés actuelles	| script
+		- Capacités activés actuelles		| script
+		- Capacités continues actuelles		| script
+
+		-------------------------------------------------------------
+
+		- Contrôleur actuel 				| entier
+		- Possesseur						| entier
+		- Points de vie 					| entier
+		- Blessures 						| entier
+		- Zone actuelle 					| énumération
+		- Engagé/Dégagé 					| booléen
+		- Visible/Non visible 				| booléen
+		- Inversé/Non inversé 				| booléen
+		- En phase/Hors phase 				| booléen
+		- Mal d'invocation 					| booléen
+		- Coût converti de mana (CCM) 		| tableau d'énumération
+		- Coût supplémentaire 				| action
+		- Légendaire						| booléen
+
+		---------------------(Pour équipement)-----------------------
+
+		- Coût d'équipement 				| tableau d'énumération
+		- Cible 							| créature
+
+		---------------------(Pour aura)-----------------------------
+
+		- Cible 							| permanent
+
+		---------------------(Pour capacité déclenché)---------------
+
+		- Conditions de déclenchement		| script (qui retourne un booléen)
+		- Effet lors du déclenchement		| script
+
+		---------------------(Pour capacité activé)---------------
+
+		- Effet lors de l'activation		| script

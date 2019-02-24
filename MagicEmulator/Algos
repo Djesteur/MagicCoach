@@ -1,0 +1,67 @@
+Algo d'un tour:
+
+NP: pas de priorité
+PA: le joueur actif reçoit la priorité
+
+Actions basé sur un état: vérifié à chaque fois qu'un joueur reçoit la prorité
+
+Phase de début de tour:
+	- étape dégagement (NP)
+		Dégagement, si effet, mise sur la pile 
+	- étape de début d'entretient
+		Activation effet début d'entretient
+		PA
+	- étape de pioche
+		Pioche du joueur actif
+		PA
+
+Phase principale 1:
+	PA + action spéciales (jouer un terrain)
+
+Phase combat:
+	- étape déclaration de phase d'attaque (obligatoire)
+		PA
+	- étape de déclaration des attaquants (facultatif)
+	    déclare les attaquants, et les cibles
+	    PA
+	- étape de déclaration des bloquants (facultatif)
+		déclare les bloquants
+		PA
+	- étape des blessures  (facultatif)
+		choix d'affectation des blessure (attaquant en premier, puis bloquant)
+		affectation des blessures et effets (initiative et double initiative)
+		affectation des blessures et effets
+		PA
+	- étape de fin de combat (obligatoire)
+		PA
+
+Phase principale 2:
+	PA + action spéciales (jouer un terrain)
+
+Phase de fin de tour:
+	- étape de fin de tour
+		effets de fin de tour
+		PA
+	- étape de nettoyage
+		defausse des cartes en trop en main
+		retire les blessures et met fin au effets "jusqu'à la fin du tour"
+			si action basé sur l'état et/ou capacité déclenchées mise sur la pile:
+				action sur les etats effectués
+				mise sur la pile des capacités
+				PA
+				recommance l'étape de nettoyage jusqu'à ce qu'il n'y ai plus rien
+
+
+Algo PA (hors phase principale):
+
+	nbPrioritéPassé = 0
+	joueurPriorité = joueurActif
+	Si joueurPriorité fait quelque chose
+		nbPrioritéPassé = 0
+	Sinon
+		nbPrioritéPassé++
+		joueurPriorité++
+		Si nbPriotitéPassé = nombreDeJoueur
+			Fin de la priorité
+		FSi
+	Fsi
