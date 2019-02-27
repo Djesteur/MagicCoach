@@ -46,10 +46,6 @@ ECS:
 		- Sous-types de base				| tableau de mots
 		- Mot clès de base					| tableau d'énumération
 		- Coût de mana de base				| tableau d'énumération
-		- Texte lorsque lancé				| script		
-		- Capacités déclenchés de base		| script
-		- Capacités activés de base			| script
-		- Capacités continues de base		| script
 
 		-------------------------------------------------------------
 
@@ -77,7 +73,6 @@ ECS:
 		- En phase/Hors phase 				| booléen
 		- Mal d'invocation 					| booléen
 		- Coût converti de mana (CCM) 		| tableau d'énumération
-		- Coût supplémentaire 				| action
 		- Légendaire						| booléen
 		- Cibles							| tableau de cibles
 
@@ -98,6 +93,11 @@ ECS:
 		---------------------(Pour capacité activé)---------------
 
 		- Effet lors de l'activation		| script
+
+		---------------------(Pour capacité passive)---------------
+
+		- Application arrivée en jeu		| script
+		- Application arrivée en jeu		| script
 
 
 
@@ -121,7 +121,8 @@ ECS:
 
 		- Combat
 		- Déclenchement de capacités déclenchées
-		- Déclenchement de capacités activées
+		- Déclenchement de capacités activées/Lancement de sort  ( + action spéciale: terrain)
 		- Vérification des actions d'état
-		- Gestion de la pile ( + action spéciale: terrain)
+		- Gestion de la pile
 		- Réserve de mana
+		- Phases et étapes
