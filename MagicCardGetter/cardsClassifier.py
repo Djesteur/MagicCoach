@@ -1,29 +1,67 @@
 import json
 import re
 from mtgsdk import Card
-#from nltk.corpus import stopwords
-#from sklearn.feature_extraction.text import CountVectorizer
-# vectorizer = CountVectorizer(stop_words=stopwords.words('english'))
-# X = vectorizer.fit_transform([card.text]).toarray()
-# print(card.name, ": ", X.shape)
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+import unicodedata
+import contractions
 
+nltk.download("stopwords")
+
+
+# Clean up the text, normalizing it
+def normalize(cardText):
+    if (cardText is not None):
+        # Removing non ASCII characters
+        #cardText = unicodedata.normalize(
+        #    'NFKD', cardText).encode("ascii", "ignore")
+
+        # Removing contractions
+        cardText = contractions.fix(cardText, slang = False)
+
+        # Tokenizing
+        tokenizedText = word_tokenize(cardText)
+
+        # Putting all words in lowercase
+        tokenizedText = [word.lower() for word in tokenizedText]
+
+        # Deleting ponctuations
+        tokenizedText = [word for word in tokenizedText if word.isalpha()]
+
+        # Removing stop words
+        stopWords = stopwords.words('english')
+        tokenizedText = [word for word in tokenizedText if not word in stopWords]
+
+        # Lemmatization (or Stemmatization?)
+        #lemmatizer = WordNetLemmatizer()
+        #cardText = [lemmatizer.lemmatize(word, pos = 'v') for word in tokenizedText]
+
+        # Turn it back into a string
+        cardText = "".join([" " + i for i in tokenizedText]).strip()
+        print(cardText)
+
+        return cardText
+
+    else: # If the text is empty
+        return ""
 
 # Returns the card's note about its control capacities:
-# Countering cards,
+# Ability to counter,
 # Stops the opponent from playing
 # Creature management
 
 
 def control(card):
-    if (card.text is not None
-            and card.text.lower().find("counter") != -1
-            and re.search("[+-][0-9]/[+-][0-9] counter", card.text.lower()) is None):
+    if (card.text.find("counter") != -1
+            and re.search("[+-][0-9]/[+-][0-9] counter", card.text) is None):
         return 1
 
     return 0
 
 # Returns the card's note about its tempo capacities:
-# Buying time
+# Ability to buy time
 
 
 def tempo(card):
@@ -34,58 +72,55 @@ def tempo(card):
 
 
 def polyvalence(card):
-    if (card.text is not None
-            and card.text.lower().find("choose one") != -1):
+    if (card.text.find("choose one") != -1):
         return 1
 
     return 0
 
 # Returns the card's note about its creature capacities:
-# Ratio of mana cost / (stats + created tokens)
+# Ratio of (stats + created tokens) / converted mana cost
 
 
 def creature(card):
-    sum = 0
+    statsSum = 0
 
-    if (card.text is not None):
-        tokenText = re.search(
-            "create .+ [0-9]/[0-9] .+ token", card.text.lower())
+    tokenText = re.search(
+        "create .+ [0-9]/[0-9] .+ token", card.text)
 
-        if (tokenText is not None):
-            tokenStats = re.findall("[0-9]", tokenText.group())
+    if (tokenText is not None):
+        tokenNumber = re.search("one|two|three|four|five|six|seven|eight|nine", tokenText)
+        tokenStats = re.findall("[0-9]", tokenText.group())
 
-            for tokenStat in tokenStats:
-                sum += int(tokenStat)
+        for tokenStat in tokenStats:
+            statsSum += int(tokenStat)
 
     if (card.power is not None
             and card.power != "*"
             and card.toughness != "*"):
-        sum += int(card.power) + int(card.toughness)
+        statsSum += int(card.power) + int(card.toughness)
 
-    if (sum >= card.cmc * 2): #TODO Get a real ratio
-        return 1
-
-    return 0
+    if (card.cmc != 0):
+        return statsSum / card.cmc
+    else:
+        return statsSum
 
 # Returns the card's note about its value capacities:
-# Drawing cards
+# Ability to draw cards
 
 
 def value(card):
-    if (card.text is not None
-            and card.text.lower().find("draw") != -1):
+    if (card.text.find("draw") != -1):
         return 1
 
     return 0
 
 # Returns the card's note about its boost capacities:
-# Improving cards, permanently or not
+# Ability to improve cards, permanently or not
 
 
 def boost(card):
-    if (card.text is not None
-            and (card.text.lower().find("gains") != -1
-                 or re.search("\+[0-9]/\+[0-9]", card.text.lower()) is not None)):
+    if (card.text.find("gains") != -1
+            or re.search("\+[0-9]/\+[0-9]", card.text) is not None):
         return 1
 
     return 0
@@ -94,6 +129,10 @@ def boost(card):
 
 
 def analyseCard(card):
+    if card.text is None:
+        card.text = ""
+    #card.text = normalize(card.text)
+
     return {
         "Control": control(card),
         "Tempo": tempo(card),
