@@ -7,19 +7,22 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import unicodedata
 import contractions
+from word2number import w2n
 
 nltk.download("stopwords")
 
 
 # Clean up the text, normalizing it
+
+
 def normalize(cardText):
     if (cardText is not None):
         # Removing non ASCII characters
-        #cardText = unicodedata.normalize(
+        # cardText = unicodedata.normalize(
         #    'NFKD', cardText).encode("ascii", "ignore")
 
         # Removing contractions
-        cardText = contractions.fix(cardText, slang = False)
+        cardText = contractions.fix(cardText, slang=False)
 
         # Tokenizing
         tokenizedText = word_tokenize(cardText)
@@ -31,8 +34,8 @@ def normalize(cardText):
         tokenizedText = [word for word in tokenizedText if word.isalpha()]
 
         # Removing stop words
-        stopWords = stopwords.words('english')
-        tokenizedText = [word for word in tokenizedText if not word in stopWords]
+        tokenizedText = [
+            word for word in tokenizedText if not word in stopwords.words('english')]
 
         # Lemmatization (or Stemmatization?)
         #lemmatizer = WordNetLemmatizer()
@@ -40,22 +43,21 @@ def normalize(cardText):
 
         # Turn it back into a string
         cardText = "".join([" " + i for i in tokenizedText]).strip()
-        print(cardText)
 
         return cardText
 
-    else: # If the text is empty
+    else:  # If the text is empty
         return ""
 
 # Returns the card's note about its control capacities:
 # Ability to counter,
-# Stops the opponent from playing
+# Stops the opponent from playing,
 # Creature management
 
 
 def control(card):
-    if (card.text.find("counter") != -1
-            and re.search("[+-][0-9]/[+-][0-9] counter", card.text) is None):
+    if (card.text.find("counter ") != -1
+            and re.search("[+-][0-9]/[+-][0-9] counter ", card.text) is None):
         return 1
 
     return 0
@@ -78,26 +80,28 @@ def polyvalence(card):
     return 0
 
 # Returns the card's note about its creature capacities:
-# Ratio of (stats + created tokens) / converted mana cost
+# Ratio of (self stats + stats of created tokens) / converted mana cost
 
 
 def creature(card):
     statsSum = 0
 
     tokenText = re.search(
-        "create .+ [0-9]/[0-9] .+ token", card.text)
+        "create (one|two|three|four|five|six|seven|eight|nine) ([0-9])/([0-9]) .+ token", card.text)
 
     if (tokenText is not None):
-        tokenNumber = re.search("one|two|three|four|five|six|seven|eight|nine", tokenText)
-        tokenStats = re.findall("[0-9]", tokenText.group())
+        tokenNumber = int(w2n.word_to_num(tokenText.group(1)))
+        tokenStats = int(tokenText.group(2)) + int(tokenText.group(3))
 
-        for tokenStat in tokenStats:
-            statsSum += int(tokenStat)
+        statsSum += tokenNumber * tokenStats
 
     if (card.power is not None
-            and card.power != "*"
+            and card.power != "*"):
+        statsSum += int(card.power)
+
+    if (card.toughness is not None
             and card.toughness != "*"):
-        statsSum += int(card.power) + int(card.toughness)
+        statsSum += int(card.toughness)
 
     if (card.cmc != 0):
         return statsSum / card.cmc
