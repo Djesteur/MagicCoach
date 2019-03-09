@@ -5,46 +5,50 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <memory>
+#include <thread>
+#include <ctime>
 
+using namespace std;
 
-void parsingUtileFile(std::string fileName, std::vector<std::string> &tabL, std::vector<std::ofstream> &tabF){
+/*void parsingUtileFile(string fileName, vector<string> tabL, vector<shared_ptr<ofstream>> tabF) {
 
-	std::ifstream file;
+	ifstream file;
 	file.open(fileName);
 
 	if (!file) {
-		std::cout << "Le fichier : "<< fileName << " est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
+		cout << "Le fichier : " << fileName << " est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
 	}
 
-	for (std::string line; getline(file, line);) {
+	int i = 0;
+	for (string line; getline(file, line);) {
 		int spacePos = line.find("|");
 		tabL.push_back(line.substr(0, spacePos));
 
-		//un tableau de fichier.... tordu ?
-		std::ofstream f;
-		f.open(line.substr(spacePos + 1, line.size()));
-		tabF.push_back(f);
+		ofstream f(line.substr(spacePos + 1, line.size()));
+		tabF.push_back(make_shared<ofstream>(f));
+		i++;
 	}
 
 	file.close();
 
 }
 
-void closeTabFile(std::vector<std::ofstream> &tabF) {
+void closeTabFile(vector<shared_ptr<ofstream>> tabF) {
 	for (size_t i = 0; i < tabF.size(); i++) {
-		tabF[i].close();
+		tabF[i]->close();
 	}
-}
+}*/
 
-bool checkLigneSkip(std::string line) {
+bool checkLigneSkip(string line) {
 
 	int const tailleList = 1;
-	std::string listInutile[tailleList];// A OPTIMISER !!!!!!! Merci
-	listInutile[0] = (std::string)"| Response:";
+	string listInutile[tailleList];// A OPTIMISER
+	listInutile[0] = (string)"| Response:";
 
-	for (std::string l: listInutile) {
-		std::size_t foundInutile = line.find(l);
-		if (foundInutile != std::string::npos) {
+	for (string l: listInutile) {
+		size_t foundInutile = line.find(l);
+		if (foundInutile != string::npos) {
 			return true;
 		}
 	}
@@ -52,11 +56,11 @@ bool checkLigneSkip(std::string line) {
 	return false;
 }
 
-int checkLigneUtility(std::string line, std::vector<std::string> utilityList) {
+int checkLigneUtility(string line, vector<string> utilityList) {
 
 	for (size_t i = 0; i < utilityList.size(); i++) {
-		std::size_t foundUtile = line.find(utilityList[i]);
-		if (foundUtile != std::string::npos) {
+		size_t foundUtile = line.find(utilityList[i]);
+		if (foundUtile != string::npos) {
 			return i;
 		}
 	}
@@ -64,27 +68,58 @@ int checkLigneUtility(std::string line, std::vector<std::string> utilityList) {
 	return -1;//pas a trier
 }
 
+int checkLigneUtility(string line) {
 
-bool getLogInformations(std::string fileName, std::vector<std::string> utilityList, std::vector<std::ofstream> tabFile) {
+	int const tailleList = 2;
+	string utilityList[tailleList];// A OPTIMISER
+	utilityList[0] = (string)"<== Deck.GetDeckLists(";
+	utilityList[1] = (string)"<== PlayerInventory.GetPlayerCardsV3(";
 
-	std::cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~\n";
-	std::cout << "Parsage par methode double line/chars \n";
-	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~\n";
+	int i = 0;
+	for (string l : utilityList) {
+		size_t foundUtile = line.find(l);
+		if (foundUtile != string::npos) {
+			return i;
+		}
+		i++;
+	}
 
-	std::ifstream file;
+	return -1;//pas a trier
+}
+
+
+//bool getLogInformations(string fileName, vector<string> utilityList, vector<shared_ptr<ofstream>> tabFile) {
+bool getLogInformations(string fileName, bool *continuerProgramme) {
+
+	cout << "\n===========================\n";
+	cout << "Parsage par methode double line/chars \n";
+	cout << "===========================\n";
+
+	ifstream file;
 	file.open(fileName);
 
 	if (!file) {
-		std::cout << "Le fichier est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
+		cout << "Le fichier est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
 		return false;
 	}
 
-	std::ofstream jsonFile("Parsed_Files/log_JSON.json", std::ofstream::out);
+	ofstream jsonFile("Parsed_Files/log_JSON.json", ofstream::out);
 	if (!jsonFile) {
-		std::cout << "Le fichier 'log_JSON.json' n'a pas être créer.\n";
+		cout << "Le fichier 'log_JSON.json' n'a pas pus être créer.\n";
 		return false;
 	}
 
+	ofstream deckFile("Parsed_Files/deck.json", ofstream::out);
+	if (!jsonFile) {
+		cout << "Le fichier 'deck.json' n'a pas pus être créer.\n";
+		return false;
+	}
+
+	ofstream carteFile("Parsed_Files/carte.json", ofstream::out);
+	if (!jsonFile) {
+		cout << "Le fichier 'carte.json' n'a pas pus être créer.\n";
+		return false;
+	}
 
 	jsonFile << "{\n \"jsonList\" : [\n";
 
@@ -94,13 +129,18 @@ bool getLogInformations(std::string fileName, std::vector<std::string> utilityLi
 	int nbJson = 0;
 	int onUtile = -1;
 
-	for (std::string line; getline(file, line);) {
+	cout << "Parsing launched ! \n";
+
+	//istream_iterator = 
+
+	for (string line; getline(file, line);) {
 
 		bool skipLine = checkLigneSkip(line);
 
-		int utile = checkLigneUtility(line, utilityList);
+		//int utile = checkLigneUtility(line, utilityList);
+		int utile = checkLigneUtility(line);
 		if (utile != -1) {
-			std::cout << "Json Utile trouver ! \n";
+			//cout << "Json Utile trouver ! \n";
 			onUtile = utile;
 			skipLine = true; //on skipe la ligne car pas besoins ce la première
 		}
@@ -109,13 +149,13 @@ bool getLogInformations(std::string fileName, std::vector<std::string> utilityLi
 
 			for (char& c : line) {//On lis char par char la ligne
 
-				//std::cout << chars;
+				//cout << chars;
 
 				//Si on trouve une { on vérifie que l'on était pas déjà dans un JSON
 				if (c == '{') {
 					if (!inJson) {
 						nbJson++;
-						std::cout << "Nb JSON find: " << nbJson << "\n";
+						//cout << "Nb JSON find: " << nbJson << "\n";
 						inJson = true;
 					}
 					nbAcolade++;
@@ -128,12 +168,24 @@ bool getLogInformations(std::string fileName, std::vector<std::string> utilityLi
 				//On ecrit dans le fichier des JSON sinon dans autre ligne
 				if (inJson || onUtile != -1) {
 
-					switch (onUtile) {
+					/*switch (onUtile) {
 					case -1:
 						jsonFile << c;
 						break;
 					default:
-						tabFile[onUtile] << c; 
+						tabFile[onUtile]->operator<<(c); // Oo wtf
+						break;
+					}*/
+
+					switch (onUtile) {
+					case 0:
+						deckFile << c;
+						break;
+					case 1:
+						carteFile << c;
+						break;
+					default:
+						jsonFile << c; // Oo wtf
 						break;
 					}
 				}
@@ -160,36 +212,71 @@ bool getLogInformations(std::string fileName, std::vector<std::string> utilityLi
 
 		}
 
+
 	}//fin pour ligne
+
+	cout << "Fin de lecture du début !\n Passage en écoute. \n";
+
+	clock_t start = clock();
+	clock_t lastTick = start;
+	while (*continuerProgramme) { //AJOUTER LECTURE LIGNE PAR LIGNE APRES PREMIRE LECTURE ! ... Je sais pas comment faire pour le moment
+		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 2) {
+			lastTick = clock();
+			cout << "POKE ! \n";
+		}
+	}
 
 	//Fermeture du JSON général
 	jsonFile << "\n{\"NbJson\" : " << nbJson << " }\n]\n}";
 
+	cout << "\n\n===========================\n";
+	cout << "Parsage du fichier terminee.\n";
+	cout << "===========================\n\n";
+
 	file.close();
 	jsonFile.close();
 
+	deckFile.close();
+	carteFile.close();
+
+	exit(0); // On fermme comme il faut
+
 	return true;
+}
+
+void readingCommande(bool *continuerProgramme) {
+	string commande;
+	while (*continuerProgramme) {
+		cout << "Commande:";
+		getline(cin, commande); //getline pour avoir toutes la ligne propre
+		if (commande == "quit") {
+			cout << "Le programme vas ce terminer correctement dans quelque instant. \n";
+			*continuerProgramme = false;
+		}
+		cout << "\n";
+	}
 }
 
 
 int main(){
 
-	std::vector<std::string> utilityList;
-	std::vector<std::ofstream> tabFile;
+	/*vector<string> utilityList;
+	vector<shared_ptr<ofstream>> tabFile;
 
 	parsingUtileFile("utile.txt", utilityList, tabFile);
 
-	std::vector<std::string, std::string> notUitlityList;
+    cout << "Log file:\n";
+	getLogInformations("output_log.txt", utilityList, tabFile);*/
+
+	bool continuerProgramme = true;
+
+	thread parsing(getLogInformations, "output_log.txt", &continuerProgramme);
+	thread comm(readingCommande, &continuerProgramme);
+	parsing.join();
+	comm.join();
 
 
-    std::cout << "Log file:\n";
-	getLogInformations("output_log.txt", utilityList, tabFile);
-
-	std::cout << "\n\n===========================\n";
-	std::cout << "Parsage du fichier terminee.\n";
-	std::cout << "===========================\n\n";
-
-	closeTabFile(tabFile);
+	//closeTabFile(tabFile);
 
 	return EXIT_SUCCESS;
 }
