@@ -4,4 +4,4 @@ BooleanComponent::BooleanComponent(ComponentType type, bool value):
 	Component{type},
 	m_value{value} {}
 
-bool& BooleanComponent::getData() { return m_value; }
+bool& BooleanComponent::data() { return m_value; }

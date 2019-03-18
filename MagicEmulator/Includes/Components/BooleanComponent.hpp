@@ -9,7 +9,7 @@ class BooleanComponent: public Component {
 
 		BooleanComponent(ComponentType type, bool value);
 
-		bool& getData();
+		bool& data();
 
 	private:
 

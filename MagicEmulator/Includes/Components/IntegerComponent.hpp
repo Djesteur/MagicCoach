@@ -9,7 +9,7 @@ class IntegerComponent: public Component {
 
 		IntegerComponent(ComponentType type, int value);
 
-		int& getData();
+		int& data();
 
 	private:
 

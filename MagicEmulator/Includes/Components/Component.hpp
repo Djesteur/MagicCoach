@@ -9,7 +9,7 @@ enum class ComponentType {
 	Word,
 	WordArray,
 	Target,
-	TargetArray
+	TargetArray,
 	Script
 };
 
