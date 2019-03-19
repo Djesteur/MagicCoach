@@ -9,12 +9,6 @@
 
 using Entity = uint32_t;
 
-struct ComponentHolder {
-
-	std::string name;
-	std::shared_ptr<Component> component;
-};
-
 class ComponentKeeper {
 
 	public:
@@ -27,15 +21,17 @@ class ComponentKeeper {
 		void deleteEntity(const Entity currentEntity);
 		bool existingEntity(const Entity currentEntity) const;
 
-		void addComponentToEntity(const Entity currentEntity, const std::string componentName, const Component &newComponent);
-		void deleteComponentToEntity(const Entity currentEntity, const std::string componentName);
+		void addComponent(const Entity currentEntity, const std::string componentName, const std::shared_ptr<Component> &newComponent);
+		void deleteComponent(const Entity currentEntity, const std::string componentName);
 
-		void changeComponentOfEntity(const Entity currentEntity, const std::string componentName, std::shared_ptr<Component> newComponent);
-		std::shared_ptr<Component> getComponentOfEntity(const Entity currentEntity, const std::string componentName);
+		void changeComponent(const Entity currentEntity, const std::string componentName, std::shared_ptr<Component> newComponent);
+		std::shared_ptr<Component> getComponent(const Entity currentEntity, const std::string componentName);
+
+		bool entityHasComponent(const Entity currentEntity, const std::string componentName);
 
 	private:
 
-		std::map<Entity, std::vector<ComponentHolder>> m_components;
+		std::map<Entity, std::map<std::string, std::shared_ptr<Component>>> m_components;
 };
 
 #endif

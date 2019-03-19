@@ -10,16 +10,18 @@ enum class ComponentType {
 	WordArray,
 	Target,
 	TargetArray,
-	Script
+	Script,
+	Unknown
 };
 
 class Component {
 
 	public:
 
+		Component();
 		Component(ComponentType type);
-		Component(const Component&) = delete;
-		Component &operator=(const Component&) = delete;
+
+		virtual ~Component() = default;
 
 		ComponentType getType() const;
 
