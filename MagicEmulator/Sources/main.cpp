@@ -34,6 +34,6 @@ int main() {
 	std::cout << casted->data() << std::endl;
 	std::cout << std::dynamic_pointer_cast<IntegerComponent>(compo1)->data() << std::endl;
 	std::cout << std::dynamic_pointer_cast<IntegerComponent>(keeper.getComponent(e1, "Test"))->data() << std::endl;	
-	
+
 	return 0;
 }

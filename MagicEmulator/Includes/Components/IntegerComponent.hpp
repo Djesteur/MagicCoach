@@ -8,7 +8,8 @@ class IntegerComponent: public Component {
 	public:
 
 		IntegerComponent(ComponentType type, int value);
-
+		virtual ~IntegerComponent();
+		
 		int& data();
 
 	private:

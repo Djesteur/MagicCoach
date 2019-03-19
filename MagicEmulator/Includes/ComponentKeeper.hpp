@@ -7,7 +7,7 @@
 
 #include "Components/Component.hpp"
 
-using Entity = uint32_t;
+#include "EntityCreator.hpp"
 
 class ComponentKeeper {
 

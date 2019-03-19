@@ -10,6 +10,7 @@ class ScriptComponent: public Component {
 	public:
 
 		ScriptComponent(ComponentType type, Script value);
+		virtual ~ScriptComponent();
 
 		Script& data();
 

@@ -10,6 +10,7 @@ class IntegerArrayComponent: public Component {
 	public:
 
 		IntegerArrayComponent(ComponentType type);
+		virtual ~IntegerArrayComponent();
 
 		std::vector<int>& data();
 

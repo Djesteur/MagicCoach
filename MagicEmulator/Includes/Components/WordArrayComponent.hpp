@@ -11,7 +11,8 @@ class WordArrayComponent: public Component {
 	public:
 
 		WordArrayComponent(ComponentType type);
-
+		virtual ~WordArrayComponent();
+		
 		std::vector<std::string>& data();
 
 	private:

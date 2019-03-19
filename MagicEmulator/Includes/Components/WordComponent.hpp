@@ -10,6 +10,7 @@ class WordComponent: public Component {
 	public:
 
 		WordComponent(ComponentType type, std::string value);
+		virtual ~WordComponent();
 
 		std::string& data();
 

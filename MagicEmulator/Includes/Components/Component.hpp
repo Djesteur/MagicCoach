@@ -21,7 +21,7 @@ class Component {
 		Component();
 		Component(ComponentType type);
 
-		virtual ~Component() = default;
+		virtual ~Component() = 0;
 
 		ComponentType getType() const;
 

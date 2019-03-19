@@ -13,6 +13,7 @@ class TargetArrayComponent: public Component {
 	public:
 
 		TargetArrayComponent(ComponentType type);
+		virtual ~TargetArrayComponent();
 
 		std::vector<Entity>& data();
 

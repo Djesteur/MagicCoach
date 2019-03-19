@@ -8,6 +8,7 @@ class BooleanComponent: public Component {
 	public:
 
 		BooleanComponent(ComponentType type, bool value);
+		virtual ~BooleanComponent();
 
 		bool& data();
 

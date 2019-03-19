@@ -12,6 +12,7 @@ class TargetComponent: public Component {
 	public:
 
 		TargetComponent(ComponentType type, Entity value);
+		virtual ~TargetComponent();
 
 		Entity& data();
 
