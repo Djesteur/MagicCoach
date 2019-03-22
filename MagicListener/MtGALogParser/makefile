@@ -3,7 +3,7 @@ CFLAGS = -pthread -g -Wall
 
 
 all :
-	$(CC) $(CFLAGS) -o a.out MtGALogParser.cpp pch.cpp pch.h
+	$(CC) $(CFLAGS) -o a.out MtGALogParser.cpp
 
 test :
 	$(CC) $(CFLAGS) -o test.out test.cpp
