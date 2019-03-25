@@ -109,13 +109,13 @@ bool getLogInformations(string fileName, bool *continuerProgramme) {
 	}
 
 	ofstream deckFile("Parsed_Files/deck.json", ofstream::out);
-	if (!jsonFile) {
+	if (!deckFile) {
 		cout << "Le fichier 'deck.json' n'a pas pus être créer.\n";
 		return false;
 	}
 
 	ofstream carteFile("Parsed_Files/carte.json", ofstream::out);
-	if (!jsonFile) {
+	if (!carteFile) {
 		cout << "Le fichier 'carte.json' n'a pas pus être créer.\n";
 		return false;
 	}

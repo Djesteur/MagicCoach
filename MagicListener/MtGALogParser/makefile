@@ -9,4 +9,4 @@ test :
 	$(CC) $(CFLAGS) -o test.out test.cpp
 
 clean :
-	rm *.out
+	rm -v *.out
