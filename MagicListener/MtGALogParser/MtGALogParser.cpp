@@ -15,7 +15,7 @@ bool getLogInformations(string, bool*);
 bool skipLine(int, ifstream &);
 bool getJSON(string, ifstream &, ofstream &, int&);
 bool jumpLine(string);
-bool secondePasse(ifstream &, ofstream*, int&);
+bool secondePasse(ifstream &, ofstream*, int&, bool&);
 int choixSortie(string);
 
 
@@ -96,7 +96,7 @@ bool jumpLine(string line) {
 	listJump[2] = (string)"[Discord";
 	listJump[3] = (string)"[Account";
 	listJump[4] = (string)"[Social";
-	//listJump[5] = (string)"[Client";
+	listJump[5] = (string)"[Client";
 
 	for (string l : listJump) {
 		size_t foundJump = line.find(l);
@@ -166,7 +166,7 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 
 		sortie = choixSortie(line);
 		if (sortie != 1) { sorties[0] << line; getline(file, line); ligneLues++; }
-		if (line.find("Event.MatchCreated") != string::npos) { sorties[0] << line; sortie = 4; line = "{"; }
+		//if (line.find("Event.MatchCreated") != string::npos) { sorties[0] << line; sortie = 4; line = "{"; }
 
 		if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
 			nbJson++;
@@ -178,15 +178,16 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 	}//fin pour ligne
 
 	ligneLues++; //ca compte 1 en moins !?
-	cout << ligneLues << "lignes lues !\n";
+	cout << ligneLues << " lignes lues !\n";
 	cout << "Fin de lecture du début !\n Passage en écoute. \n";
 
 	clock_t start = clock();
 	clock_t lastTick = start;
+	bool onMatch = false;
 	while (*continuerProgramme) {
 		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 5) {
 			lastTick = clock();
-			cout << "POKE ! \n";
+			//cout << "POKE ! \n";
 			ifstream file2;
 			file2.open(fileName);
 			if (!file2) {
@@ -195,8 +196,8 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 			}
 			if (skipLine(ligneLues, file2)) {
 				cout << "seconde passe \n";
-				secondePasse(file2, sorties, ligneLues);
-				cout << ligneLues << "lignes lu au total";
+				secondePasse(file2, sorties, ligneLues, onMatch);
+				cout << "Lignes lu au total: " << ligneLues << "\n";
 			}
 			file2.close();
 		}
@@ -227,19 +228,34 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 
 }
 
-bool secondePasse(ifstream & entree, ofstream* sorties, int & lignesLues) {
-
+bool secondePasse(ifstream & entree, ofstream* sorties, int & lignesLues, bool & onMatch) {
+	int sortie = 1;
 	for (string line; getline(entree, line);) {
 		lignesLues++;
-		if (jumpLine(line)) { 
+		if (line.find("Event.MatchCreated") != string::npos) {// AVANT JUMP
+			sorties[0] << line;
+			onMatch = true;
+			line = "{";
+			cout << "Début de match détécter ! Passage en parsing match.\n";
+		}
+		if (onMatch) {
+			sortie = 4;
+		}
+		/*
+		Ici autre "[Client" utile
+		*/
+
+		//On jump une fois les "[Client" possiblement utile lus.
+		if (jumpLine(line)) {
 			sorties[0] << line; 
 			getline(entree, line); 
 			lignesLues++;
 		}
+
 		if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
 			//nbJson++;
-			getJSON(line, entree, sorties[1], lignesLues);
-			sorties[1] << ",\n";
+			getJSON(line, entree, sorties[sortie], lignesLues);
+			sorties[sortie] << ",\n";
 		} else { 
 			sorties[0] << line;
 		}
@@ -270,14 +286,6 @@ int choixSortie(string line) {
 
 int main() {
 
-	/*vector<string> utilityList;
-	vector<shared_ptr<ofstream>> tabFile;
-
-	parsingUtileFile("utile.txt", utilityList, tabFile);
-
-	cout << "Log file:\n";
-	getLogInformations("output_log.txt", utilityList, tabFile);*/
-
 	bool continuerProgramme = true;
 
 	//thread parsing(getLogInformations, "output_log_1game.txt", &continuerProgramme);
@@ -285,9 +293,6 @@ int main() {
 	thread comm(readingCommande, &continuerProgramme);
 	parsing.join();
 	comm.join();
-
-
-	//closeTabFile(tabFile);
 
 	return EXIT_SUCCESS;
 }
