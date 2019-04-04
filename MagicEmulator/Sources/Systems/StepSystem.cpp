@@ -1,39 +1,30 @@
 #include "Systems/StepSystem.hpp"
 
-StepSystem::StepSystem(ComponentKeeper &keeper): System{keeper} {}
+StepSystem::StepSystem(ComponentKeeper &keeper, const Entity currentEntity): 
+	System{keeper},
+	m_gameEntity{currentEntity} {
 
-void StepSystem::addEntity(const Entity currentEntity) {
-
-	//Must be a Game entity, 1 per process
-	//Function must be called once
-
-	m_gameEntity = currentEntity;
+	m_keeper.addEntity(m_gameEntity);
 
 	std::shared_ptr<Component> currentTurn{newComponent(ComponentType::Integer)};
-	std::shared_ptr<IntegerComponent> currentTurnCast{std::static_pointer_cast<IntegerComponent>(currentTurn)};
-	currentTurnCast->data() = 1;
-
-	m_keeper.addEntity(currentEntity);
+	std::static_pointer_cast<IntegerComponent>(currentTurn)->data() = 1;
 	m_keeper.addComponent(currentEntity, "NumberOfTurn", currentTurn);
 
 
-
 	std::shared_ptr<Component> currentPhase{newComponent(ComponentType::Integer)};
-	std::shared_ptr<IntegerComponent> currentPhaseCast{std::static_pointer_cast<IntegerComponent>(currentPhase)};
-	currentPhaseCast->data() = CurrentPhase::MainPhase1;
-
-	m_keeper.addEntity(currentEntity);
+	std::static_pointer_cast<IntegerComponent>(currentPhase)->data() = CurrentPhase::MainPhase1;
 	m_keeper.addComponent(currentEntity, "CurrentPhase", currentPhase);
 
 
 
 	std::shared_ptr<Component> currentStep{newComponent(ComponentType::Integer)};
-	std::shared_ptr<IntegerComponent> currentStepCast{std::static_pointer_cast<IntegerComponent>(currentStep)};
-	currentStepCast->data() = CurrentStep::MainPhaseStep1;
-
-	m_keeper.addEntity(currentEntity);
+	std::static_pointer_cast<IntegerComponent>(currentStep)->data() = CurrentStep::MainPhaseStep1;
 	m_keeper.addComponent(currentEntity, "CurrentStep", currentStep);
 
+
+	std::shared_ptr<Component> currentPlayer{newComponent(ComponentType::Integer)};
+	std::static_pointer_cast<IntegerComponent>(currentPlayer)->data() = 0;
+	m_keeper.addComponent(currentEntity, "ActivePlayer", currentPlayer);
 }
 
 int StepSystem::getCurrentTurn() const {
@@ -57,6 +48,13 @@ int StepSystem::getCurrentPhase() const {
 	return currentPhaseCast->data();
 }
 
+int StepSystem::getActivePlayer() const {
+
+	std::shared_ptr<Component> currentPlayer{m_keeper.getComponent(m_gameEntity, "ActivePlayer")};
+	std::shared_ptr<IntegerComponent> currentPlayerCast{std::static_pointer_cast<IntegerComponent>(currentPlayer)};
+	return currentPlayerCast->data();
+}
+
 void StepSystem::nextStep() {
 
 	std::shared_ptr<Component> currentStep{m_keeper.getComponent(m_gameEntity, "CurrentStep")};
@@ -77,6 +75,11 @@ void StepSystem::nextStep() {
 		std::shared_ptr<Component> currentTurn{m_keeper.getComponent(m_gameEntity, "NumberOfTurn")};
 		std::shared_ptr<IntegerComponent> currentTurnCast{std::static_pointer_cast<IntegerComponent>(currentTurn)};
 		currentTurnCast->data()++;
+
+		std::shared_ptr<Component> currentPlayer{m_keeper.getComponent(m_gameEntity, "ActivePlayer")};
+		std::shared_ptr<IntegerComponent> currentPlayerCast{std::static_pointer_cast<IntegerComponent>(currentPlayer)};
+		if(currentPlayerCast->data() == 0) { currentPlayerCast->data() = 1; }
+		else { currentPlayerCast->data() = 0; }
 	}
 
 	if(thisStep <= CurrentStep::DrawStep) { thisPhase = CurrentPhase::BeginningPhase; }

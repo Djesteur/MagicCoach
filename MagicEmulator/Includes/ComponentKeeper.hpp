@@ -4,8 +4,10 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <iostream>
 
 #include "Components/Component.hpp"
+#include "Components/ComponentUtils.hpp"
 
 #include "EntityCreator.hpp"
 
@@ -28,6 +30,9 @@ class ComponentKeeper {
 		std::shared_ptr<Component> getComponent(const Entity currentEntity, const std::string componentName);
 
 		bool entityHasComponent(const Entity currentEntity, const std::string componentName);
+
+		void drawEntity(const Entity &entity);
+		void drawComponents();
 
 	private:
 

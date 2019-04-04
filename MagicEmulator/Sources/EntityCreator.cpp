@@ -1,6 +1,8 @@
 #include "EntityCreator.hpp"
 
-EntityCreator::EntityCreator(): m_lastEntity{0} {}
+//Let 0 can be used as an invalid entity
+
+EntityCreator::EntityCreator(): m_lastEntity{1} {}
 
 Entity EntityCreator::newEntity() {
 

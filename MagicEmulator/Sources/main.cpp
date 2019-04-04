@@ -4,45 +4,15 @@
 #include "Components/IntegerComponent.hpp"
 #include "ComponentKeeper.hpp"
 #include "EntityCreator.hpp"
-#include "Systems/StepSystem.hpp"
-
-void drawInfos(StepSystem &testSystem) {
-
-	std::cout << "Turn: " << testSystem.getCurrentTurn() 
-			  << " - Phase: " << testSystem.getCurrentPhase()
-			  << " - Step: " << testSystem.getCurrentStep() << std::endl;
-}
+#include "Systems/GameSystem.hpp"
 
 int main() {
 
 	EntityCreator creator;
 	ComponentKeeper keeper;
-	StepSystem testSystem{keeper};
+	GameSystem testSystem{keeper, creator};
 
-	Entity gameEntity{creator.newEntity()}; 
-	testSystem.addEntity(gameEntity);
-
-	drawInfos(testSystem);
-	testSystem.nextStep();
-	drawInfos(testSystem);
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	drawInfos(testSystem);
-	testSystem.nextStep();
-	testSystem.nextStep();
-	drawInfos(testSystem);
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	testSystem.nextStep();
-	drawInfos(testSystem);
+	testSystem.playGame();
 
 	return 0;
 }

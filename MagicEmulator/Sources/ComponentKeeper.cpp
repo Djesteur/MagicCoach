@@ -57,3 +57,73 @@ bool ComponentKeeper::entityHasComponent(const Entity currentEntity, const std::
 
 	return false;
 }
+
+void ComponentKeeper::drawEntity(const Entity &entity) {
+
+	if(existingEntity(entity)) {
+
+			std::cout << "Entity: " << entity << std::endl;
+
+		for(std::map<std::string, std::shared_ptr<Component>>::iterator componentIte = m_components[entity].begin();
+			componentIte != m_components[entity].end(); componentIte++) {
+
+			switch(componentIte->second->getType()) {
+
+				case ComponentType::Boolean:
+					std::cout << " Type: Boolean - Name: " << componentIte->first << " - Value: "
+					<< std::static_pointer_cast<BooleanComponent>(componentIte->second)->data() << std::endl;
+					break;
+
+				case ComponentType::Integer:
+					std::cout << " Type: Integer - Name: " << componentIte->first << " - Value: "
+					<< std::static_pointer_cast<IntegerComponent>(componentIte->second)->data() << std::endl;
+					break;
+
+				case ComponentType::Target:
+					std::cout << " Type: Target - Name: " << componentIte->first << " - Value: "
+					<< std::static_pointer_cast<TargetComponent>(componentIte->second)->data() << std::endl;
+					break;
+
+				case ComponentType::Word:
+					std::cout << " Type: Word - Name: " << componentIte->first << " - Value: "
+					<< std::static_pointer_cast<WordComponent>(componentIte->second)->data() << std::endl;
+					break;
+
+				case ComponentType::IntegerArray:
+					std::cout << " Type: Word - Name: " << componentIte->first << " - Value: ";
+					for(int &currentValue: std::static_pointer_cast<IntegerArrayComponent>(componentIte->second)->data()) { 
+						
+						std::cout << currentValue << " "; 
+					} 
+					std::cout << std::endl;
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
+}
+
+void ComponentKeeper::drawComponents() {
+
+	for(std::map<Entity, std::map<std::string, std::shared_ptr<Component>>>::iterator entityIte = m_components.begin();
+		entityIte != m_components.end(); entityIte++) {
+
+		drawEntity(entityIte->first);
+	}
+}
+
+/*enum class ComponentType {
+
+	Boolean,
+	Integer,
+	IntegerArray,
+	Word,
+	WordArray,
+	Target,
+	TargetArray,
+	Script,
+	Unknown
+
+};*/
