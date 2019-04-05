@@ -97,7 +97,7 @@ bool ManaSystem::playCard(const unsigned int player, const Entity &cardToPlay) {
 
 	std::vector<int> manaCost{std::static_pointer_cast<IntegerArrayComponent>(m_keeper.getComponent(cardToPlay, "ManaCost"))->data()},
 					 needToPay{manaCost},
-					 manaPool{std::static_pointer_cast<IntegerArrayComponent>(m_keeper.getComponent(m_manaPool[player], "ManaPool"))->data()};
+					 &manaPool{std::static_pointer_cast<IntegerArrayComponent>(m_keeper.getComponent(m_manaPool[player], "ManaPool"))->data()};
 
 	//Take mana from mana pool.
 
