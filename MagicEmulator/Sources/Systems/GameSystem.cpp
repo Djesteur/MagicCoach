@@ -4,9 +4,13 @@ GameSystem::GameSystem(ComponentKeeper &keeper, EntityCreator &creator):
 	System{keeper},
 	m_creator{creator},
 	m_gameEntity{creator.newEntity()},
+	m_player1{m_creator.newEntity()},
+	m_player2{m_creator.newEntity()},
 	m_stepSystem{keeper, m_gameEntity},
 	m_stackSystem{keeper, m_gameEntity},
-	m_manaSystem{keeper, m_gameEntity, creator} {
+	m_manaSystem{keeper, m_gameEntity, creator},
+	m_actionSystem{keeper, m_gameEntity, m_player1, m_player2},
+	m_attackSystem{keeper, m_player1, m_player2} {
 
 	std::srand(std::time(0)); //Init random for std::random_shuffle
 	prepareBrandonGame();
@@ -14,26 +18,6 @@ GameSystem::GameSystem(ComponentKeeper &keeper, EntityCreator &creator):
 	std::cout << "Begin of the game, players draw 7 cards. " << std::endl;
 	drawXCards(0, 7);
 	drawXCards(1, 7);
-
-	//std::cout << "Players have: " << std::endl;
-
-	/*for(unsigned int i{0}; i < m_hand[0].size(); i++) { m_keeper.drawEntity(m_hand[0][i]); }
-	std::cout << "-----------------------------" << std::endl;
-	
-	for(unsigned int i{0}; i < m_hand[1].size(); i++) { m_keeper.drawEntity(m_hand[1][i]); }
-	std::cout << "-----------------------------" << std::endl;*/
-
-	/*while(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "NumberOfTurn"))->data() < 5 ) {
-
-		m_stepSystem.nextStep();
-
-		if(m_stepSystem.getCurrentStep() == CurrentStep::DrawStep) {
-
-			drawCard(m_stepSystem.getActivePlayer());
-			std::cout << "Player " << m_stepSystem.getActivePlayer() << " draw the following card: " << std::endl;
-			m_keeper.drawEntity(m_hand[m_stepSystem.getActivePlayer()].back());
-		}
-	}*/
 }
 
 void GameSystem::playGame() {
@@ -41,8 +25,9 @@ void GameSystem::playGame() {
 	unsigned int test{0};
 
 	int currentStep{0}, activePlayer{0};
+	bool player1Lost{false}, player2Lost{false};
 
-	while(test < 100) {
+	while(test < 10'000 && !player1Lost && !player2Lost) {
 
 		currentStep = std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "CurrentStep"))->data();
 		activePlayer = std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "ActivePlayer"))->data();
@@ -54,6 +39,8 @@ void GameSystem::playGame() {
 				break;
 
 			case CurrentStep::UpkeepStep:
+				removeSummonSickness(activePlayer);
+
 				break;
 
 			case CurrentStep::DrawStep:
@@ -74,7 +61,10 @@ void GameSystem::playGame() {
 				break;
 
 			case CurrentStep::CombatDamagesStep:
-				
+				m_attackSystem.applyDamages();
+				m_actionSystem.checkStates();
+				player1Lost = std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_player1, "PlayerLost"))->data();
+				player2Lost = std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_player2, "PlayerLost"))->data();
 				break;
 
 			case CurrentStep::EndCombatStep:
@@ -90,7 +80,8 @@ void GameSystem::playGame() {
 
 			case CurrentStep::CleanupStep:
 				//Discard
-				//Reset blessures
+				resetDamageTaken();
+				m_attackSystem.clearSystem();
 				break;
 
 		}
@@ -100,6 +91,9 @@ void GameSystem::playGame() {
 
 		test++;
 	}
+
+	if(player1Lost) { std::cout << "Player 1 lost !" << std::endl; }
+	if(player2Lost) { std::cout << "Player 2 lost !" << std::endl; }
 }
 
 void GameSystem::drawXCards(const unsigned int player, const unsigned int x) {
@@ -109,11 +103,8 @@ void GameSystem::drawXCards(const unsigned int player, const unsigned int x) {
 
 void GameSystem::drawCard(const unsigned int player) {
 
-	Entity movingCard{m_library[player].front()};
+	std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_library[player].front(), "Area"))->data() = Area::Hand;
 	m_library[player].pop_front();
-	m_hand[player].emplace_back(movingCard);
-
-	std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_hand[player].back(), "Area"))->data() = Area::Hand;
 }
 
 void GameSystem::prepareBrandonGame() {
@@ -169,6 +160,18 @@ void GameSystem::prepareBrandonGame() {
 		std::shared_ptr<Component> cardSummon{newComponent(ComponentType::Boolean)};
 		std::static_pointer_cast<BooleanComponent>(cardSummon)->data() = true;
 		m_keeper.addComponent(newCard, "SummonSickness", cardSummon);
+
+		std::shared_ptr<Component> cardStrength{newComponent(ComponentType::Integer)};
+		std::static_pointer_cast<IntegerComponent>(cardStrength)->data() = 2;
+		m_keeper.addComponent(newCard, "Strength", cardStrength);
+
+		std::shared_ptr<Component> cardToughness{newComponent(ComponentType::Integer)};
+		std::static_pointer_cast<IntegerComponent>(cardToughness)->data() = 2;
+		m_keeper.addComponent(newCard, "Toughness", cardToughness);
+
+		std::shared_ptr<Component> cardDamageTaken{newComponent(ComponentType::Integer)};
+		std::static_pointer_cast<IntegerComponent>(cardDamageTaken)->data() = 0;
+		m_keeper.addComponent(newCard, "DamageTaken", cardDamageTaken);
 	}
 
 	//Add lands
@@ -177,9 +180,6 @@ void GameSystem::prepareBrandonGame() {
 
 		newCard = m_creator.newEntity();
 		m_keeper.addEntity(newCard);
-		
-		if(i < 36) { m_playerCards[0].emplace_back(newCard); }
-		else { m_playerCards[1].emplace_back(newCard); }
 
 		std::shared_ptr<Component> cardName{newComponent(ComponentType::Word)};
 		std::static_pointer_cast<WordComponent>(cardName)->data() = "Mountain";
@@ -217,6 +217,17 @@ void GameSystem::prepareBrandonGame() {
 		m_keeper.addComponent(newCard, "IsTapped", cardTapped);
 	}
 
+	//Add and life points
+
+	std::shared_ptr<Component> lifePoint1{newComponent(ComponentType::Integer)};
+	std::static_pointer_cast<IntegerComponent>(lifePoint1)->data() = 20;
+	m_keeper.addComponent(m_player1, "LifePoint", lifePoint1);
+
+	std::shared_ptr<Component> lifePoint2{newComponent(ComponentType::Integer)};
+	std::static_pointer_cast<IntegerComponent>(lifePoint2)->data() = 20;
+	m_keeper.addComponent(m_player2, "LifePoint", lifePoint2);
+
+
 	//Sort library
 
 	m_library[0] = m_playerCards[0];
@@ -228,51 +239,68 @@ void GameSystem::prepareBrandonGame() {
 
 void GameSystem::iaAttackAll(const unsigned int activePlayer) {
 
+	Entity entityNotActivePlayer;
+	if(activePlayer == 0) {  entityNotActivePlayer = m_player2;}
+	else { entityNotActivePlayer = m_player1; }
 
+	std::vector<std::pair<Entity, Entity>> attackingCreatures;
+
+	for(Entity currentEntity: m_playerCards[activePlayer]) {
+
+		//std::cout << "TYPE " << std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(currentEntity, "Type"))->data() << std::endl;
+		//std::cout << "AREA " << std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(currentEntity, "Area"))->data() << std::endl;
+
+		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(currentEntity, "Type"))->data() == CardType::Creature &&
+		   std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(currentEntity, "Area"))->data() == Area::Battlefield &&
+		   std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(currentEntity, "IsTapped"))->data() == false &&
+		   std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(currentEntity, "SummonSickness"))->data() == false) {
+
+			attackingCreatures.emplace_back(currentEntity, entityNotActivePlayer);
+		}
+	}
+
+	m_attackSystem.declareAttackingCreatures(attackingCreatures);
 }
 
 void GameSystem::iaPlayAll(const unsigned int activePlayer) {
 
 	//Play a montain if have 1
 
-	for(unsigned int i{0}; i < m_hand[activePlayer].size(); i++) {
+	for(unsigned int i{0}; i < m_playerCards[activePlayer].size(); i++) {
 
-		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_hand[activePlayer][i], "Type"))->data() == CardType::Land) {
+		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Area"))->data() == Area::Hand && 
+		   std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Type"))->data() == CardType::Land) {
 
-			if(m_manaSystem.canPlay(activePlayer, m_hand[activePlayer][i])) { 
-
-				m_manaSystem.playCard(activePlayer, m_hand[activePlayer][i]);
-				//Card put on board by mana system
-
-				m_battlefield[activePlayer].emplace_back(m_hand[activePlayer][i]);
-				m_hand[activePlayer].erase(m_hand[activePlayer].begin() + i);
-			}
+			m_manaSystem.playCard(activePlayer, m_playerCards[activePlayer][i]);
+			//Land is put on board if return true, else just return false
 		}
 	}
 
+	//Tap all lands for mana
+
+	for(unsigned int i{0}; i < m_playerCards[activePlayer].size(); i++) {
+
+		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Area"))->data() == Area::Battlefield && 
+		  	  std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Type"))->data() == CardType::Land &&
+		  	  std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "IsTapped"))->data() == false) {
+
+			m_manaSystem.tapLandForMana(activePlayer, m_playerCards[activePlayer][i]);
+		}
+	}
+
+	std::vector<int> manaPool = m_manaSystem.listAllPossibleMana(activePlayer);
+
 	//Play the most possible number of brandon
 
-	for(unsigned int i{0}; i < m_hand[activePlayer].size(); i++) {
+	for(unsigned int i{0}; i < m_playerCards[activePlayer].size(); i++) {
 
-		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_hand[activePlayer][i], "Type"))->data() == CardType::Creature) {
+		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Area"))->data() == Area::Hand &&
+		   std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Type"))->data() == CardType::Creature) {
 
-			if(m_manaSystem.canPlay(activePlayer, m_hand[activePlayer][i])) { 
+			if(m_manaSystem.playCard(activePlayer, m_playerCards[activePlayer][i])) {
 
-				//Tap land until get enought mana (try to get mana from all cards, mana system willtap only lands)
-				bool cardPlayed{false};
-				for(unsigned int j{0}; j < m_battlefield[activePlayer].size() && !cardPlayed; j++) {
-
-					m_manaSystem.tapLandForMana(activePlayer, m_battlefield[activePlayer][j]);
-					cardPlayed = m_manaSystem.playCard(activePlayer, m_hand[activePlayer][i]);
-				}
-				
-				m_stackSystem.wantToPlay(m_hand[activePlayer][i]);
+				m_stackSystem.wantToPlay(m_playerCards[activePlayer][i]);
 				m_stackSystem.resolveAllSpell();
-
-				m_battlefield[activePlayer].emplace_back(m_hand[activePlayer][i]);
-				m_hand[activePlayer].erase(m_hand[activePlayer].begin() + i);
-
-				i = 0;
 			}
 		}
 	}
@@ -282,16 +310,55 @@ void GameSystem::drawBoard(const unsigned int activePlayer) {
 
 	std::cout << "Player " << activePlayer << " has on hand: " << std::endl;
 
-	for(unsigned int i{0}; i < m_hand[activePlayer].size(); i++) {
+	for(unsigned int i{0}; i < m_playerCards[activePlayer].size(); i++) {
 
-		std::cout << "  " << std::static_pointer_cast<WordComponent>(m_keeper.getComponent(m_hand[activePlayer][i], "Name"))->data() << std::endl;
+		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Area"))->data() == Area::Hand) {
+
+			std::cout << "  " << std::static_pointer_cast<WordComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Name"))->data()
+			<< " ID: " << m_playerCards[activePlayer][i] << std::endl;
+		}
 	}
 
 	std::cout << "Player " << activePlayer << " has on board: " << std::endl;
 
-	for(unsigned int i{0}; i < m_battlefield[activePlayer].size(); i++) {
+	for(unsigned int i{0}; i < m_playerCards[activePlayer].size(); i++) {
 
-		std::cout << "  " <<std::static_pointer_cast<WordComponent>(m_keeper.getComponent(m_battlefield[activePlayer][i], "Name"))->data() << std::endl;
+		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Area"))->data() == Area::Battlefield) {
+
+			std::cout << "  " << std::static_pointer_cast<WordComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Name"))->data()
+			<< " ID: " << m_playerCards[activePlayer][i] << std::endl;
+		}
 	}
+
+	Entity entityActivePlayer;
+	if(activePlayer == 0) { entityActivePlayer = m_player1; }
+	else { entityActivePlayer = m_player2; }
+
+	std::cout << std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(entityActivePlayer, "LifePoint"))->data() << " life points. " << std::endl;
 	std::cout << "---------------------------------------------------------------" << std::endl;
+}
+
+void GameSystem::resetDamageTaken() {
+
+	for(unsigned int i{0}; i< m_playerCards.size(); i++) {
+
+		for(Entity currentEntity: m_playerCards[i]) {
+
+			if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(currentEntity, "Type"))->data() == CardType::Creature) {
+
+				std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(currentEntity, "DamageTaken"))->data() = 0;
+			}
+		}
+	}
+}
+
+void GameSystem::removeSummonSickness(const unsigned int activePlayer) {
+
+	for(unsigned int i{0}; i < m_playerCards[activePlayer].size(); i++) {
+
+		if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "Type"))->data() == CardType::Creature) {
+
+			std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_playerCards[activePlayer][i], "SummonSickness"))->data() = false;
+		}
+	}
 }

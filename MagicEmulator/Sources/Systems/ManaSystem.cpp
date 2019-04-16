@@ -24,58 +24,6 @@ ManaSystem::ManaSystem(ComponentKeeper &keeper, const Entity currentEntity, Enti
 	m_keeper.addComponent(m_manaPool[1], "ManaPool", newComponent(ComponentType::IntegerArray));
 }
 
-bool ManaSystem::canPlay(const unsigned int player, const Entity &cardToPlay) {
-
-	if(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(cardToPlay, "Type"))->data() == CardType::Land) {
-
-		if(!m_landPlayedThisTurn) { return true; }
-		else { return false; }
-	}
-
-	else {
-
-		std::vector<int> manaCost{std::static_pointer_cast<IntegerArrayComponent>(m_keeper.getComponent(cardToPlay, "ManaCost"))->data()},
-						  needToPay{manaCost};
-
-		std::vector<int> possibleMana{listAllPossibleMana(player)};
-		unsigned int anyColorToPay{0};
-
-
-		bool foundMana{false};
-
-		while(!needToPay.empty()) {
-
-			foundMana = false;
-
-			if(needToPay[0] != Mana::AnyColor) { //Will be pay in a 2nd time
-
-				for(unsigned int j{0}; j < possibleMana.size() && !foundMana; j++) {
-
-					if(needToPay[0] == possibleMana[j]) {
-
-						foundMana = true;
-						needToPay.erase(needToPay.begin());
-						possibleMana.erase(possibleMana.begin() + j);
-					}
-				}
-			}
-
-			else { 
-
-				foundMana = true; 
-				anyColorToPay++;
-				needToPay.erase(needToPay.begin());
-			}
-
-			if(!foundMana) { return false; }
-		}
-
-		if(anyColorToPay > possibleMana.size()) { return false; } //Not enought mana for pay any color cost
-	}
-
-	return true;
-}
-
 bool ManaSystem::playCard(const unsigned int player, const Entity &cardToPlay) {
 
 	//If land

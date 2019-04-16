@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include <exception>
 
 #include "Components/Component.hpp"
 #include "Components/ComponentUtils.hpp"

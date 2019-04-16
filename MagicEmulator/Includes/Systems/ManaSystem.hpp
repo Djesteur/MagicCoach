@@ -14,8 +14,6 @@ class ManaSystem : public System {
 
 		ManaSystem(ComponentKeeper &keeper, const Entity currentEntity, EntityCreator &creator);
 
-		bool canPlay(const unsigned int player, const Entity &cardToPlay);
-
 		//Return true if can was played, false if not enought mana in mana pool
 		bool playCard(const unsigned int player, const Entity &cardToPlay);
 
@@ -25,11 +23,11 @@ class ManaSystem : public System {
 		void getManaFromLand(const Entity &landEntity);
 		void tapLandForMana(const unsigned int player, const Entity &land);
 
-	private:
-
+		
 		std::vector<int> listAllPossibleMana(const unsigned int player) const;
 		int getManaFromName(const std::string name) const;
 
+	private:
 
 		Entity m_gameEntity;
 		EntityCreator &m_entityCreator;

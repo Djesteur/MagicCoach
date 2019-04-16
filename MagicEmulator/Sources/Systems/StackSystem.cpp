@@ -10,15 +10,13 @@ StackSystem::StackSystem(ComponentKeeper &keeper, const Entity currentEntity):
 bool StackSystem::wantToPlay(const Entity entityToPlay) { 
 
 	std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(entityToPlay, "Area"))->data() = Area::Stack;
-
+	m_stack.push(entityToPlay);
 	return true; 
 }
 
 void StackSystem::resolveNextSpell() {
 
-	int entityType{std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_stack.top(), "Type"))->data()};
-
-	switch(entityType) {
+	switch(std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_stack.top(), "Type"))->data()) {
 
 		case CardType::Creature:
 			std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_stack.top(), "Area"))->data() = Area::Battlefield;

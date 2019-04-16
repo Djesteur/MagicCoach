@@ -45,6 +45,11 @@ void ComponentKeeper::changeComponent(const Entity currentEntity, const std::str
 std::shared_ptr<Component> ComponentKeeper::getComponent(const Entity currentEntity, const std::string componentName) {
 
 	if(entityHasComponent(currentEntity, componentName)) { return m_components[currentEntity][componentName]; }
+	else {
+
+		throw std::runtime_error("ComponentKeeper error: asked for component " + componentName + " of entity " 
+								 + std::to_string(currentEntity) + ", which doesn't exist.");
+	}
 	return nullptr;
 }
 
