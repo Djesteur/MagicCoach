@@ -9,6 +9,7 @@
 #include <thread>
 #include <ctime>
 #include <json/json.h>
+#include "Transmitter.hpp"
 
 #pragma warning(disable : 4996)
 
@@ -16,12 +17,19 @@ using namespace std;
 
 bool getLogInformations(string, bool*);
 bool skipLine(int, ifstream &);
-string getJSON(string, ifstream &, ofstream &, int&);
+string getJSON(string, ifstream &, int&);
 bool jumpLine(string);
-bool secondePasse(ifstream &, ofstream*, int&, bool&);
+bool secondePasse(ifstream &,int&, bool&);
 int choixSortie(string);
 string getAction(string);
 vector<string> getMessageInJson(string);
+string getStep(Json::Value);
+string getPhase(Json::Value);
+string stringCleaner(string);
+void startParsing(Transmitter);
+bool getGameOver(Json::Value);
+bool getMatchOver(Json::Value);
+bool getGameStageStart(Json::Value);
 
 
 void readingCommande(bool *continuerProgramme) {
@@ -48,7 +56,7 @@ bool skipLine(int n, ifstream & fichier) {
 	return !(fichier.eof()); // retourne vrai si fichier n'a pas atteind la fin.
 }
 
-string getJSON(string l1, ifstream & fichier, ofstream & sortie, int & ligneLues) {
+string getJSON(string l1, ifstream & fichier, int & ligneLues) {
 
 	int nbAccolade = 0;
 	int nbCrochet = 0;
@@ -71,7 +79,6 @@ string getJSON(string l1, ifstream & fichier, ofstream & sortie, int & ligneLues
 			}
 			//On ecrit dans le fichier des JSON sinon dans autre ligne
 			if (inJson) {
-				sortie << c;
 				jsonEnCours += c;
 			}
 			//On recher les } si c'était la dernière du JSON on "sort" du JSON
@@ -131,37 +138,6 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 		return false;
 	}
 
-	ofstream sorties[5];
-	sorties[0].open("Parsed_Files/discard.txt", ofstream::out);
-	if (!sorties[0]) {
-		cout << "Le fichier 'discard.txt' n'a pas pus être créé.\n";
-		return false;
-	}
-	sorties[1].open("Parsed_Files/log_JSON.json", ofstream::out); //JSON en bordel
-	if (!sorties[1]) {
-		cout << "Le fichier 'log_JSON.json' n'a pas pus être créé.\n";
-		return false;
-	}
-	sorties[2].open("Parsed_Files/deck.json", ofstream::out);
-	if (!sorties[2]) {
-		cout << "Le fichier 'deck.json' n'a pas pus être créé.\n";
-		return false;
-	}
-	sorties[3].open("Parsed_Files/carte.json", ofstream::out);
-	if (!sorties[3]) {
-		cout << "Le fichier 'carte.json' n'a pas pus être créé.\n";
-		return false;
-	}
-	sorties[4].open("Parsed_Files/match.json", ofstream::out);
-	if (!sorties[4]) {
-		cout << "Le fichier 'match.json' n'a pas pus être créé.\n";
-		return false;
-	}
-
-	/*jsonFile*/sorties[1] << "{\n \"jsonList\" : [\n";
-	sorties[2] << "{\n \"jsonList\" : [\n";
-	sorties[3] << "{\n \"jsonList\" : [\n";
-	sorties[4] << "{\n \"jsonList\" : [\n";
 
 	cout << "Parsing launched ! \n";
 
@@ -171,23 +147,17 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 
 	for (string line; getline(file, line);) {
 		ligneLues++;
-		if (jumpLine(line)) { sorties[0] << line; getline(file, line); ligneLues++; }
+		if (jumpLine(line)) {getline(file, line); ligneLues++; }
 
 		sortie = choixSortie(line);
-		if (sortie != 1) { sorties[0] << line; getline(file, line); ligneLues++; }
+		if (sortie != 1) {getline(file, line); ligneLues++; }
 		//if (line.find("Event.MatchCreated") != string::npos) { sorties[0] << line; sortie = 4; line = "{"; }
 
 		if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
 			nbJson++;
-			string jsonSorti = getJSON(line, file, sorties[sortie], ligneLues); //On récupère le JSON complet en changant le nombre de ligne lue (retourn aussi ce json dans un string)
-			
-			for (string s : getMessageInJson(jsonSorti)) {
-				getAction(s);
-			}
-			
-			//getAction(jsonSorti);
-			sorties[sortie] << ",\n";
-		} else { sorties[0] << line; }
+			getJSON(line, file, ligneLues); //On récupère le JSON complet en changant le nombre de ligne lue (retourn aussi ce json dans un string)
+		} else {
+		}
 		sortie = 1;
 
 	}//fin pour ligne
@@ -200,9 +170,8 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 	clock_t lastTick = start;
 	bool onMatch = false;
 	while (*continuerProgramme) {
-		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 5) {
+		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 4) {
 			lastTick = clock();
-			//cout << "POKE ! \n";
 			ifstream file2;
 			file2.open(fileName);
 			if (!file2) {
@@ -210,32 +179,21 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 				return false;
 			}
 			if (skipLine(ligneLues, file2)) {
-				cout << "seconde passe \n";
-				secondePasse(file2, sorties, ligneLues, onMatch);
+				cout << "Seconde passe. \n";
+				secondePasse(file2, ligneLues, onMatch);
 				cout << "Lignes lu au total: " << ligneLues << "\n";
 			}
 			file2.close();
 		}
 	}
 
-	//Fermeture du JSON général
-	sorties[1] << "\n{\"NbJson\" : " << nbJson << " }\n]\n}";
-
-	sorties[2] << "\n{\"Jsondeck\" : " << 0 << " }\n]\n}";
-	sorties[3] << "\n{\"Jsoncarte\" : " << 0 << " }\n]\n}";
-	sorties[4] << "\n{\"Jsonmatch\" : " << 0 << " }\n]\n}";
-
+	
 	cout << "\n\n===========================\n";
 	cout << "Parsage du fichier terminee.\n";
 	cout << "===========================\n\n";
 
+	//Fermeture du JSON général
 	file.close();
-
-	sorties[0].close();
-	sorties[1].close();
-	sorties[2].close();
-	sorties[3].close();
-	sorties[4].close();
 
 	exit(0); // On fermme comme il faut
 
@@ -243,36 +201,33 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 
 }
 
-bool secondePasse(ifstream & entree, ofstream* sorties, int & lignesLues, bool & onMatch) {
-	int sortie = 1;
+bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch) {
 	for (string line; getline(entree, line);) {
 		lignesLues++;
 		if (line.find("Event.MatchCreated") != string::npos) {// AVANT JUMP
-			sorties[0] << line;
 			onMatch = true;
 			line = "{";
 			cout << "Début de match détécter ! Passage en parsing match.\n";
 		}
-		if (onMatch) {
-			sortie = 4;
-		}
+
 		/*
 		Ici autre "[Client" utile
 		*/
 
 		//On jump une fois les "[Client" possiblement utile lus.
 		if (jumpLine(line)) {
-			sorties[0] << line; 
 			getline(entree, line); 
 			lignesLues++;
 		}
 
 		if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
 			//nbJson++;
-			getJSON(line, entree, sorties[sortie], lignesLues);
-			sorties[sortie] << ",\n";
+			string jsonSorti = getJSON(line, entree, lignesLues);
+
+			for (string s : getMessageInJson(jsonSorti)) {
+				getAction(s);
+			}
 		} else { 
-			sorties[0] << line;
 		}
 
 	}//fin pour ligne
@@ -300,24 +255,6 @@ int choixSortie(string line) {
 }
 
 string getAction(string json) {
-	cout << "Action : ";
-	int const tailleList = 5;
-	string listAction[tailleList][3];
-	listAction[0][0] = (string)"MatchState_MatchComplete"; listAction[0][1] = (string)"FinDeMatch"; listAction[0][2] = (string)"Match terminer !";
-	listAction[1][0] = (string)"DuelScene.GameStart"; listAction[1][1] = (string)"DebutDeDuel"; listAction[1][2] = (string)"Game start ! Debut du duel.";
-	listAction[2][0] = (string)"Event.MatchCreated"; listAction[2][1] = (string)"MatchCreate"; listAction[2][2] = (string)"Debut d'un match !";
-	listAction[3][0] = (string)"Step_BeginCombat"; listAction[3][1] = (string)"DebutCombat"; listAction[3][2] = (string)"Debut d'un combat.";
-	listAction[4][0] = (string)"step\": \"Step_Draw"; listAction[4][1] = (string)"Pioche"; listAction[4][2] = (string)"Pioche";
-
-	for (int i = 0; i < tailleList; i++) {
-		size_t foundAction = json.find(listAction[i][0]);
-		if (foundAction != string::npos) {
-			cout << listAction[i][2];
-			//return listAction[i][1];
-		}
-	}
-
-	cout << "\n";
 
 	Json::Value root;
 	Json::Reader reader;
@@ -326,7 +263,21 @@ string getAction(string json) {
 	if (!parsingSuccessful) {
 		cout << "Error parsing the string" << endl;
 	} else {
-
+		/*if (getGameStageStart) {
+			cout << "Stage start !\n";
+		}*/
+		string phase = getPhase(root);
+		string step = getStep(root);
+		if (phase != "NOTHING") {
+			cout << "Phase: " << phase << " | ";
+			cout << "Step : " << step << "\n";
+		}
+		if (getGameOver(root)) {
+			cout << "Game over \n";
+		}
+		if (getMatchOver(root)) {
+			cout << "Match over \n";
+		}
 	}
 
 	return "";
@@ -381,13 +332,90 @@ vector<string> getMessageInJson(string json) {
 	return messages;
 }
 
+string getStep(Json::Value root) {
+	if (root.isMember("gameStateMessage")) {
+		if (root["gameStateMessage"].isMember("turnInfo")) {
+			if (root["gameStateMessage"]["turnInfo"].isMember("step")) {
+				return stringCleaner(root["gameStateMessage"]["turnInfo"]["step"].toStyledString());
+			}
+		}
+	}
+	return "NOTHING";
+}
+
+string getPhase(Json::Value root) {
+	if (root.isMember("gameStateMessage")) {
+		if (root["gameStateMessage"].isMember("turnInfo")) {
+			if (root["gameStateMessage"]["turnInfo"].isMember("phase")) {
+				return stringCleaner(root["gameStateMessage"]["turnInfo"]["phase"].toStyledString());
+			}
+		}
+	}
+	return "NOTHING";
+}
+
+bool getGameOver(Json::Value root) {
+	if (root.isMember("gameStateMessage")) {
+		if (root["gameStateMessage"].isMember("gameInfo")) {
+			if (root["gameStateMessage"]["gameInfo"].isMember("stage")) {
+				string end = stringCleaner(root["gameStateMessage"]["gameInfo"]["stage"].toStyledString());
+				if (end == "GameStage_GameOver") {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+bool getMatchOver(Json::Value root) {
+	if (root.isMember("gameStateMessage")) {
+		if (root["gameStateMessage"].isMember("gameInfo")) {
+			if (root["gameStateMessage"]["gameInfo"].isMember("matchState")) {
+				string end = stringCleaner(root["gameStateMessage"]["gameInfo"]["matchState"].toStyledString());
+				if (end == "MatchState_GameComplete") {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+bool getGameStageStart(Json::Value root) {
+	if (root.isMember("gameStateMessage")) {
+		if (root["gameStateMessage"].isMember("gameInfo")) {
+			if (root["gameStateMessage"]["gameInfo"].isMember("stage")) {
+				string end = stringCleaner(root["gameStateMessage"]["gameInfo"]["stage"].toStyledString());
+				if (end == "GameStage_Start") {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+
+string stringCleaner(string s) {
+	return s.substr(1, s.length()-3); //suprime les " " et \n a la fin des stylestring
+}
+
+/*void startParsing(Transmitter &trans) {
+	string userHome = getenv("USERPROFILE");
+	string folder = userHome + "/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt";
+	getLogInformations(folder, trans); //lis les premier ligne et start l'écoute
+}*/
+
 
 int main() {
 
 	bool continuerProgramme = true;
 
 	//thread parsing(getLogInformations, "output_log_1game.txt", &continuerProgramme);
-	thread parsing(getLogInformations, "C:/Users/cleme/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt", &continuerProgramme);
+	string userHome = getenv("USERPROFILE");
+	string folder = userHome + "/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt";
+	thread parsing(getLogInformations, folder, &continuerProgramme);
 	thread comm(readingCommande, &continuerProgramme);
 	parsing.join();
 	comm.join();
