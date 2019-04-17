@@ -1,0 +1,2 @@
+<== Deck.GetDeckLists(|deck.json
+<== PlayerInventory.GetPlayerCardsV3(|carte.json
