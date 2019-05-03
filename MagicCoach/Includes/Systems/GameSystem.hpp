@@ -17,12 +17,14 @@
 #include "Systems/StateBasedActionSystem.hpp"
 #include "Systems/AttackSystem.hpp"
 
+#include "Transmitter.hpp"
+
 
 class GameSystem : public System {
 
 	public:
 
-		GameSystem(ComponentKeeper &keeper, EntityCreator &creator);
+		GameSystem(ComponentKeeper &keeper, EntityCreator &creator, Transmitter &transmitter);
 
 		void playGame();
 
@@ -50,6 +52,8 @@ class GameSystem : public System {
 		ManaSystem m_manaSystem;
 		StateBasedActionSystem m_actionSystem;
 		AttackSystem m_attackSystem;
+
+		Transmitter &m_transmitter;
 };
 
 #endif

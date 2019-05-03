@@ -1,3 +1,5 @@
+#include <thread>
+
 #include "Components/IntegerComponent.hpp"
 #include "ComponentKeeper.hpp"
 #include "EntityCreator.hpp"
@@ -14,12 +16,12 @@ int main() {
 
 	std::thread parserThread{[&infoTransmitter]() { startParsing(infoTransmitter); }};
 
-	/*GameSystem gameSystem{ keeper, creator, infoTransmitter };
-	gameSystem.playGame();*/
+	GameSystem gameSystem{ keeper, creator, infoTransmitter };
+	gameSystem.playGame();
 
 	Information stop;
 	stop.type = InformationType::StopListen;
-	//infoTransmitter.addInfoForListener(stop);
+	infoTransmitter.addInfoForListener(stop);
 
 	parserThread.join();
 

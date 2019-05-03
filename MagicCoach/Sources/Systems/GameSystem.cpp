@@ -1,6 +1,6 @@
 #include "Systems/GameSystem.hpp"
 
-GameSystem::GameSystem(ComponentKeeper &keeper, EntityCreator &creator): 
+GameSystem::GameSystem(ComponentKeeper &keeper, EntityCreator &creator, Transmitter &transmitter): 
 	System{keeper},
 	m_creator{creator},
 	m_gameEntity{creator.newEntity()},
@@ -10,85 +10,97 @@ GameSystem::GameSystem(ComponentKeeper &keeper, EntityCreator &creator):
 	m_stackSystem{keeper, m_gameEntity},
 	m_manaSystem{keeper, m_gameEntity, creator},
 	m_actionSystem{keeper, m_gameEntity, m_player1, m_player2},
-	m_attackSystem{keeper, m_player1, m_player2} {
+	m_attackSystem{keeper, m_player1, m_player2},
+	m_transmitter{transmitter} {
 
-	std::srand(std::time(0)); //Init random for std::random_shuffle
-	prepareBrandonGame();
-
-	std::cout << "Begin of the game, players draw 7 cards. " << std::endl;
-	drawXCards(0, 7);
-	drawXCards(1, 7);
+	std::cout << "Emulator is ready !" << std::endl;
 }
 
 void GameSystem::playGame() {
 
-	unsigned int test{0};
+	std::cout << "Begin of the game." << std::endl;
 
-	int currentStep{0}, activePlayer{0};
-	bool player1Lost{false}, player2Lost{false};
+	bool player1Lost{false}, player2Lost{false}, haveToQuit{false};
+	unsigned int activePlayer{0};
+	int currentStep{0};
 
-	while(test < 10'000 && !player1Lost && !player2Lost) {
+	while(!haveToQuit) {
 
-		currentStep = std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "CurrentStep"))->data();
 		activePlayer = std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "ActivePlayer"))->data();
+		//TODO: une fonction qui resynchronise vraiment selon les données reçues
 
-		switch(currentStep) {
+		if(m_transmitter.waitingInfoForCoach()) {
 
-			case CurrentStep::UntapStep:
-				m_manaSystem.untapStep(activePlayer);
-				break;
+			Information lastInfo{m_transmitter.getCoachInfo()};
 
-			case CurrentStep::UpkeepStep:
-				removeSummonSickness(activePlayer);
-				break;
+			if(lastInfo.type == InformationType::NextStep) {
 
-			case CurrentStep::DrawStep:
-				drawCard(activePlayer);
-				break;
+				m_stepSystem.nextStep();
+				currentStep = m_stepSystem.getCurrentStep();
 
-			case CurrentStep::MainPhaseStep1:
-				break;
+				if(currentStep != lastInfo.values[0]) {
 
-			case CurrentStep::DeclaringAttackPhaseStep:
-				break;
+					std::cout  << "Emulator was desynchronized (step " << currentStep << " instead of step " << lastInfo.values[0] << ")." << std::endl;
+					std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "CurrentStep"))->data() = lastInfo.values[0];
+					//TODO: resynchoniser également les phases (pas important)
+				}
 
-			case CurrentStep::DeclaringAttackersStep:
-				iaAttackAll(activePlayer);
-				break;
+				switch(currentStep) {
 
-			case CurrentStep::DeclaringDefendersStep:
-				break;
+					case CurrentStep::UntapStep:
+						m_manaSystem.untapStep(activePlayer);
+						break;
 
-			case CurrentStep::CombatDamagesStep:
-				m_attackSystem.applyDamages();
-				m_actionSystem.checkStates(); //Normally, checked each time a player get priority
-				player1Lost = std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_player1, "PlayerLost"))->data();
-				player2Lost = std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_player2, "PlayerLost"))->data();
-				break;
+					case CurrentStep::UpkeepStep:
+						removeSummonSickness(activePlayer);
+						break;
 
-			case CurrentStep::EndCombatStep:
-				break;
+					case CurrentStep::DrawStep:
+						drawCard(activePlayer);
+						break;
 
-			case CurrentStep::MainPhaseStep2:
-				iaPlayAll(activePlayer);
-				break;
+					case CurrentStep::MainPhaseStep1:
+						break;
 
-			case CurrentStep::EndStep:
-				drawBoard(activePlayer);
-				break;
+					case CurrentStep::DeclaringAttackPhaseStep:
+						break;
 
-			case CurrentStep::CleanupStep:
-				//Discard
-				resetDamageTaken();
-				m_attackSystem.clearSystem();
-				break;
+					case CurrentStep::DeclaringAttackersStep:
+						break;
 
+					case CurrentStep::DeclaringDefendersStep:
+						break;
+
+					case CurrentStep::CombatDamagesStep:
+						m_attackSystem.applyDamages();
+						m_actionSystem.checkStates(); //Normally, checked each time a player get priority
+						player1Lost = std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_player1, "PlayerLost"))->data();
+						player2Lost = std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_player2, "PlayerLost"))->data();
+						break;
+
+					case CurrentStep::EndCombatStep:
+						break;
+
+					case CurrentStep::MainPhaseStep2:
+						break;
+
+					case CurrentStep::EndStep:
+						break;
+
+					case CurrentStep::CleanupStep:
+						//Discard
+						resetDamageTaken();
+						m_attackSystem.clearSystem();
+						break;
+
+				}
+
+				m_manaSystem.endOfStep();
+
+			}
+
+			else { haveToQuit = true; }
 		}
-
-		m_manaSystem.endOfStep();
-		m_stepSystem.nextStep();
-
-		test++;
 	}
 
 	if(player1Lost) { std::cout << "Player 1 lost !" << std::endl; }

@@ -10,7 +10,7 @@ class CardLoader {
 
 	public:
 
-		CardLoader(const ComponentKeeper &keeper, const EntityCreator &creator);
+		CardLoader(ComponentKeeper &keeper, EntityCreator &creator);
 		CardLoader(const CardLoader&) = delete;
 		CardLoader &operator=(const CardLoader&) = delete;
 
@@ -23,7 +23,7 @@ class CardLoader {
 
 		ComponentKeeper &m_keeper;
 		EntityCreator &m_creator; 
-		std::queue<unsigned int, Entity> m_loadedCard;
+		std::map<unsigned int, Entity> m_loadedCard;
 };
 
 #endif
