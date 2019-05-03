@@ -100,6 +100,11 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>/I Includes %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="sources\ComponentKeeper.cpp" />
     <ClCompile Include="sources\components\BooleanComponent.cpp" />
@@ -114,15 +119,19 @@
     <ClCompile Include="sources\components\WordComponent.cpp" />
     <ClCompile Include="sources\EntityCreator.cpp" />
     <ClCompile Include="sources\IA.cpp" />
+    <ClCompile Include="Sources\jsoncpp.cpp" />
     <ClCompile Include="sources\main.cpp" />
+    <ClCompile Include="Sources\MtGALogParser.cpp" />
     <ClCompile Include="sources\systems\AttackSystem.cpp" />
     <ClCompile Include="sources\systems\GameSystem.cpp" />
     <ClCompile Include="sources\systems\ManaSystem.cpp" />
     <ClCompile Include="sources\systems\StackSystem.cpp" />
-    <ClCompile Include="sources\systems\StateBasedActionSystem.cpp" />
+    <ClCompile Include="sources\systems\StateBasedActionSystem.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Includes</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="sources\systems\StepSystem.cpp" />
     <ClCompile Include="sources\systems\System.cpp" />
-    <ClCompile Include="Transmitter.cpp" />
+    <ClCompile Include="Sources\Transmitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\ComponentKeeper.hpp" />
@@ -139,6 +148,9 @@
     <ClInclude Include="includes\EntityCreator.hpp" />
     <ClInclude Include="includes\GameTypes.hpp" />
     <ClInclude Include="includes\IA.hpp" />
+    <ClInclude Include="Includes\json-forwards.h" />
+    <ClInclude Include="Includes\json.h" />
+    <ClInclude Include="Includes\MtGALogParser.hpp" />
     <ClInclude Include="includes\systems\AttackSystem.hpp" />
     <ClInclude Include="includes\systems\GameSystem.hpp" />
     <ClInclude Include="includes\systems\ManaSystem.hpp" />
@@ -146,7 +158,7 @@
     <ClInclude Include="includes\systems\StateBasedActionSystem.hpp" />
     <ClInclude Include="includes\systems\StepSystem.hpp" />
     <ClInclude Include="includes\systems\System.hpp" />
-    <ClInclude Include="Transmitter.hpp" />
+    <ClInclude Include="Includes\Transmitter.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

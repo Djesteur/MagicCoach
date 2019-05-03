@@ -78,7 +78,13 @@
     <ClCompile Include="sources\systems\System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transmitter.cpp">
+    <ClCompile Include="Sources\MtGALogParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Transmitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\jsoncpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,7 +152,16 @@
     <ClInclude Include="includes\systems\System.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transmitter.hpp">
+    <ClInclude Include="Includes\MtGALogParser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\Transmitter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\json-forwards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\json.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

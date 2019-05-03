@@ -106,7 +106,7 @@ void GameSystem::drawCard(const unsigned int player) {
 	if (player == 0) { activePlayer = m_player1; }
 	else { activePlayer = m_player2;  }
 
-	if (std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(activePlayer, "PlayerLooseNextDraw"))->data() == true) {
+	if (std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(activePlayer, "PlayerLooseNextDraw"))->data() == true) {
 
 		std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(activePlayer, "PlayerLost"))->data() = true;
 	}

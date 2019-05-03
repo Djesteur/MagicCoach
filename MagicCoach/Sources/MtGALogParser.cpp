@@ -94,7 +94,8 @@ bool jumpLine(string line) {
 	return false;
 }
 
-bool getLogInformations(string fileName, bool* continuerProgramme) {
+//bool getLogInformations(string fileName, bool* continuerProgramme) {
+bool getLogInformations(string fileName, Transmitter &trans) {
 
 	cout << "\n===========================\n";
 	cout << "Parsage par methode double line/chars \n";
@@ -139,7 +140,11 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 	clock_t start = clock();
 	clock_t lastTick = start;
 	bool onMatch = false;
-	while (*continuerProgramme) {
+
+	//while (*continuerProgramme) {
+	Information lastinfo;
+	lastinfo.type = InformationType::PlayCard;
+	while (lastinfo.type != InformationType::StopListen) {
 		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 4) {
 			lastTick = clock();
 			ifstream file2;
@@ -154,6 +159,9 @@ bool getLogInformations(string fileName, bool* continuerProgramme) {
 				cout << "Lignes lu au total: " << ligneLues << "\n";
 			}
 			file2.close();
+		}
+		if (trans.waitingInfoForListener() == true) {
+			lastinfo = trans.getListenerInfo();
 		}
 	}
 
@@ -374,7 +382,7 @@ string stringCleaner(string s) {
 void startParsing(Transmitter &trans) {
 	string userHome = getenv("USERPROFILE");
 	string folder = userHome + "/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt";
-	//getLogInformations(folder, trans); //lis les premier ligne et start l'écoute
+	getLogInformations(folder, trans); //lis les premier ligne et start l'écoute
 }
 
 
