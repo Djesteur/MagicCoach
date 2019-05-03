@@ -1,4 +1,28 @@
-﻿  MtGALogParser.cpp
+﻿  ComponentKeeper.cpp
+  BooleanComponent.cpp
+  Component.cpp
+  ComponentUtils.cpp
+  IntegerArrayComponent.cpp
+  IntegerComponent.cpp
+  ScriptComponent.cpp
+  TargetArrayComponent.cpp
+  TargetComponent.cpp
+  WordArrayComponent.cpp
+  WordComponent.cpp
+  EntityCreator.cpp
+  IA.cpp
+  jsoncpp.cpp
   main.cpp
+  MtGALogParser.cpp
+  AttackSystem.cpp
+  GameSystem.cpp
+  ManaSystem.cpp
+  StackSystem.cpp
   Génération de code en cours...
-  MagicCoach.vcxproj -> C:\Users\cleme\source\repos\MagicCoach\x64\Debug\MagicCoach.exe
+  Compilation en cours...
+  StepSystem.cpp
+  System.cpp
+  Transmitter.cpp
+  Génération de code en cours...
+  StateBasedActionSystem.cpp
+  MagicCoach.vcxproj -> C:\Users\cleme\Documents\GitHub\MagicCoach\MagicCoach\x64\Debug\MagicCoach.exe

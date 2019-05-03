@@ -26,7 +26,7 @@ bool skipLine(int n, ifstream & fichier) {
 	return !(fichier.eof()); // retourne vrai si fichier n'a pas atteind la fin.
 }
 
-string getJSON(string l1, ifstream & fichier, int & ligneLues) {
+bool getJSON(string l1, ifstream & fichier, int & ligneLues) {
 
 	int nbAccolade = 0;
 	int nbCrochet = 0;
@@ -36,8 +36,20 @@ string getJSON(string l1, ifstream & fichier, int & ligneLues) {
 	string line = l1;
 	string jsonEnCours = "";
 
+	ofstream tmpJson;
+	tmpJson.open("tmpJson.json", ofstream::out);
+	if (!tmpJson) {
+		cout << "Erreur avec l'ouverture en ecriture de tmpJson.json \n";
+			return false;
+	}
+
 	do {
-		if (ligne1) { ligne1 = false; } else { getline(fichier, line); ligneLues++; }
+		if (ligne1) { //si c'est la premiere ligne on ne getpas la ligne avec getLine et on ne la compte pas car deja compter
+			ligne1 = false; 
+		} else { 
+			getline(fichier, line); 
+			ligneLues++; 
+		}
 		for (char& c : line) {//On lis char par char la ligne
 
 			if (c == '{') {
@@ -47,11 +59,12 @@ string getJSON(string l1, ifstream & fichier, int & ligneLues) {
 				nbCrochet++;
 				inArray = true;
 			}
-			//On ecrit dans le fichier des JSON sinon dans autre ligne
+			//On ecris le Json
 			if (inJson) {
-				jsonEnCours += c;
+				//jsonEnCours += c;
+				tmpJson << c;
 			}
-			//On recher les } si c'était la dernière du JSON on "sort" du JSON
+			//On recher les } si c'etait la derniere du JSON on "sort" du JSON
 			if (c == '}') {
 				nbAccolade--;
 				if (nbAccolade <= 0) {
@@ -68,9 +81,12 @@ string getJSON(string l1, ifstream & fichier, int & ligneLues) {
 			}
 
 		}//fin pour char
-	} while (inJson || inArray);
-	//fin pour ligne
-	return jsonEnCours;
+
+	} while (inJson || inArray); 	//fin pour ligne
+
+	tmpJson.close();
+
+	return true;
 }
 
 bool jumpLine(string line) {
@@ -103,12 +119,10 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 
 	ifstream file;
 	file.open(fileName);
-
 	if (!file) {
 		cout << "Le fichier est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
 		return false;
 	}
-
 
 	cout << "Parsing launched ! \n";
 
@@ -118,34 +132,21 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 
 	for (string line; getline(file, line);) {
 		ligneLues++;
-		if (jumpLine(line)) {getline(file, line); ligneLues++; }
-
-		sortie = choixSortie(line);
-		if (sortie != 1) {getline(file, line); ligneLues++; }
-		//if (line.find("Event.MatchCreated") != string::npos) { sorties[0] << line; sortie = 4; line = "{"; }
-
-		if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
-			nbJson++;
-			getJSON(line, file, ligneLues); //On récupère le JSON complet en changant le nombre de ligne lue (retourn aussi ce json dans un string)
-		} else {
-		}
-		sortie = 1;
-
 	}//fin pour ligne
 
-	ligneLues++; //ca compte 1 en moins !?
+	ligneLues++; //ca compte 1 en moins surement la ligne de fin de fichier qui n'est pas compter
 	cout << ligneLues << " lignes lues !\n";
-	cout << "Fin de lecture du début !\n Passage en écoute. \n";
+	cout << "Fin de lecture du debut !\n Passage en ecoute. \n";
 
 	clock_t start = clock();
 	clock_t lastTick = start;
 	bool onMatch = false;
 
-	//while (*continuerProgramme) {
 	Information lastinfo;
 	lastinfo.type = InformationType::PlayCard;
+	int passe = 0;
 	while (lastinfo.type != InformationType::StopListen) {
-		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 4) {
+		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 1) {
 			lastTick = clock();
 			ifstream file2;
 			file2.open(fileName);
@@ -154,7 +155,7 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 				return false;
 			}
 			if (skipLine(ligneLues, file2)) {
-				cout << "Seconde passe. \n";
+				cout << "Passe n°: " << passe <<"\n";
 				secondePasse(file2, ligneLues, onMatch);
 				cout << "Lignes lu au total: " << ligneLues << "\n";
 			}
@@ -170,7 +171,7 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 	cout << "Parsage du fichier terminee.\n";
 	cout << "===========================\n\n";
 
-	//Fermeture du JSON général
+	//Fermeture du JSON general
 	file.close();
 
 	exit(0); // On fermme comme il faut
@@ -180,12 +181,13 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 }
 
 bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch) {
+
 	for (string line; getline(entree, line);) {
 		lignesLues++;
 		if (line.find("Event.MatchCreated") != string::npos) {// AVANT JUMP
 			onMatch = true;
 			line = "{";
-			cout << "Début de match détécter ! Passage en parsing match.\n";
+			cout << "Debut de match detecter ! Passage en parsing match.\n";
 		}
 
 		/*
@@ -200,9 +202,11 @@ bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch) {
 
 		if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
 			//nbJson++;
-			string jsonSorti = getJSON(line, entree, lignesLues);
+			if (!getJSON(line, entree, lignesLues)) {
+				return false;
+			}
 
-			for (string s : getMessageInJson(jsonSorti)) {
+			for (string s : getMessageInJson()) {
 				getAction(s);
 			}
 		} else { 
@@ -261,52 +265,64 @@ string getAction(string json) {
 	return "";
 }
 
-vector<string> getMessageInJson(string json) {
+vector<string> getMessageInJson() {
+
+	ifstream tmpJson;
+	tmpJson.open("tmpJson.json");
+	if (!tmpJson) {
+		cout << "Le fichier tmpJson.json est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
+	}
+
 	vector<string> messages;
 
-	size_t pos = json.find("greToClientMessages");
+	for (string line; getline(tmpJson, line);) {
 
-	if(pos != string::npos) {
-		int nbMessage = 0;
+		size_t pos = line.find("greToClientMessages");
 
-		string sub = json.substr(pos);
-		int nbCrochet = 0;//le premier crocher serra trouver dans le for
-		bool inArray = true;
-		int nbAccolade = 0;
-		bool inJson = false;
-		string jsonEnCours = "";
+		if (pos != string::npos) {
+			int nbMessage = 0;
 
-		for (char& c : sub) {//On lis char par char la ligne
-			if (c == '{') {
-				nbAccolade++;
-				if (!inJson) {
-					nbMessage++;
-					inJson = true;
+			string sub = line.substr(pos);
+			int nbCrochet = 0;//le premier crocher serra trouver dans le for
+			bool inArray = true;
+			int nbAccolade = 0;
+			bool inJson = false;
+			string jsonEnCours = "";
+
+			for (char& c : sub) {//On lis char par char la ligne
+				if (c == '{') {
+					nbAccolade++;
+					if (!inJson) {
+						nbMessage++;
+						inJson = true;
+					}
+				} else if (c == '[') {
+					nbCrochet++;
 				}
-			} else if (c == '[') {
-				nbCrochet++;
-			}
-			if (inJson) {
-				jsonEnCours += c;
-			}
-			if (c == '}' && nbAccolade > 0) {
-				nbAccolade--;
-				if (nbAccolade <= 0) {
-					nbAccolade = 0;
-					messages.push_back(jsonEnCours);
-					jsonEnCours = "";
-					inJson = false;
+				if (inJson) {
+					jsonEnCours += c;
 				}
-			} else if (c == ']' && nbCrochet > 0) {
-				nbCrochet--;
-				if (nbCrochet <= 0) {
-					nbCrochet = 0;
-					inArray = false;
+				if (c == '}' && nbAccolade > 0) {
+					nbAccolade--;
+					if (nbAccolade <= 0) {
+						nbAccolade = 0;
+						messages.push_back(jsonEnCours);
+						jsonEnCours = "";
+						inJson = false;
+					}
+				} else if (c == ']' && nbCrochet > 0) {
+					nbCrochet--;
+					if (nbCrochet <= 0) {
+						nbCrochet = 0;
+						inArray = false;
+					}
 				}
-			}
 
-		}//fin pour char
-	}
+			}//fin pour char
+		}
+	}//Line par line de tmpJson.json
+	
+	tmpJson.close();
 	return messages;
 }
 
@@ -374,29 +390,13 @@ bool getGameStageStart(Json::Value root) {
 	return false;
 }
 
-
 string stringCleaner(string s) {
 	return s.substr(1, s.length()-3); //suprime les " " et \n a la fin des stylestring
 }
 
+//Fonction de demarage du parsing.
 void startParsing(Transmitter &trans) {
 	string userHome = getenv("USERPROFILE");
 	string folder = userHome + "/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt";
-	getLogInformations(folder, trans); //lis les premier ligne et start l'écoute
+	getLogInformations(folder, trans); //lis les premier ligne et start l'ecoute
 }
-
-
-/*int main() {
-
-	bool continuerProgramme = true;
-
-	//thread parsing(getLogInformations, "output_log_1game.txt", &continuerProgramme);
-	string userHome = getenv("USERPROFILE");
-	string folder = userHome + "/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt";
-	thread parsing(getLogInformations, folder, &continuerProgramme);
-	thread comm(readingCommande, &continuerProgramme);
-	parsing.join();
-	comm.join();
-
-	return EXIT_SUCCESS;
-}*/
