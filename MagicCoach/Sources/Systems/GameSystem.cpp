@@ -34,80 +34,86 @@ void GameSystem::playGame() {
 
 			Information lastInfo{m_transmitter.getCoachInfo()};
 
-			if(lastInfo.type == InformationType::NextStep) {
+			switch(lastInfo.type) {
 
-				m_stepSystem.nextStep();
-				currentStep = m_stepSystem.getCurrentStep();
+				case InformationType::NextStep:
+					receiveStepInfo(lastInfo);
+					break;
 
-				if(currentStep != lastInfo.values[0]) {
-
-					std::cout  << "Emulator was desynchronized (step " << currentStep << " instead of step " << lastInfo.values[0] << ")." << std::endl;
-					std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "CurrentStep"))->data() = lastInfo.values[0];
-					//TODO: resynchoniser également les phases (pas important)
-				}
-
-				std::cout << "Begin of step " << currentStep << std::endl;
-
-				switch(currentStep) {
-
-					case CurrentStep::UntapStep:
-						m_manaSystem.untapStep(activePlayer);
-						break;
-
-					case CurrentStep::UpkeepStep:
-						removeSummonSickness(activePlayer);
-						break;
-
-					case CurrentStep::DrawStep:
-						drawCard(activePlayer);
-						break;
-
-					case CurrentStep::MainPhaseStep1:
-						break;
-
-					case CurrentStep::DeclaringAttackPhaseStep:
-						break;
-
-					case CurrentStep::DeclaringAttackersStep:
-						break;
-
-					case CurrentStep::DeclaringDefendersStep:
-						break;
-
-					case CurrentStep::CombatDamagesStep:
-						m_attackSystem.applyDamages();
-						m_actionSystem.checkStates(); //Normally, checked each time a player get priority
-						player1Lost = std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_player1, "PlayerLost"))->data();
-						player2Lost = std::static_pointer_cast<BooleanComponent>(m_keeper.getComponent(m_player2, "PlayerLost"))->data();
-						break;
-
-					case CurrentStep::EndCombatStep:
-						break;
-
-					case CurrentStep::MainPhaseStep2:
-						break;
-
-					case CurrentStep::EndStep:
-						break;
-
-					case CurrentStep::CleanupStep:
-						//Discard
-						resetDamageTaken();
-						m_attackSystem.clearSystem();
-						break;
-
-				}
-
-				m_manaSystem.endOfStep();
-
+				default:
+					break;
 			}
 
-			else { haveToQuit = true; }
+			if(lastInfo.type != InformationType::NextStep) { haveToQuit = true; }
 		}
 	}
 
 	if(player1Lost) { std::cout << "Player 1 lost !" << std::endl; }
 	if(player2Lost) { std::cout << "Player 2 lost !" << std::endl; }
+}
+
+void GameSystem::receiveStepInfo(const Information lastInfo) {
+
+	m_stepSystem.nextStep();
+	currentStep = m_stepSystem.getCurrentStep();
+
+	if(currentStep != lastInfo.values[0]) {
+
+		std::cout  << "Emulator was desynchronized (step " << currentStep << " instead of step " << lastInfo.values[0] << ")." << std::endl;
+		std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "CurrentStep"))->data() = lastInfo.values[0];
+					//TODO: resynchoniser également les phases (pas important)
+	}
+
+	std::cout << "Begin of step " << currentStep << std::endl;
+
+	switch(currentStep) {
+
+		case CurrentStep::UntapStep:
+			m_manaSystem.untapStep(activePlayer);
+			break;
+
+		case CurrentStep::UpkeepStep:
+			removeSummonSickness(activePlayer);
+			break;
+
+		case CurrentStep::DrawStep:
+			drawCard(activePlayer);
+			break;
+
+		case CurrentStep::MainPhaseStep1:
+			break;
+
+		case CurrentStep::DeclaringAttackPhaseStep:
+			break;
+
+		case CurrentStep::DeclaringAttackersStep:
+			break;
+
+		case CurrentStep::DeclaringDefendersStep:
+			break;
+
+		case CurrentStep::CombatDamagesStep:
+			m_attackSystem.applyDamages();
+			m_actionSystem.checkStates(); //Normally, checked each time a player get priority
+			break;
+
+		case CurrentStep::EndCombatStep:
+			break;
+
+		case CurrentStep::MainPhaseStep2:
+			break;
+
+		case CurrentStep::EndStep:
+			break;
+
+		case CurrentStep::CleanupStep:
+			//Discard
+			resetDamageTaken();
+			m_attackSystem.clearSystem();
+			break;
+	}
+
+	m_manaSystem.endOfStep();
 }
 
 void GameSystem::drawXCards(const unsigned int player, const unsigned int x) {

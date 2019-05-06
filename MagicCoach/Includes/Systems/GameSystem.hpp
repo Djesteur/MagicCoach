@@ -30,6 +30,8 @@ class GameSystem : public System {
 
 	private:
 
+		void receiveStepInfo(const Information lastInfo);
+
 		void drawXCards(const unsigned int player, const unsigned int x);
 		void drawCard(const unsigned int player);
 
