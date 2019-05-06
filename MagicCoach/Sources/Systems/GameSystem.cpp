@@ -27,6 +27,7 @@ void GameSystem::playGame() {
 	while(!haveToQuit) {
 
 		activePlayer = std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "ActivePlayer"))->data();
+
 		//TODO: une fonction qui resynchronise vraiment selon les données reçues
 
 		if(m_transmitter.waitingInfoForCoach()) {
@@ -44,6 +45,8 @@ void GameSystem::playGame() {
 					std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "CurrentStep"))->data() = lastInfo.values[0];
 					//TODO: resynchoniser également les phases (pas important)
 				}
+
+				std::cout << "Begin of step " << currentStep << std::endl;
 
 				switch(currentStep) {
 
