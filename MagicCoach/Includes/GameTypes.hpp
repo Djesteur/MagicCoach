@@ -40,7 +40,7 @@ enum CurrentStep {
 	UpkeepStep = 1,
 	DrawStep = 2,
 	MainPhaseStep1 = 3,
-	DeclaringAttackPhaseStep = 4,
+	BeginCombat	 = 4,
 	DeclaringAttackersStep = 5,
 	DeclaringDefendersStep = 6,
 	CombatDamagesStep = 7,

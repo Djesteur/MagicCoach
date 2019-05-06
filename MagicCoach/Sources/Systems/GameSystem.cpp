@@ -21,8 +21,7 @@ void GameSystem::playGame() {
 	std::cout << "Begin of the game." << std::endl;
 
 	bool player1Lost{false}, player2Lost{false}, haveToQuit{false};
-	unsigned int activePlayer{0};
-	int currentStep{0};
+	int activePlayer{0};
 
 	while(!haveToQuit) {
 
@@ -55,65 +54,72 @@ void GameSystem::playGame() {
 void GameSystem::receiveStepInfo(const Information lastInfo) {
 
 	m_stepSystem.nextStep();
-	currentStep = m_stepSystem.getCurrentStep();
+	int currentStep = m_stepSystem.getCurrentStep();
 
-	if(currentStep != lastInfo.values[0]) {
+	if(currentStep + 1 != lastInfo.values[0] 
+		|| !(currentStep == CurrentStep::CleanupStep && lastInfo.values[0] == 0)) {
 
 		std::cout  << "Emulator was desynchronized (step " << currentStep << " instead of step " << lastInfo.values[0] << ")." << std::endl;
 		std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "CurrentStep"))->data() = lastInfo.values[0];
-					//TODO: resynchoniser également les phases (pas important)
+		//TODO: resynchoniser également les phases (pas important)
 	}
 
-	std::cout << "Begin of step " << currentStep << std::endl;
+	else if (currentStep != lastInfo.values[0]) {
 
-	switch(currentStep) {
+		m_stepSystem.nextStep();
+		currentStep = m_stepSystem.getCurrentStep();
 
-		case CurrentStep::UntapStep:
-			m_manaSystem.untapStep(activePlayer);
-			break;
+		std::cout << "Begin of step " << currentStep << std::endl;
 
-		case CurrentStep::UpkeepStep:
-			removeSummonSickness(activePlayer);
-			break;
+		switch(currentStep) {
 
-		case CurrentStep::DrawStep:
-			drawCard(activePlayer);
-			break;
+			case CurrentStep::UntapStep:
+				m_manaSystem.untapStep(lastInfo.player);
+				break;
 
-		case CurrentStep::MainPhaseStep1:
-			break;
+			case CurrentStep::UpkeepStep:
+				removeSummonSickness(lastInfo.player);
+				break;
 
-		case CurrentStep::DeclaringAttackPhaseStep:
-			break;
+			case CurrentStep::DrawStep:
+				drawCard(lastInfo.player);
+				break;
 
-		case CurrentStep::DeclaringAttackersStep:
-			break;
+			case CurrentStep::MainPhaseStep1:
+				break;
 
-		case CurrentStep::DeclaringDefendersStep:
-			break;
+			case CurrentStep::BeginCombat:
+				break;
 
-		case CurrentStep::CombatDamagesStep:
-			m_attackSystem.applyDamages();
-			m_actionSystem.checkStates(); //Normally, checked each time a player get priority
-			break;
+			case CurrentStep::DeclaringAttackersStep:
+				break;
 
-		case CurrentStep::EndCombatStep:
-			break;
+			case CurrentStep::DeclaringDefendersStep:
+				break;
 
-		case CurrentStep::MainPhaseStep2:
-			break;
+			case CurrentStep::CombatDamagesStep:
+				m_attackSystem.applyDamages();
+				m_actionSystem.checkStates(); //Normally, checked each time a player get priority
+				break;
 
-		case CurrentStep::EndStep:
-			break;
+			case CurrentStep::EndCombatStep:
+				break;
 
-		case CurrentStep::CleanupStep:
-			//Discard
-			resetDamageTaken();
-			m_attackSystem.clearSystem();
-			break;
+			case CurrentStep::MainPhaseStep2:
+				break;
+
+			case CurrentStep::EndStep:
+				break;
+
+			case CurrentStep::CleanupStep:
+				//Discard
+				resetDamageTaken();
+				m_attackSystem.clearSystem();
+				break;
+		}
+
+		m_manaSystem.endOfStep();
 	}
-
-	m_manaSystem.endOfStep();
 }
 
 void GameSystem::drawXCards(const unsigned int player, const unsigned int x) {
