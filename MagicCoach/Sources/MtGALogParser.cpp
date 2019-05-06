@@ -27,7 +27,7 @@ bool skipLine(int n, ifstream & fichier) {
 	return !(fichier.eof()); // retourne vrai si fichier n'a pas atteind la fin.
 }
 
-bool getJSON(string l1, ifstream & fichier, int & ligneLues) {
+bool getJSON(string l1, ifstream & fichier, unsigned int & ligneLues, int & lastPosition) {
 
 	int nbAccolade = 0;
 	int nbCrochet = 0;
@@ -49,7 +49,9 @@ bool getJSON(string l1, ifstream & fichier, int & ligneLues) {
 			ligne1 = false; 
 		} else { 
 			getline(fichier, line); 
-			ligneLues++; 
+			ligneLues++;
+			lastPosition = fichier.tellg();
+			tmpJson << "\n"; //Evite la ligne de 300Km qui fait surement buger
 		}
 		for (char& c : line) {//On lis char par char la ligne
 
@@ -114,30 +116,12 @@ bool jumpLine(string line) {
 //bool getLogInformations(string fileName, bool* continuerProgramme) {
 bool getLogInformations(string fileName, Transmitter &trans) {
 
-	cout << "\n===========================\n";
-	cout << "Parsage par methode double line/chars \n";
-	cout << "===========================\n";
+	int lastPosition = 0;
+	unsigned int lastLine = getNbLine(fileName, lastPosition);
 
-	ifstream file;
-	file.open(fileName);
-	if (!file) {
-		cout << "Le fichier est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
-		return false;
-	}
+	cout << "Parser: " << lastLine << " lignes Skip ! | File size : " << lastPosition << "\n";
 
-	cout << "Parsing launched ! \n";
-
-	int nbJson = 0;
-	int ligneLues = 0;
-	int sortie = 1;
-
-	for (string line; getline(file, line);) {
-		ligneLues++;
-	}//fin pour ligne
-
-	ligneLues++; //ca compte 1 en moins surement la ligne de fin de fichier qui n'est pas compter
-	cout << ligneLues << " lignes lues !\n";
-	cout << "Fin de lecture du debut !\n Passage en ecoute. \n";
+	cout << "Parser: Passage en ecoute. \n";
 
 	clock_t start = clock();
 	clock_t lastTick = start;
@@ -146,34 +130,27 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 	Information lastinfo;
 	lastinfo.type = InformationType::PlayCard;
 	int passe = 0;
+	int nbClock = 0;
 	while (lastinfo.type != InformationType::StopListen) {
-		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 1) {
+		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 5) { //Mettre 10 sec en temps normal si bug encore en partie
 			lastTick = clock();
-			ifstream file2;
-			file2.open(fileName);
-			if (!file2) {
-				cout << "Le fichier est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
-				return false;
+
+			//unsigned int nbLineFile = getNbLine(fileName);
+
+			//if (lastLine < nbLineFile) {
+			if (lastPosition < getFileSize(fileName)){
+				//cout << "Nb line file : " << nbLineFile << "\n";
+				cout << "Parser: Passe num: " << passe <<"\n";
+				secondePasse(fileName, lastPosition, lastLine, onMatch, trans);
+				passe++;
 			}
-			if (skipLine(ligneLues, file2)) {
-				cout << "Passe n°: " << passe <<"\n";
-				secondePasse(file2, ligneLues, onMatch, trans);
-				cout << "Lignes lu au total: " << ligneLues << "\n";
-			}
-			file2.close();
+
+			nbClock++;
 		}
 		if (trans.waitingInfoForListener() == true) {
 			lastinfo = trans.getListenerInfo();
 		}
 	}
-
-	
-	cout << "\n\n===========================\n";
-	cout << "Parsage du fichier terminee.\n";
-	cout << "===========================\n\n";
-
-	//Fermeture du JSON general
-	file.close();
 
 	exit(0); // On fermme comme il faut
 
@@ -181,14 +158,29 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 
 }
 
-bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch, Transmitter &trans) {
+bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, bool & onMatch, Transmitter &trans) {
 
-	for (string line; getline(entree, line);) {
-		lignesLues++;
+	unsigned int saveLastLine = lastLine;
+
+	ifstream file;
+	file.open(fileName);
+	if (!file) {
+		cout << "Parser: Le fichier est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
+		return false;
+	}
+
+	file.seekg(lastPosition); //On remet a l'ancienne position du fichier.
+	//cout << "Debug position : " << file.tellg() << "\n";
+
+	//skipLine(lastLine, file);
+	for (string line; getline(file, line);) {
+		lastLine++;
+		lastPosition = file.tellg();
+		//cout << "Debug position at getline : " << file.tellg() << "\n";
 		if (line.find("Event.MatchCreated") != string::npos) {// AVANT JUMP
 			onMatch = true;
 			line = "{";
-			cout << "Debut de match detecter ! Passage en parsing match.\n";
+			cout << "Parser: Debut de match detecter ! Passage en parsing match.\n";
 		}
 
 		/*
@@ -197,13 +189,17 @@ bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch, Transmitt
 
 		//On jump une fois les "[Client" possiblement utile lus.
 		if (jumpLine(line)) {
-			getline(entree, line); 
-			lignesLues++;
+			getline(file, line); 
+			lastLine++;
+			lastPosition = file.tellg();
 		}
+		
+		//cout << "Debug position befor getJson : " << lastPosition << "\n";
 
 		if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
 			//nbJson++;
-			if (!getJSON(line, entree, lignesLues)) {
+			if (!getJSON(line, file, lastLine, lastPosition)) {
+				file.close();
 				return false;
 			}
 
@@ -214,6 +210,10 @@ bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch, Transmitt
 		}
 
 	}//fin pour ligne
+	file.close();
+
+	int nbLineRead = (lastLine - saveLastLine);
+	cout << "Parser: Ligne lues pendant la passe : " << nbLineRead << " | File size: " << lastPosition <<"\n";
 	return true;
 
 }
@@ -246,7 +246,7 @@ Information getAction(string json) {
 
 	bool parsingSuccessful = reader.parse(json, root);
 	if (!parsingSuccessful) {
-		cout << "Error parsing the string" << endl;
+		cout << "Parser: Error parsing the string" << endl;
 	} else {
 
 		info.player = getActivePlayer(root);
@@ -279,7 +279,7 @@ vector<string> getMessageInJson() {
 	ifstream tmpJson;
 	tmpJson.open("tmpJson.json");
 	if (!tmpJson) {
-		cout << "Le fichier tmpJson.json est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
+		cout << "Parser: Le fichier tmpJson.json est introuvable dans le dossier du programe ou n'a pas pus etre ouvert.\n";
 	}
 
 	vector<string> messages;
@@ -436,6 +436,33 @@ int stepToInt(string step, string phase) {
 	} else {
 		return -1;
 	}
+}
+
+unsigned int getNbLine(string fileName) {
+	std::ifstream file(fileName);
+	file.unsetf(std::ios_base::skipws);
+	unsigned line_count = std::count(std::istream_iterator<char>(file),std::istream_iterator<char>(),'\n');
+	return line_count;
+}
+
+unsigned int getNbLine(string fileName, int & fileSize) { //version je fait les deux en un
+	std::ifstream file(fileName);
+
+	file.seekg(0, file.end);
+	fileSize = file.tellg();
+	file.seekg(0, file.beg);
+	
+	file.unsetf(std::ios_base::skipws);
+	unsigned line_count = std::count(std::istream_iterator<char>(file),std::istream_iterator<char>(),'\n');
+	return line_count;
+}
+
+int getFileSize(string fileName) {
+	std::ifstream file(fileName);
+	file.seekg(0, file.end);
+	int fileSize = file.tellg();
+	file.seekg(0, file.beg);
+	return  fileSize;
 }
 
 //Fonction de demarage du parsing.

@@ -11,14 +11,15 @@
 #include <thread>
 #include <ctime>
 #include <json.h>
+#include <iterator>
 
 #include "Transmitter.hpp"
 
 bool getLogInformations(std::string, bool*);
 bool skipLine(int, std::ifstream &);
-bool getJSON(std::string, std::ifstream &, int&);
+bool getJSON(std::string, std::ifstream &, unsigned int &, int &);
 bool jumpLine(std::string);
-bool secondePasse(std::ifstream &,int&, bool&, Transmitter&);
+bool secondePasse(std::string, int &, unsigned int &, bool&, Transmitter&);
 int choixSortie(std::string);
 Information getAction(std::string);
 std::vector<std::string> getMessageInJson();
@@ -30,6 +31,9 @@ bool getGameOver(Json::Value);
 bool getMatchOver(Json::Value);
 bool getGameStageStart(Json::Value);
 unsigned int getActivePlayer(Json::Value);
-int stepToInt(std::string step, std::string phase);
+int stepToInt(std::string, std::string);
+unsigned int getNbLine(std::string);
+unsigned int getNbLine(std::string, int &);
+int getFileSize(std::string);
 
 #endif

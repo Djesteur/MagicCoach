@@ -42,8 +42,6 @@ void GameSystem::playGame() {
 				default:
 					break;
 			}
-
-			if(lastInfo.type != InformationType::CurrentStep) { haveToQuit = true; }
 		}
 	}
 
