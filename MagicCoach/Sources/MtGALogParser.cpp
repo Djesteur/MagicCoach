@@ -1,5 +1,6 @@
 #include "MtGALogParser.hpp"
 
+
 using namespace std;
 
 void readingCommande(bool *continuerProgramme) {
@@ -156,7 +157,7 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 			}
 			if (skipLine(ligneLues, file2)) {
 				cout << "Passe n°: " << passe <<"\n";
-				secondePasse(file2, ligneLues, onMatch);
+				secondePasse(file2, ligneLues, onMatch, trans);
 				cout << "Lignes lu au total: " << ligneLues << "\n";
 			}
 			file2.close();
@@ -180,7 +181,7 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 
 }
 
-bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch) {
+bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch, Transmitter &trans) {
 
 	for (string line; getline(entree, line);) {
 		lignesLues++;
@@ -207,7 +208,7 @@ bool secondePasse(ifstream & entree, int & lignesLues, bool & onMatch) {
 			}
 
 			for (string s : getMessageInJson()) {
-				getAction(s);
+				trans.addInfoForCoach(getAction(s));
 			}
 		} else { 
 		}
@@ -236,33 +237,41 @@ int choixSortie(string line) {
 	return 1;//pas a trier
 }
 
-string getAction(string json) {
+Information getAction(string json) {
 
 	Json::Value root;
 	Json::Reader reader;
+
+	Information info = Information();
 
 	bool parsingSuccessful = reader.parse(json, root);
 	if (!parsingSuccessful) {
 		cout << "Error parsing the string" << endl;
 	} else {
+
+		info.player = getActivePlayer(root);
 		/*if (getGameStageStart) {
 			cout << "Stage start !\n";
 		}*/
 		string phase = getPhase(root);
 		string step = getStep(root);
 		if (phase != "NOTHING") {
+			info.type = InformationType::CurrentStep;
+			info.values.push_back(stepToInt(step, phase));
 			cout << "Phase: " << phase << " | ";
 			cout << "Step : " << step << "\n";
 		}
 		if (getGameOver(root)) {
+			info.type = InformationType::GameOver;
 			cout << "Game over \n";
 		}
 		if (getMatchOver(root)) {
+			info.type = InformationType::MatchOver;
 			cout << "Match over \n";
 		}
 	}
 
-	return "";
+	return info;
 }
 
 vector<string> getMessageInJson() {
@@ -390,8 +399,43 @@ bool getGameStageStart(Json::Value root) {
 	return false;
 }
 
+unsigned int getActivePlayer(Json::Value root) {
+	if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("turnInfo") && root["gameStateMessage"]["turnInfo"].isMember("activePlayer")) {
+		return (unsigned int) root["gameStateMessage"]["turnInfo"]["activePlayer"].isInt();
+	}
+	return 0;
+}
+
 string stringCleaner(string s) {
 	return s.substr(1, s.length()-3); //suprime les " " et \n a la fin des stylestring
+}
+
+int stepToInt(string step, string phase) {
+	if (step == "Step_BeginCombat") {
+		return 4;
+	} else if (step == "Step_Draw") {
+		return 2;
+	} else if (step == "Step_DeclareAttack") {
+		return 5;
+	} else if (step == "Step_DeclareBlock") {
+		return 6;
+	} else if (step == "Step_EndCombat") {
+		return 8;
+	} else if (step == "Step_CombatDamage") {
+		return 7;
+	} else if (step == "Step_Cleanup") {
+		return 11;
+	} else if (step == "Step_End") {
+		return 10;
+	} else if (step == "Step_Upkeep") {
+		return 1;
+	} else if (step == "NOTHING" && phase == "Phase_Main1") {
+		return 3;
+	} else if (step == "NOTHING" && phase == "Phase_Main2") {
+		return 9;
+	} else {
+		return -1;
+	}
 }
 
 //Fonction de demarage du parsing.

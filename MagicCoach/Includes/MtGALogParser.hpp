@@ -18,9 +18,9 @@ bool getLogInformations(std::string, bool*);
 bool skipLine(int, std::ifstream &);
 bool getJSON(std::string, std::ifstream &, int&);
 bool jumpLine(std::string);
-bool secondePasse(std::ifstream &,int&, bool&);
+bool secondePasse(std::ifstream &,int&, bool&, Transmitter&);
 int choixSortie(std::string);
-std::string getAction(std::string);
+Information getAction(std::string);
 std::vector<std::string> getMessageInJson();
 std::string getStep(Json::Value);
 std::string getPhase(Json::Value);
@@ -29,5 +29,7 @@ void startParsing(Transmitter&);
 bool getGameOver(Json::Value);
 bool getMatchOver(Json::Value);
 bool getGameStageStart(Json::Value);
+unsigned int getActivePlayer(Json::Value);
+int stepToInt(std::string step, std::string phase);
 
 #endif

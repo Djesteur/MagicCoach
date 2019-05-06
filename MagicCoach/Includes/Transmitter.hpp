@@ -9,10 +9,12 @@ enum class InformationType {
 
 	PlayCard,
 	Draw,
-	NextStep,
+	CurrentStep,
 	DeclaringAttackers,
 	DeclaringBlockers,
-	StopListen
+	StopListen,
+	GameOver,
+	MatchOver
 };
 
 struct Information {
