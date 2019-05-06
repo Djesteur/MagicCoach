@@ -84,7 +84,7 @@ void StepSystem::nextStep() {
 
 	if(thisStep <= CurrentStep::DrawStep) { thisPhase = CurrentPhase::BeginningPhase; }
 	else if(thisStep == CurrentStep::MainPhaseStep1) { thisPhase = CurrentPhase::MainPhase1; }
-	if(thisStep >= CurrentStep::DeclaringAttackPhaseStep && thisStep <= CurrentStep::EndCombatStep) { thisPhase = CurrentPhase::CombatPhase; }
+	if(thisStep >= CurrentStep::BeginCombat && thisStep <= CurrentStep::EndCombatStep) { thisPhase = CurrentPhase::CombatPhase; }
 	if(thisStep == CurrentStep::MainPhaseStep2) { thisPhase = CurrentPhase::MainPhase2; }
 	if(thisStep >= CurrentStep::EndStep) { thisPhase = CurrentPhase::EndPhase; }
 }

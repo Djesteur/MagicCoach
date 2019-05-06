@@ -35,7 +35,7 @@ void GameSystem::playGame() {
 
 			switch(lastInfo.type) {
 
-				case InformationType::NextStep:
+				case InformationType::CurrentStep:
 					receiveStepInfo(lastInfo);
 					break;
 
@@ -43,7 +43,7 @@ void GameSystem::playGame() {
 					break;
 			}
 
-			if(lastInfo.type != InformationType::NextStep) { haveToQuit = true; }
+			if(lastInfo.type != InformationType::CurrentStep) { haveToQuit = true; }
 		}
 	}
 
