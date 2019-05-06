@@ -13,13 +13,11 @@ nltk.download("stopwords")
 
 
 # Clean up the text, normalizing it
-
-
 def normalize(cardText):
     if (cardText is not None):
         # Removing non ASCII characters
-        # cardText = unicodedata.normalize(
-        #    'NFKD', cardText).encode("ascii", "ignore")
+        cardText = unicodedata.normalize(
+            'NFKD', cardText).encode("ascii", "ignore").decode("utf-8", 'ignore')
 
         # Removing contractions
         cardText = contractions.fix(cardText, slang=False)
@@ -37,11 +35,21 @@ def normalize(cardText):
         tokenizedText = [
             word for word in tokenizedText if not word in stopwords.words('english')]
 
-        # Lemmatization (or Stemmatization?)
-        #lemmatizer = WordNetLemmatizer()
-        #cardText = [lemmatizer.lemmatize(word, pos = 'v') for word in tokenizedText]
+        # Converting numbers
+        inflectEngine = inflect.engine()
+        newWords = []
+        for word in tokenizedText:
+            if word.isdigit():
+                newWords.append(inflectEngine.number_to_words(word))
+            else:
+                newWords.append(word)
+        tokenizedText = newWords
 
-        # Turn it back into a string
+        # Lemmatization
+        lemmatizer = WordNetLemmatizer()
+        cardText = [lemmatizer.lemmatize(word, pos = 'v') for word in tokenizedText]
+
+        # Turning it back into a string
         cardText = "".join([" " + i for i in tokenizedText]).strip()
 
         return cardText
@@ -49,47 +57,50 @@ def normalize(cardText):
     else:  # If the text is empty
         return ""
 
+
 # Returns the card's note about its control capacities:
 # Ability to counter,
 # Stops the opponent from playing,
-# Creature management
-
-
+# Ability to destroy
+# Defender keyword
 def control(card):
-    if (card.text.find("counter ") != -1
-            and re.search("[+-][0-9]/[+-][0-9] counter ", card.text) is None):
+    if ((card.text.find("counter ") != -1
+            and re.search("[+-][0-9]/[+-][0-9] counter ", card.text) is None)
+            or card.text.find("destroy") != -1
+            or card.text.find("defender") != -1):
         return 1
 
     return 0
 
+
 # Returns the card's note about its tempo capacities:
 # Ability to buy time
-
-
 def tempo(card):
-    return -1
+    if (card.text.find("tap target") != -1):
+        return 1
+
+    return 0
+
 
 # Returns the card's note about its polyvalence capacities:
 # Adapted to different contexts
-
-
 def polyvalence(card):
     if (card.text.find("choose one") != -1):
         return 1
 
     return 0
 
+
 # Returns the card's note about its creature capacities:
 # Ratio of (self stats + stats of created tokens) / converted mana cost
-
-
+# Ignoring values of power and toughness changing depending on the state of the game
 def creature(card):
     statsSum = 0
 
     tokenText = re.search(
         "create (one|two|three|four|five|six|seven|eight|nine) ([0-9])/([0-9]) .+ token", card.text)
 
-    if (tokenText is not None):
+    if tokenText is not None:
         tokenNumber = int(w2n.word_to_num(tokenText.group(1)))
         tokenStats = int(tokenText.group(2)) + int(tokenText.group(3))
 
@@ -108,20 +119,18 @@ def creature(card):
     else:
         return statsSum
 
+
 # Returns the card's note about its value capacities:
 # Ability to draw cards
-
-
 def value(card):
-    if (card.text.find("draw") != -1):
+    if (card.text.find("draw ") != -1):
         return 1
 
     return 0
 
+
 # Returns the card's note about its boost capacities:
 # Ability to improve cards, permanently or not
-
-
 def boost(card):
     if (card.text.find("gains") != -1
             or re.search("\+[0-9]/\+[0-9]", card.text) is not None):
@@ -129,13 +138,12 @@ def boost(card):
 
     return 0
 
+
 # Returns the card's note about its capacities in all categories
-
-
 def analyseCard(card):
+    #card.text = normalize(card.text)
     if card.text is None:
         card.text = ""
-    #card.text = normalize(card.text)
 
     return {
         "Control": control(card),
@@ -146,36 +154,34 @@ def analyseCard(card):
         "Boost": boost(card)
     }
 
+
 # Creates a .json file where all data about cards are stored
-
-
 def createJson(cardsList):
-    serialisedCard = {}
+    serialisedCard = []
 
     for card in cardsList:
-        serialisedCard.update(
+        serialisedCard.append(
             {
-                card.name:
-                {
-                    "Mana cost": card.mana_cost,
-                    "Color identity": card.color_identity,
-                    "Type": card.type,
-                    "Loyalty": card.loyalty,
-                    "Power": card.power,
-                    "Toughness": card.toughness,
-                    "Text": card.text,
-                    "Categories": analyseCard(card)
-                }
+                "Name": card.name,
+                "Id": card.id,
+                "Multiverse id": card.multiverse_id,
+                "Mana cost": card.mana_cost,
+                "Color identity": card.color_identity,
+                "Type": card.type,
+                "Loyalty": card.loyalty,
+                "Power": card.power,
+                "Toughness": card.toughness,
+                "Text": card.text,
+                "Categories": analyseCard(card)
             }
         )
 
-    with open('cardsList.json', 'w') as outfile:
+    with open('cardsList.json', 'w', encoding='utf-8') as outfile:
         json.dump(serialisedCard, outfile, sort_keys=True,
                   indent=4, ensure_ascii=False)
 
+
 # Main function
-
-
 def main():
     print("Retrieving cards...")
     mtgaCards = Card.where(gameFormat="Standard").all()
