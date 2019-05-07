@@ -12,13 +12,11 @@ GameSystem::GameSystem(ComponentKeeper &keeper, EntityCreator &creator, Transmit
 	m_actionSystem{keeper, m_gameEntity, m_player1, m_player2},
 	m_attackSystem{keeper, m_player1, m_player2},
 	m_transmitter{transmitter} {
-
-	std::cout << "Emulator is ready !" << std::endl;
 }
 
 void GameSystem::playGame() {
 
-	std::cout << "Begin of the game." << std::endl;
+	std::cout << "Emulator: ready !" << std::endl;
 
 	bool player1Lost{false}, player2Lost{false}, haveToQuit{false};
 	int activePlayer{0};
@@ -39,11 +37,17 @@ void GameSystem::playGame() {
 					receiveStepInfo(lastInfo);
 					break;
 
+				case InformationType::GameOver:
+					haveToQuit = true;
+					break;
+
 				default:
 					break;
 			}
 		}
 	}
+
+	std::cout << "Emulator: end of the game !" << std::endl;
 
 	if(player1Lost) { std::cout << "Player 1 lost !" << std::endl; }
 	if(player2Lost) { std::cout << "Player 2 lost !" << std::endl; }

@@ -31,7 +31,7 @@ void StateBasedActionSystem::addGameEntity(const Entity entity) { m_gameEntities
 
 void StateBasedActionSystem::checkStates() {
 
-	checkLifePoint();
+	//checkLifePoint();
 	checkDraw();
 	checkDamages();
 }
