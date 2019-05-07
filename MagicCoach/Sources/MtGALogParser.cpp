@@ -132,7 +132,7 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 	int passe = 0;
 	int nbClock = 0;
 	while (lastinfo.type != InformationType::StopListen) {
-		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) == 5) { //Mettre 10 sec en temps normal si bug encore en partie
+		if (((clock() - lastTick) / (double)CLOCKS_PER_SEC) >= 1) { //Mettre 10 sec en temps normal si bug encore en partie
 			lastTick = clock();
 
 			//unsigned int nbLineFile = getNbLine(fileName);
@@ -188,26 +188,24 @@ bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, 
 		*/
 
 		//On jump une fois les "[Client" possiblement utile lus.
-		if (jumpLine(line)) {
-			getline(file, line); 
-			lastLine++;
-			lastPosition = file.tellg();
+		if (!jumpLine(line)) {
+			//cout << "Debug position befor getJson : " << lastPosition << "\n";
+
+			if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
+				//nbJson++;
+				if (!getJSON(line, file, lastLine, lastPosition)) {
+					file.close();
+					return false;
+				}
+
+				for (string s : getMessageInJson()) {
+					trans.addInfoForCoach(getAction(s));
+				}
+			} else {
+			}
 		}
 		
-		//cout << "Debug position befor getJson : " << lastPosition << "\n";
 
-		if (line[0] == '{' || (line[0] == '[')) {//(line.find('{')!=string::npos){
-			//nbJson++;
-			if (!getJSON(line, file, lastLine, lastPosition)) {
-				file.close();
-				return false;
-			}
-
-			for (string s : getMessageInJson()) {
-				trans.addInfoForCoach(getAction(s));
-			}
-		} else { 
-		}
 
 	}//fin pour ligne
 	file.close();
@@ -286,48 +284,59 @@ vector<string> getMessageInJson() {
 
 	for (string line; getline(tmpJson, line);) {
 
-		size_t pos = line.find("greToClientMessages");
+		size_t pos = line.find("greToClientMessages"); //on trouve des message
+		
+		int nbCrochet = 0;
 
-		if (pos != string::npos) {
+		bool messageTrouver = false;
+
+		if (pos != string::npos || messageTrouver) { //si on viens de trouver ou si on n'a déjà trouver alors c'est ok
+
 			int nbMessage = 0;
+			messageTrouver = true;
 
-			string sub = line.substr(pos);
-			int nbCrochet = 0;//le premier crocher serra trouver dans le for
+			nbCrochet = 1;
+			
 			bool inArray = true;
 			int nbAccolade = 0;
 			bool inJson = false;
 			string jsonEnCours = "";
 
-			for (char& c : sub) {//On lis char par char la ligne
-				if (c == '{') {
-					nbAccolade++;
-					if (!inJson) {
-						nbMessage++;
-						inJson = true;
+			do {
+				getline(tmpJson, line); //on prend la ligne suivante au moins une fois
+				for (char& c : line) {//On lis char par char la ligne
+					if (c == '{') {
+						nbAccolade++;
+						if (!inJson) {
+							nbMessage++;
+							inJson = true;
+						}
+					} else if (c == '[') {
+						nbCrochet++;
 					}
-				} else if (c == '[') {
-					nbCrochet++;
-				}
-				if (inJson) {
-					jsonEnCours += c;
-				}
-				if (c == '}' && nbAccolade > 0) {
-					nbAccolade--;
-					if (nbAccolade <= 0) {
-						nbAccolade = 0;
-						messages.push_back(jsonEnCours);
-						jsonEnCours = "";
-						inJson = false;
+					if (inJson) {
+						jsonEnCours += c;
 					}
-				} else if (c == ']' && nbCrochet > 0) {
-					nbCrochet--;
-					if (nbCrochet <= 0) {
-						nbCrochet = 0;
-						inArray = false;
+					if (c == '}') {
+						nbAccolade--;
+						if (nbAccolade <= 0) {
+							nbAccolade = 0;
+							messages.push_back(jsonEnCours);
+							jsonEnCours = "";
+							inJson = false;
+						}
+					} else if (c == ']') {
+						nbCrochet--;
+						if (nbCrochet <= 0) { //si on arrive a 0 c'est que on a lus tous les messages du tableau donc messageTrouver a false car on est plus dans des message
+							nbCrochet = 0;
+							messageTrouver = false;
+						}
 					}
-				}
 
-			}//fin pour char
+				}//fin pour char
+
+			} while (inJson || nbCrochet); 	//fin pour ligne
+			
 		}
 	}//Line par line de tmpJson.json
 	
