@@ -12,6 +12,7 @@
 #include <ctime>
 #include <json.h>
 #include <iterator>
+#include <algorithm>
 
 #include "Transmitter.hpp"
 
