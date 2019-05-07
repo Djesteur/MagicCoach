@@ -27,6 +27,7 @@ Information Transmitter::getCoachInfo() {
 
 	m_toCoachMutex.lock();
 	Information newInfo{ m_infoToCoach.front() };
+	m_infoToCoach.pop();
 	m_toCoachMutex.unlock();
 	return newInfo;
 }
@@ -44,6 +45,7 @@ Information Transmitter::getListenerInfo() {
 
 	m_toListenerMutex.lock();
 	Information newInfo{ m_infoToListener.front() };
+	m_infoToListener.pop();
 	m_toListenerMutex.unlock();
 	return newInfo;
 }
