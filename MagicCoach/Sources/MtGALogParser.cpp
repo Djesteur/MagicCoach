@@ -199,7 +199,8 @@ bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, 
 				}
 
 				for (string s : getMessageInJson()) {
-					trans.addInfoForCoach(getAction(s));
+					JsonMessage m = JsonMessage(s);
+					m.getAction(trans);
 				}
 			} else {
 			}
@@ -233,43 +234,6 @@ int choixSortie(string line) {
 	}
 
 	return 1;//pas a trier
-}
-
-Information getAction(string json) {
-
-	Json::Value root;
-	Json::Reader reader;
-
-	Information info = Information();
-
-	bool parsingSuccessful = reader.parse(json, root);
-	if (!parsingSuccessful) {
-		cout << "Parser: Error parsing the string" << endl;
-	} else {
-
-		info.player = getActivePlayer(root);
-		/*if (getGameStageStart) {
-			cout << "Stage start !\n";
-		}*/
-		string phase = getPhase(root);
-		string step = getStep(root);
-		if (phase != "NOTHING") {
-			info.type = InformationType::CurrentStep;
-			info.values.push_back(stepToInt(step, phase));
-			cout << "Phase: " << phase << " | ";
-			cout << "Step : " << step << "\n";
-		}
-		if (getGameOver(root)) {
-			info.type = InformationType::GameOver;
-			cout << "Game over \n";
-		}
-		if (getMatchOver(root)) {
-			info.type = InformationType::MatchOver;
-			cout << "Match over \n";
-		}
-	}
-
-	return info;
 }
 
 vector<string> getMessageInJson() {
@@ -342,109 +306,6 @@ vector<string> getMessageInJson() {
 	
 	tmpJson.close();
 	return messages;
-}
-
-string getStep(Json::Value root) {
-	if (root.isMember("gameStateMessage")) {
-		if (root["gameStateMessage"].isMember("turnInfo")) {
-			if (root["gameStateMessage"]["turnInfo"].isMember("step")) {
-				return stringCleaner(root["gameStateMessage"]["turnInfo"]["step"].toStyledString());
-			}
-		}
-	}
-	return "NOTHING";
-}
-
-string getPhase(Json::Value root) {
-	if (root.isMember("gameStateMessage")) {
-		if (root["gameStateMessage"].isMember("turnInfo")) {
-			if (root["gameStateMessage"]["turnInfo"].isMember("phase")) {
-				return stringCleaner(root["gameStateMessage"]["turnInfo"]["phase"].toStyledString());
-			}
-		}
-	}
-	return "NOTHING";
-}
-
-bool getGameOver(Json::Value root) {
-	if (root.isMember("gameStateMessage")) {
-		if (root["gameStateMessage"].isMember("gameInfo")) {
-			if (root["gameStateMessage"]["gameInfo"].isMember("stage")) {
-				string end = stringCleaner(root["gameStateMessage"]["gameInfo"]["stage"].toStyledString());
-				if (end == "GameStage_GameOver") {
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-bool getMatchOver(Json::Value root) {
-	if (root.isMember("gameStateMessage")) {
-		if (root["gameStateMessage"].isMember("gameInfo")) {
-			if (root["gameStateMessage"]["gameInfo"].isMember("matchState")) {
-				string end = stringCleaner(root["gameStateMessage"]["gameInfo"]["matchState"].toStyledString());
-				if (end == "MatchState_GameComplete") {
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-bool getGameStageStart(Json::Value root) {
-	if (root.isMember("gameStateMessage")) {
-		if (root["gameStateMessage"].isMember("gameInfo")) {
-			if (root["gameStateMessage"]["gameInfo"].isMember("stage")) {
-				string end = stringCleaner(root["gameStateMessage"]["gameInfo"]["stage"].toStyledString());
-				if (end == "GameStage_Start") {
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-unsigned int getActivePlayer(Json::Value root) {
-	if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("turnInfo") && root["gameStateMessage"]["turnInfo"].isMember("activePlayer")) {
-		return (unsigned int) root["gameStateMessage"]["turnInfo"]["activePlayer"].isInt();
-	}
-	return 0;
-}
-
-string stringCleaner(string s) {
-	return s.substr(1, s.length()-3); //suprime les " " et \n a la fin des stylestring
-}
-
-int stepToInt(string step, string phase) {
-	if (step == "Step_BeginCombat") {
-		return 4;
-	} else if (step == "Step_Draw") {
-		return 2;
-	} else if (step == "Step_DeclareAttack") {
-		return 5;
-	} else if (step == "Step_DeclareBlock") {
-		return 6;
-	} else if (step == "Step_EndCombat") {
-		return 8;
-	} else if (step == "Step_CombatDamage") {
-		return 7;
-	} else if (step == "Step_Cleanup") {
-		return 11;
-	} else if (step == "Step_End") {
-		return 10;
-	} else if (step == "Step_Upkeep") {
-		return 1;
-	} else if (step == "NOTHING" && phase == "Phase_Main1") {
-		return 3;
-	} else if (step == "NOTHING" && phase == "Phase_Main2") {
-		return 9;
-	} else {
-		return -1;
-	}
 }
 
 unsigned int getNbLine(string fileName) {

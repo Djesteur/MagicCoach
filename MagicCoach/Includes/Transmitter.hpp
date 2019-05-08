@@ -14,6 +14,7 @@ enum class InformationType {
 	DeclaringBlockers,
 	StopListen,
 	GameOver,
+	SynchroID,//instanceid, grpid(mtgaid), owner, controller
 	MatchOver
 };
 
