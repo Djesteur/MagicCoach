@@ -1,0 +1,3849 @@
+[
+    {
+        "67284": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{B}",
+            "Name": "The Eldest Reborn",
+            "Power": null,
+            "Text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each opponent sacrifices a creature or planeswalker.\nII — Each opponent discards a card.\nIII — Put target creature or planeswalker card from a graveyard onto the battlefield under your control.",
+            "Toughness": null,
+            "Type": "Enchantment — Saga"
+        }
+    },
+    {
+        "67348": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{R}",
+            "Name": "The First Eruption",
+            "Power": null,
+            "Text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — The First Eruption deals 1 damage to each creature without flying.\nII — Add {R}{R}.\nIII — Sacrifice a Mountain. If you do, The First Eruption deals 3 damage to each creature.",
+            "Toughness": null,
+            "Type": "Enchantment — Saga"
+        }
+    },
+    {
+        "67350": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{R}",
+            "Name": "The Flame of Keld",
+            "Power": null,
+            "Text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Discard your hand.\nII — Draw two cards.\nIII — If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 to that permanent or player instead.",
+            "Toughness": null,
+            "Type": "Enchantment — Saga"
+        }
+    },
+    {
+        "69421": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{B}{B}",
+            "Name": "The Haunt of Hightower",
+            "Power": "3",
+            "Text": "Flying, lifelink\nWhenever The Haunt of Hightower attacks, defending player discards a card.\nWhenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on The Haunt of Hightower.",
+            "Toughness": "3",
+            "Type": "Legendary Creature — Vampire"
+        }
+    },
+    {
+        "66991": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{6}",
+            "Name": "The Immortal Sun",
+            "Power": null,
+            "Text": "Players can't activate planeswalkers' loyalty abilities.\nAt the beginning of your draw step, draw an additional card.\nSpells you cast cost {1} less to cast.\nCreatures you control get +1/+1.",
+            "Toughness": null,
+            "Type": "Legendary Artifact"
+        }
+    },
+    {
+        "67450": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{G}{G}",
+            "Name": "The Mending of Dominaria",
+            "Power": null,
+            "Text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Put the top two cards of your library into your graveyard, then you may return a creature card from your graveyard to your hand.\nIII — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.",
+            "Toughness": null,
+            "Type": "Enchantment — Saga"
+        }
+    },
+    {
+        "67218": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{U}",
+            "Name": "The Mirari Conjecture",
+            "Power": null,
+            "Text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return target instant card from your graveyard to your hand.\nII — Return target sorcery card from your graveyard to your hand.\nIII — Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.",
+            "Toughness": null,
+            "Type": "Enchantment — Saga"
+        }
+    },
+    {
+        "69488": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": "5",
+            "Mana cost": "{3}{W}",
+            "Name": "The Wanderer",
+            "Power": null,
+            "Text": "Prevent all noncombat damage that would be dealt to you and other permanents you control.\n−2: Exile target creature with power 4 or greater.",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker"
+        }
+    },
+    {
+        "68666": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}{B}",
+            "Name": "Thief of Sanity",
+            "Power": "2",
+            "Text": "Flying\nWhenever Thief of Sanity deals combat damage to a player, look at the top three cards of that player's library, exile one of them face down, then put the rest into their graveyard. You may look at and cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.",
+            "Toughness": "2",
+            "Type": "Creature — Specter"
+        }
+    },
+    {
+        "69215": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{B}",
+            "Name": "Thirsting Shade",
+            "Power": "1",
+            "Text": "Lifelink\n{2}{B}: Thirsting Shade gets +1/+1 until end of turn.",
+            "Toughness": "1",
+            "Type": "Creature — Shade"
+        }
+    },
+    {
+        "67474": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{G}{G}",
+            "Name": "Thorn Elemental",
+            "Power": "7",
+            "Text": "You may have Thorn Elemental assign its combat damage as though it weren't blocked.",
+            "Toughness": "7",
+            "Type": "Creature — Elemental"
+        }
+    },
+    {
+        "68088": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.8,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{G}",
+            "Name": "Thornhide Wolves",
+            "Power": "4",
+            "Text": "",
+            "Toughness": "5",
+            "Type": "Creature — Wolf"
+        }
+    },
+    {
+        "68086": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 2.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Thorn Lieutenant",
+            "Power": "2",
+            "Text": "Whenever Thorn Lieutenant becomes the target of a spell or ability an opponent controls, create a 1/1 green Elf Warrior creature token.\n{5}{G}: Thorn Lieutenant gets +4/+4 until end of turn.",
+            "Toughness": "3",
+            "Type": "Creature — Elf Warrior"
+        }
+    },
+    {
+        "68516": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 1,
+                "Creature": 4.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{U}",
+            "Name": "Thoughtbound Phantasm",
+            "Power": "2",
+            "Text": "Defender\nWhenever you surveil, put a +1/+1 counter on Thoughtbound Phantasm.\nAs long as Thoughtbound Phantasm has three or more +1/+1 counters on it, it can attack as though it didn't have defender.",
+            "Toughness": "2",
+            "Type": "Creature — Spirit"
+        }
+    },
+    {
+        "69185": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}{U}",
+            "Name": "Thought Collapse",
+            "Power": null,
+            "Text": "Counter target spell. Its controller puts the top three cards of their library into their graveyard.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68667": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{U}{B}",
+            "Name": "Thought Erasure",
+            "Power": null,
+            "Text": "Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nSurveil 1. (Look at the top card of your library. You may put it into your graveyard.)",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "68668": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R",
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{U}{R}",
+            "Name": "Thousand-Year Storm",
+            "Power": null,
+            "Text": "Whenever you cast an instant or sorcery spell, copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies.",
+            "Toughness": null,
+            "Type": "Enchantment"
+        }
+    },
+    {
+        "67570": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{4}",
+            "Name": "Thran Temporal Gateway",
+            "Power": null,
+            "Text": "{4}, {T}: You may put a historic permanent card from your hand onto the battlefield. (Artifacts, legendaries, and Sagas are historic.)",
+            "Toughness": null,
+            "Type": "Legendary Artifact"
+        }
+    },
+    {
+        "66913": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.3333333333333335,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}{G}",
+            "Name": "Thrashing Brontodon",
+            "Power": "3",
+            "Text": "{1}, Sacrifice Thrashing Brontodon: Destroy target artifact or enchantment.",
+            "Toughness": "4",
+            "Type": "Creature — Dinosaur"
+        }
+    },
+    {
+        "66301": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{R}",
+            "Name": "Thrash of Raptors",
+            "Power": "3",
+            "Text": "As long as you control another Dinosaur, Thrash of Raptors gets +2/+0 and has trample.",
+            "Toughness": "3",
+            "Type": "Creature — Dinosaur"
+        }
+    },
+    {
+        "69373": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G",
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{R/G}{R/G} // {2}{R}{G}",
+            "Name": "Thrash // Threat",
+            "Power": null,
+            "Text": "",
+            "Toughness": null,
+            "Type": "Instant // Sorcery"
+        }
+    },
+    {
+        "68006": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{R}",
+            "Name": "Thud",
+            "Power": null,
+            "Text": "As an additional cost to cast this spell, sacrifice a creature.\nThud deals damage equal to the sacrificed creature's power to any target.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "69524": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.25,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{U}",
+            "Name": "Thunder Drake",
+            "Power": "2",
+            "Text": "Flying\nWhenever you cast your second spell each turn, put a +1/+1 counter on Thunder Drake.",
+            "Toughness": "3",
+            "Type": "Creature — Elemental Drake"
+        }
+    },
+    {
+        "66915": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Thunderherd Migration",
+            "Power": null,
+            "Text": "As an additional cost to cast this spell, reveal a Dinosaur card from your hand or pay {1}.\nSearch your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "69630": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.8,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{G}",
+            "Name": "Thundering Ceratok",
+            "Power": "4",
+            "Text": "Trample\nWhen Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.",
+            "Toughness": "5",
+            "Type": "Creature — Rhino"
+        }
+    },
+    {
+        "66389": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.4285714285714286,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{G}{G}",
+            "Name": "Thundering Spineback",
+            "Power": "5",
+            "Text": "Other Dinosaurs you control get +1/+1.\n{5}{G}: Create a 3/3 green Dinosaur creature token with trample.",
+            "Toughness": "5",
+            "Type": "Creature — Dinosaur"
+        }
+    },
+    {
+        "67520": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.2,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{R}{W}",
+            "Name": "Tiana, Ship's Caretaker",
+            "Power": "3",
+            "Text": "Flying, first strike\nWhenever an Aura or Equipment you control is put into a graveyard from the battlefield, you may return that card to its owner's hand at the beginning of the next end step.",
+            "Toughness": "3",
+            "Type": "Legendary Creature — Angel Artificer"
+        }
+    },
+    {
+        "69597": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": "5",
+            "Mana cost": "{2}{R}",
+            "Name": "Tibalt, Rakish Instigator",
+            "Power": null,
+            "Text": "Your opponents can't gain life.\n−2: Create a 1/1 red Devil creature token with \"When this creature dies, it deals 1 damage to any target.\"",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Tibalt"
+        }
+    },
+    {
+        "69598": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{R}",
+            "Name": "Tibalt's Rager",
+            "Power": "1",
+            "Text": "When Tibalt's Rager dies, it deals 1 damage to any target.\n{1}{R}: Tibalt's Rager gets +2/+0 until end of turn.",
+            "Toughness": "2",
+            "Type": "Creature — Devil"
+        }
+    },
+    {
+        "66857": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{R}",
+            "Name": "Tilonalli's Crown",
+            "Power": null,
+            "Text": "Enchant creature\nWhen Tilonalli's Crown enters the battlefield, it deals 1 damage to enchanted creature.\nEnchanted creature gets +3/+0 and has trample.",
+            "Toughness": null,
+            "Type": "Enchantment — Aura"
+        }
+    },
+    {
+        "66303": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{R}",
+            "Name": "Tilonalli's Knight",
+            "Power": "2",
+            "Text": "Whenever Tilonalli's Knight attacks, if you control a Dinosaur, Tilonalli's Knight gets +1/+1 until end of turn.",
+            "Toughness": "2",
+            "Type": "Creature — Human Knight"
+        }
+    },
+    {
+        "66305": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{R}",
+            "Name": "Tilonalli's Skinshifter",
+            "Power": "0",
+            "Text": "Haste\nWhenever Tilonalli's Skinshifter attacks, it becomes a copy of another target nonlegendary attacking creature until end of turn.",
+            "Toughness": "1",
+            "Type": "Creature — Human Shaman"
+        }
+    },
+    {
+        "66859": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{R}",
+            "Name": "Tilonalli's Summoner",
+            "Power": "1",
+            "Text": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nWhenever Tilonalli's Summoner attacks, you may pay {X}{R}. If you do, create X 1/1 red Elemental creature tokens that are tapped and attacking. At the beginning of the next end step, exile those tokens unless you have the city's blessing.",
+            "Toughness": "1",
+            "Type": "Creature — Human Shaman"
+        }
+    },
+    {
+        "68198": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G",
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "",
+            "Name": "Timber Gorge",
+            "Power": null,
+            "Text": "Timber Gorge enters the battlefield tapped.\n{T}: Add {R} or {G}.",
+            "Toughness": null,
+            "Type": "Land"
+        }
+    },
+    {
+        "67244": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{U}",
+            "Name": "Time of Ice",
+            "Power": null,
+            "Text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Tap target creature an opponent controls. It doesn't untap during its controller's untap step for as long as you control Time of Ice.\nIII — Return all tapped creatures to their owners' hands.",
+            "Toughness": null,
+            "Type": "Enchantment — Saga"
+        }
+    },
+    {
+        "66735": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}",
+            "Name": "Timestream Navigator",
+            "Power": "1",
+            "Text": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{2}{U}{U}, {T}, Put Timestream Navigator on the bottom of its owner's library: Take an extra turn after this one. Activate this ability only if you have the city's blessing.",
+            "Toughness": "1",
+            "Type": "Creature — Human Pirate Wizard"
+        }
+    },
+    {
+        "69672": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{W}{W}{U}",
+            "Name": "Time Wipe",
+            "Power": null,
+            "Text": "Return a creature you control to its owner's hand, then destroy all creatures.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "69248": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{R}",
+            "Name": "Tin Street Dodger",
+            "Power": "1",
+            "Text": "Haste\n{R}: Tin Street Dodger can't be blocked this turn except by creatures with defender.",
+            "Toughness": "1",
+            "Type": "Creature — Goblin Rogue"
+        }
+    },
+    {
+        "66391": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{G}",
+            "Name": "Tishana's Wayfinder",
+            "Power": "2",
+            "Text": "When Tishana's Wayfinder enters the battlefield, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)",
+            "Toughness": "2",
+            "Type": "Creature — Merfolk Scout"
+        }
+    },
+    {
+        "66429": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "G",
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{G}{U}",
+            "Name": "Tishana, Voice of Thunder",
+            "Power": "*",
+            "Text": "Tishana, Voice of Thunder's power and toughness are each equal to the number of cards in your hand.\nYou have no maximum hand size.\nWhen Tishana enters the battlefield, draw a card for each creature you control.",
+            "Toughness": "*",
+            "Type": "Legendary Creature — Merfolk Shaman"
+        }
+    },
+    {
+        "69274": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Titanic Brawl",
+            "Power": null,
+            "Text": "This spell costs {1} less to cast if it targets a creature you control with a +1/+1 counter on it.\nTarget creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68090": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Titanic Growth",
+            "Power": null,
+            "Text": "Target creature gets +4/+4 until end of turn.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "69113": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{U}{U}",
+            "Name": "Titanic Pelagosaur",
+            "Power": "4",
+            "Text": "",
+            "Toughness": "6",
+            "Type": "Creature — Dinosaur"
+        }
+    },
+    {
+        "69558": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{B}",
+            "Name": "Tithebearer Giant",
+            "Power": "4",
+            "Text": "When Tithebearer Giant enters the battlefield, you draw a card and you lose 1 life.",
+            "Toughness": "5",
+            "Type": "Creature — Giant Warrior"
+        }
+    },
+    {
+        "69155": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{W}",
+            "Name": "Tithe Taker",
+            "Power": "2",
+            "Text": "During your turn, spells your opponents cast cost {1} more to cast and abilities your opponents activate cost {1} more to activate unless they're mana abilities.\nAfterlife 1 (When this creature dies, create a 1/1 white and black Spirit creature token with flying.)",
+            "Toughness": "1",
+            "Type": "Creature — Human Soldier"
+        }
+    },
+    {
+        "66045": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{W}",
+            "Name": "Tocatli Honor Guard",
+            "Power": "1",
+            "Text": "Creatures entering the battlefield don't cause abilities to trigger.",
+            "Toughness": "3",
+            "Type": "Creature — Human Soldier"
+        }
+    },
+    {
+        "67840": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.6666666666666667,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{U}",
+            "Name": "Tolarian Scholar",
+            "Power": "2",
+            "Text": "",
+            "Toughness": "3",
+            "Type": "Creature — Human Wizard"
+        }
+    },
+    {
+        "69559": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Toll of the Invasion",
+            "Power": null,
+            "Text": "Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nAmass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "69673": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.2,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{G}{G}{W}",
+            "Name": "Tolsimir, Friend to Wolves",
+            "Power": "3",
+            "Text": "When Tolsimir, Friend to Wolves enters the battlefield, create Voja, Friend to Elves, a legendary 3/3 green and white Wolf creature token.\nWhenever a Wolf enters the battlefield under your control, you gain 3 life and that creature fights up to one target creature you don't control.",
+            "Toughness": "3",
+            "Type": "Legendary Creature — Elf Scout"
+        }
+    },
+    {
+        "66791": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.6666666666666666,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Tomb Robber",
+            "Power": "1",
+            "Text": "Menace\n{1}, Discard a card: Tomb Robber explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)",
+            "Toughness": "1",
+            "Type": "Creature — Human Pirate"
+        }
+    },
+    {
+        "69390": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{5}",
+            "Name": "Tome of the Guildpact",
+            "Power": null,
+            "Text": "Whenever you cast a multicolored spell, draw a card.\n{T}: Add one mana of any color.",
+            "Toughness": null,
+            "Type": "Artifact"
+        }
+    },
+    {
+        "69485": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{W}{W}",
+            "Name": "Tomik, Distinguished Advokist",
+            "Power": "2",
+            "Text": "Flying\nLands on the battlefield and land cards in graveyards can't be the targets of spells or abilities your opponents control.\nYour opponents can't play land cards from graveyards.",
+            "Toughness": "3",
+            "Type": "Legendary Creature — Human Advisor"
+        }
+    },
+    {
+        "69486": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{W}",
+            "Name": "Topple the Statue",
+            "Power": null,
+            "Text": "Tap target permanent. If it's an artifact, destroy it.\nDraw a card.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68580": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{R}",
+            "Name": "Torch Courier",
+            "Power": "1",
+            "Text": "Haste\nSacrifice Torch Courier: Another target creature gains haste until end of turn.",
+            "Toughness": "1",
+            "Type": "Creature — Goblin"
+        }
+    },
+    {
+        "67320": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.625,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{6}{B}{B}",
+            "Name": "Torgaar, Famine Incarnate",
+            "Power": "7",
+            "Text": "As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed this way.\nWhen Torgaar, Famine Incarnate enters the battlefield, up to one target player's life total becomes half their starting life total, rounded down.",
+            "Toughness": "6",
+            "Type": "Legendary Creature — Avatar"
+        }
+    },
+    {
+        "68008": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{R}",
+            "Name": "Tormenting Voice",
+            "Power": null,
+            "Text": "As an additional cost to cast this spell, discard a card.\nDraw two cards.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "67842": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{U}",
+            "Name": "Totally Lost",
+            "Power": null,
+            "Text": "Put target nonland permanent on top of its owner's library.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "69275": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Tower Defense",
+            "Power": null,
+            "Text": "Creatures you control get +0/+5 and gain reach until end of turn.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "67178": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{W}",
+            "Name": "Tragic Poet",
+            "Power": "1",
+            "Text": "{T}, Sacrifice Tragic Poet: Return target enchantment card from your graveyard to your hand.",
+            "Toughness": "1",
+            "Type": "Creature — Human"
+        }
+    },
+    {
+        "68200": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "",
+            "Name": "Tranquil Expanse",
+            "Power": null,
+            "Text": "Tranquil Expanse enters the battlefield tapped.\n{T}: Add {G} or {W}.",
+            "Toughness": null,
+            "Type": "Land"
+        }
+    },
+    {
+        "68176": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{3}",
+            "Name": "Transmogrifying Wand",
+            "Power": null,
+            "Text": "Transmogrifying Wand enters the battlefield with three charge counters on it.\n{1}, {T}, Remove a charge counter from Transmogrifying Wand: Destroy target creature. Its controller creates a 2/4 white Ox creature token. Activate this ability only any time you could cast a sorcery.",
+            "Toughness": null,
+            "Type": "Artifact"
+        }
+    },
+    {
+        "66675": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{W}{W}",
+            "Name": "Trapjaw Tyrant",
+            "Power": "5",
+            "Text": "Enrage — Whenever Trapjaw Tyrant is dealt damage, exile target creature an opponent controls until Trapjaw Tyrant leaves the battlefield.",
+            "Toughness": "5",
+            "Type": "Creature — Dinosaur"
+        }
+    },
+    {
+        "66999": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{1}",
+            "Name": "Traveler's Amulet",
+            "Power": null,
+            "Text": "{1}, Sacrifice Traveler's Amulet: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.",
+            "Toughness": null,
+            "Type": "Artifact"
+        }
+    },
+    {
+        "67572": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 3.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{4}",
+            "Name": "Traxos, Scourge of Kroog",
+            "Power": "7",
+            "Text": "Trample\nTraxos, Scourge of Kroog enters the battlefield tapped and doesn't untap during your untap step.\nWhenever you cast a historic spell, untap Traxos. (Artifacts, legendaries, and Sagas are historic.)",
+            "Toughness": "7",
+            "Type": "Legendary Artifact Creature — Construct"
+        }
+    },
+    {
+        "66477": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": null,
+            "Name": "Treasure Map // Treasure Cove",
+            "Power": null,
+            "Text": "",
+            "Toughness": null,
+            "Type": "Artifact // Land"
+        }
+    },
+    {
+        "69119": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Treetop Warden",
+            "Power": "2",
+            "Text": "",
+            "Toughness": "2",
+            "Type": "Creature — Elf Warrior"
+        }
+    },
+    {
+        "67180": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{W}",
+            "Name": "Triumph of Gerrard",
+            "Power": null,
+            "Text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Put a +1/+1 counter on target creature you control with the greatest power.\nIII — Target creature you control with the greatest power gains flying, first strike, and lifelink until end of turn.",
+            "Toughness": null,
+            "Type": "Enchantment — Saga"
+        }
+    },
+    {
+        "69276": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{G}",
+            "Name": "Trollbred Guardian",
+            "Power": "5",
+            "Text": "{2}{G}: Adapt 2. (If this creature has no +1/+1 counters on it, put two +1/+1 counters on it.)\nEach creature you control with a +1/+1 counter on it has trample.",
+            "Toughness": "5",
+            "Type": "Creature — Troll Frog Warrior"
+        }
+    },
+    {
+        "68669": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.8,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{G}{W}",
+            "Name": "Trostani Discordant",
+            "Power": "1",
+            "Text": "Other creatures you control get +1/+1.\nWhen Trostani Discordant enters the battlefield, create two 1/1 white Soldier creature tokens with lifelink.\nAt the beginning of your end step, each player gains control of all creatures they own.",
+            "Toughness": "4",
+            "Type": "Legendary Creature — Dryad"
+        }
+    },
+    {
+        "66307": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{R}",
+            "Name": "Trove of Temptation",
+            "Power": null,
+            "Text": "Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.\nAt the beginning of your end step, create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\"",
+            "Toughness": null,
+            "Type": "Enchantment"
+        }
+    },
+    {
+        "68670": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.75,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{R}{R}{W}{W}",
+            "Name": "Truefire Captain",
+            "Power": "4",
+            "Text": "Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nWhenever Truefire Captain is dealt damage, it deals that much damage to target player.",
+            "Toughness": "3",
+            "Type": "Creature — Human Knight"
+        }
+    },
+    {
+        "68010": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{R}",
+            "Name": "Trumpet Blast",
+            "Power": null,
+            "Text": "Attacking creatures get +2/+0 until end of turn.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "69487": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{W}",
+            "Name": "Trusted Pegasus",
+            "Power": "2",
+            "Text": "Flying\nWhenever Trusted Pegasus attacks, target attacking creature without flying gains flying until end of turn.",
+            "Toughness": "2",
+            "Type": "Creature — Pegasus"
+        }
+    },
+    {
+        "67762": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.6666666666666667,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{W}",
+            "Name": "Trusty Packbeast",
+            "Power": "2",
+            "Text": "When Trusty Packbeast enters the battlefield, return target artifact card from your graveyard to your hand.",
+            "Toughness": "3",
+            "Type": "Creature — Beast"
+        }
+    },
+    {
+        "69599": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.75,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{R}",
+            "Name": "Turret Ogre",
+            "Power": "4",
+            "Text": "Reach\nWhen Turret Ogre enters the battlefield, if you control another creature with power 4 or greater, Turret Ogre deals 2 damage to each opponent.",
+            "Toughness": "3",
+            "Type": "Creature — Ogre Warrior"
+        }
+    },
+    {
+        "69156": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 3.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{W}",
+            "Name": "Twilight Panther",
+            "Power": "1",
+            "Text": "{B}: Twilight Panther gains deathtouch until end of turn.",
+            "Toughness": "2",
+            "Type": "Creature — Cat Spirit"
+        }
+    },
+    {
+        "66793": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}{B}",
+            "Name": "Twilight Prophet",
+            "Power": "2",
+            "Text": "Flying\nAscend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAt the beginning of your upkeep, if you have the city's blessing, reveal the top card of your library and put it into your hand. Each opponent loses X life and you gain X life, where X is that card's converted mana cost.",
+            "Toughness": "4",
+            "Type": "Creature — Vampire Cleric"
+        }
+    },
+    {
+        "67398": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{R}{R}",
+            "Name": "Two-Headed Giant",
+            "Power": "4",
+            "Text": "Whenever Two-Headed Giant attacks, flip two coins. If both coins come up heads, Two-Headed Giant gains double strike until end of turn. If both coins come up tails, Two-Headed Giant gains menace until end of turn.",
+            "Toughness": "4",
+            "Type": "Creature — Giant Warrior"
+        }
+    },
+    {
+        "67926": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}",
+            "Name": "Two-Headed Zombie",
+            "Power": "4",
+            "Text": "Menace (This creature can't be blocked except by two or more creatures.)",
+            "Toughness": "2",
+            "Type": "Creature — Zombie"
+        }
+    },
+    {
+        "69676": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{U}{B}",
+            "Name": "Tyrant's Scorn",
+            "Power": null,
+            "Text": "Choose one —\n• Destroy target creature with converted mana cost 3 or less.\n• Return target creature to its owner's hand.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "69454": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{X}",
+            "Name": "Ugin's Conjurant",
+            "Power": "0",
+            "Text": "Ugin's Conjurant enters the battlefield with X +1/+1 counters on it.\nIf damage would be dealt to Ugin's Conjurant while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from Ugin's Conjurant.",
+            "Toughness": "0",
+            "Type": "Creature — Spirit Monk"
+        }
+    },
+    {
+        "69453": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": "4",
+            "Mana cost": "{6}",
+            "Name": "Ugin, the Ineffable",
+            "Power": null,
+            "Text": "Colorless spells you cast cost {2} less to cast.\n+1: Exile the top card of your library face down and look at it. Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, put the exiled card into your hand.\n−3: Destroy target permanent that's one or more colors.",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Ugin"
+        }
+    },
+    {
+        "69157": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{W}",
+            "Name": "Unbreakable Formation",
+            "Power": null,
+            "Text": "Creatures you control gain indestructible until end of turn.\nAddendum — If you cast this spell during your main phase, put a +1/+1 counter on each of those creatures and they gain vigilance until end of turn.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "66495": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "",
+            "Name": "Unclaimed Territory",
+            "Power": null,
+            "Text": "As Unclaimed Territory enters the battlefield, choose a creature type.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.",
+            "Toughness": null,
+            "Type": "Land"
+        }
+    },
+    {
+        "67844": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{U}",
+            "Name": "Uncomfortable Chill",
+            "Power": null,
+            "Text": "Creatures your opponents control get -2/-0 until end of turn.\nDraw a card.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68548": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}",
+            "Name": "Undercity Necrolisk",
+            "Power": "3",
+            "Text": "{1}, Sacrifice another creature: Put a +1/+1 counter on Undercity Necrolisk. It gains menace until end of turn. Activate this ability only any time you could cast a sorcery. (It can't be blocked except by two or more creatures.)",
+            "Toughness": "3",
+            "Type": "Creature — Zombie Lizard"
+        }
+    },
+    {
+        "69216": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}",
+            "Name": "Undercity Scavenger",
+            "Power": "3",
+            "Text": "When Undercity Scavenger enters the battlefield, you may sacrifice another creature. If you do, put two +1/+1 counters on Undercity Scavenger, then scry 2.",
+            "Toughness": "3",
+            "Type": "Creature — Ogre Warrior"
+        }
+    },
+    {
+        "69217": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Undercity's Embrace",
+            "Power": null,
+            "Text": "Target opponent sacrifices a creature. If you control a creature with power 4 or greater, you gain 4 life.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68671": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}{G}",
+            "Name": "Undercity Uprising",
+            "Power": null,
+            "Text": "Creatures you control gain deathtouch until end of turn. Then target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "68672": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.4,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "B",
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}{G}",
+            "Name": "Underrealm Lich",
+            "Power": "4",
+            "Text": "If you would draw a card, instead look at the top three cards of your library, then put one into your hand and the rest into your graveyard.\nPay 4 life: Underrealm Lich gains indestructible until end of turn. Tap it.",
+            "Toughness": "3",
+            "Type": "Creature — Zombie Elf Shaman"
+        }
+    },
+    {
+        "68517": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}",
+            "Name": "Unexplained Disappearance",
+            "Power": null,
+            "Text": "Return target creature to its owner's hand.\nSurveil 1. (Look at the top card of your library. You may put that card into your graveyard.)",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "66309": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{R}",
+            "Name": "Unfriendly Fire",
+            "Power": null,
+            "Text": "Unfriendly Fire deals 4 damage to any target.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "66497": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "",
+            "Name": "Unknown Shores",
+            "Power": null,
+            "Text": "{T}: Add {C}.\n{1}, {T}: Add one mana of any color.",
+            "Toughness": null,
+            "Type": "Land"
+        }
+    },
+    {
+        "69560": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 1,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{B}",
+            "Name": "Unlikely Aid",
+            "Power": null,
+            "Text": "Target creature gets +2/+0 and gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68673": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}{B}",
+            "Name": "Unmoored Ego",
+            "Power": null,
+            "Text": "Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles their library, then draws a card for each card exiled from their hand this way.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "67476": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Untamed Kavu",
+            "Power": "2",
+            "Text": "Kicker {3} (You may pay an additional {3} as you cast this spell.)\nVigilance, trample\nIf Untamed Kavu was kicked, it enters the battlefield with three +1/+1 counters on it.",
+            "Toughness": "2",
+            "Type": "Creature — Kavu"
+        }
+    },
+    {
+        "67248": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{U}",
+            "Name": "Unwind",
+            "Power": null,
+            "Text": "Counter target noncreature spell. Untap up to three lands.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68607": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Urban Utopia",
+            "Power": null,
+            "Text": "Enchant land\nWhen Urban Utopia enters the battlefield, draw a card.\nEnchanted land has \"{T}: Add one mana of any color.\"",
+            "Toughness": null,
+            "Type": "Enchantment — Aura"
+        }
+    },
+    {
+        "67322": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.1666666666666667,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{B}{B}",
+            "Name": "Urgoros, the Empty One",
+            "Power": "4",
+            "Text": "Flying\nWhenever Urgoros, the Empty One deals combat damage to a player, that player discards a card at random. If the player can't, you draw a card.",
+            "Toughness": "3",
+            "Type": "Legendary Creature — Specter"
+        }
+    },
+    {
+        "68290": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Ursine Champion",
+            "Power": "2",
+            "Text": "{5}{G}: Ursine Champion gets +3/+3 and becomes a Bear Berserker until end of turn. Activate this ability only once each turn.",
+            "Toughness": "2",
+            "Type": "Creature — Human Berserker"
+        }
+    },
+    {
+        "67182": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{W}",
+            "Name": "Urza's Ruinous Blast",
+            "Power": null,
+            "Text": "(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)\nExile all nonland permanents that aren't legendary.",
+            "Toughness": null,
+            "Type": "Legendary Sorcery"
+        }
+    },
+    {
+        "67574": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{2}",
+            "Name": "Urza's Tome",
+            "Power": null,
+            "Text": "{3}, {T}: Draw a card. Then discard a card unless you exile a historic card from your graveyard. (Artifacts, legendaries, and Sagas are historic.)",
+            "Toughness": null,
+            "Type": "Artifact"
+        }
+    },
+    {
+        "68132": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "G",
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}{R}{G}",
+            "Name": "Vaevictis Asmadi, the Dire",
+            "Power": "6",
+            "Text": "Flying\nWhenever Vaevictis Asmadi, the Dire attacks, for each player, choose target permanent that player controls. Those players sacrifice those permanents. Each player who sacrificed a permanent this way reveals the top card of their library, then puts it onto the battlefield if it's a permanent card.",
+            "Toughness": "6",
+            "Type": "Legendary Creature — Elder Dragon"
+        }
+    },
+    {
+        "67400": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.6666666666666667,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{R}",
+            "Name": "Valduk, Keeper of the Flame",
+            "Power": "3",
+            "Text": "At the beginning of combat on your turn, for each Aura and Equipment attached to Valduk, Keeper of the Flame, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step.",
+            "Toughness": "2",
+            "Type": "Legendary Creature — Human Shaman"
+        }
+    },
+    {
+        "67764": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.75,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{W}",
+            "Name": "Valiant Knight",
+            "Power": "3",
+            "Text": "Other Knights you control get +1/+1.\n{3}{W}{W}: Knights you control gain double strike until end of turn.",
+            "Toughness": "4",
+            "Type": "Creature — Human Knight"
+        }
+    },
+    {
+        "67027": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}",
+            "Name": "Vampire Champion",
+            "Power": "3",
+            "Text": "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)",
+            "Toughness": "3",
+            "Type": "Creature — Vampire Soldier"
+        }
+    },
+    {
+        "67928": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 3.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{B}",
+            "Name": "Vampire Neonate",
+            "Power": "0",
+            "Text": "{2}, {T}: Each opponent loses 1 life and you gain 1 life.",
+            "Toughness": "3",
+            "Type": "Creature — Vampire"
+        }
+    },
+    {
+        "69561": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{B}",
+            "Name": "Vampire Opportunist",
+            "Power": "2",
+            "Text": "{6}{B}: Each opponent loses 2 life and you gain 2 life.",
+            "Toughness": "1",
+            "Type": "Creature — Vampire"
+        }
+    },
+    {
+        "66795": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}",
+            "Name": "Vampire Revenant",
+            "Power": "3",
+            "Text": "Flying",
+            "Toughness": "1",
+            "Type": "Creature — Vampire Spirit"
+        }
+    },
+    {
+        "67930": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.4,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}{B}",
+            "Name": "Vampire Sovereign",
+            "Power": "3",
+            "Text": "Flying\nWhen Vampire Sovereign enters the battlefield, target opponent loses 3 life and you gain 3 life.",
+            "Toughness": "4",
+            "Type": "Creature — Vampire"
+        }
+    },
+    {
+        "66047": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{W}",
+            "Name": "Vampire's Zeal",
+            "Power": null,
+            "Text": "Target creature gets +2/+2 until end of turn. If it's a Vampire, it gains first strike until end of turn.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "66311": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": null,
+            "Name": "Vance's Blasting Cannons // Spitfire Bastion",
+            "Power": null,
+            "Text": "",
+            "Toughness": null,
+            "Type": "Legendary Enchantment // Legendary Land"
+        }
+    },
+    {
+        "66481": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{5}",
+            "Name": "Vanquisher's Banner",
+            "Power": null,
+            "Text": "As Vanquisher's Banner enters the battlefield, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\nWhenever you cast a creature spell of the chosen type, draw a card.",
+            "Toughness": null,
+            "Type": "Artifact"
+        }
+    },
+    {
+        "66219": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Vanquish the Weak",
+            "Power": null,
+            "Text": "Destroy target creature with power 3 or less.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68518": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}",
+            "Name": "Vedalken Mesmerist",
+            "Power": "2",
+            "Text": "Whenever Vedalken Mesmerist attacks, target creature an opponent controls gets -2/-0 until end of turn.",
+            "Toughness": "1",
+            "Type": "Creature — Vedalken Wizard"
+        }
+    },
+    {
+        "68549": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Veiled Shade",
+            "Power": "2",
+            "Text": "{1}{B}: Veiled Shade gets +1/+1 until end of turn.",
+            "Toughness": "2",
+            "Type": "Creature — Shade"
+        }
+    },
+    {
+        "68491": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.6,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{W}",
+            "Name": "Venerated Loxodon",
+            "Power": "4",
+            "Text": "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of the creature's color.)\nWhen Venerated Loxodon enters the battlefield, put a +1/+1 counter on each creature that convoked it.",
+            "Toughness": "4",
+            "Type": "Creature — Elephant Cleric"
+        }
+    },
+    {
+        "68411": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{B}{B}",
+            "Name": "Vengeant Vampire",
+            "Power": "4",
+            "Text": "Lifelink\nWhen Vengeant Vampire dies, destroy target creature an opponent controls and you gain 4 life.",
+            "Toughness": "4",
+            "Type": "Creature — Vampire"
+        }
+    },
+    {
+        "67478": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.75,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{G}{G}{G}",
+            "Name": "Verdant Force",
+            "Power": "7",
+            "Text": "At the beginning of each upkeep, create a 1/1 green Saproling creature token.",
+            "Toughness": "7",
+            "Type": "Creature — Elemental"
+        }
+    },
+    {
+        "66393": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Verdant Rebirth",
+            "Power": null,
+            "Text": "Until end of turn, target creature gains \"When this creature dies, return it to its owner's hand.\"\nDraw a card.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "66395": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.4285714285714286,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{G}{G}",
+            "Name": "Verdant Sun's Avatar",
+            "Power": "5",
+            "Text": "Whenever Verdant Sun's Avatar or another creature enters the battlefield under your control, you gain life equal to that creature's toughness.",
+            "Toughness": "5",
+            "Type": "Creature — Dinosaur Avatar"
+        }
+    },
+    {
+        "69186": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{U}",
+            "Name": "Verity Circle",
+            "Power": null,
+            "Text": "Whenever a creature an opponent controls becomes tapped, if it isn't being declared as an attacker, you may draw a card.\n{4}{U}: Tap target creature without flying.",
+            "Toughness": null,
+            "Type": "Enchantment"
+        }
+    },
+    {
+        "67402": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{R}{R}",
+            "Name": "Verix Bladewing",
+            "Power": "4",
+            "Text": "Kicker {3} (You may pay an additional {3} as you cast this spell.)\nFlying\nWhen Verix Bladewing enters the battlefield, if it was kicked, create Karox Bladewing, a legendary 4/4 red Dragon creature token with flying.",
+            "Toughness": "4",
+            "Type": "Legendary Creature — Dragon"
+        }
+    },
+    {
+        "68680": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G/W}",
+            "Name": "Vernadi Shieldmate",
+            "Power": "2",
+            "Text": "Vigilance",
+            "Toughness": "2",
+            "Type": "Creature — Human Soldier"
+        }
+    },
+    {
+        "68012": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{R}",
+            "Name": "Viashino Pyromancer",
+            "Power": "2",
+            "Text": "When Viashino Pyromancer enters the battlefield, it deals 2 damage to target player or planeswalker.",
+            "Toughness": "1",
+            "Type": "Creature — Viashino Wizard"
+        }
+    },
+    {
+        "66221": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 3.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{B}",
+            "Name": "Vicious Conquistador",
+            "Power": "1",
+            "Text": "Whenever Vicious Conquistador attacks, each opponent loses 1 life.",
+            "Toughness": "2",
+            "Type": "Creature — Vampire Soldier"
+        }
+    },
+    {
+        "67324": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{B}",
+            "Name": "Vicious Offering",
+            "Power": null,
+            "Text": "Kicker—Sacrifice a creature. (You may sacrifice a creature in addition to any other costs as you cast this spell.)\nTarget creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "68550": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{B}",
+            "Name": "Vicious Rumors",
+            "Power": null,
+            "Text": "Vicious Rumors deals 1 damage to each opponent. Each opponent discards a card, then puts the top card of their library into their graveyard. You gain 1 life.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "68092": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{G}{G}",
+            "Name": "Vigilant Baloth",
+            "Power": "5",
+            "Text": "Vigilance (Attacking doesn't cause this creature to tap.)",
+            "Toughness": "5",
+            "Type": "Creature — Beast"
+        }
+    },
+    {
+        "68608": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.6666666666666667,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{G}",
+            "Name": "Vigorspore Wurm",
+            "Power": "6",
+            "Text": "Undergrowth — When Vigorspore Wurm enters the battlefield, target creature gains vigilance and gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.\nVigorspore Wurm can't be blocked by more than one creature.",
+            "Toughness": "4",
+            "Type": "Creature — Wurm"
+        }
+    },
+    {
+        "69218": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.25,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{B}",
+            "Name": "Vindictive Vampire",
+            "Power": "2",
+            "Text": "Whenever another creature you control dies, Vindictive Vampire deals 1 damage to each opponent and you gain 1 life.",
+            "Toughness": "3",
+            "Type": "Creature — Vampire"
+        }
+    },
+    {
+        "68094": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{G}{G}",
+            "Name": "Vine Mare",
+            "Power": "5",
+            "Text": "Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nVine Mare can't be blocked by black creatures.",
+            "Toughness": "3",
+            "Type": "Creature — Elemental Horse"
+        }
+    },
+    {
+        "66397": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{G}",
+            "Name": "Vineshaper Mystic",
+            "Power": "1",
+            "Text": "When Vineshaper Mystic enters the battlefield, put a +1/+1 counter on each of up to two target Merfolk you control.",
+            "Toughness": "3",
+            "Type": "Creature — Merfolk Shaman"
+        }
+    },
+    {
+        "68609": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{G}",
+            "Name": "Vivid Revival",
+            "Power": null,
+            "Text": "Return up to three target multicolored cards from your graveyard to your hand. Exile Vivid Revival.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "69631": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": "4",
+            "Mana cost": "{2}{G}",
+            "Name": "Vivien, Champion of the Wilds",
+            "Power": null,
+            "Text": "You may cast creature spells as though they had flash.\n+1: Until your next turn, up to one target creature gains vigilance and reach.\n−2: Look at the top three cards of your library. Exile one face down and put the rest on the bottom of your library in any order. For as long as it remains exiled, you may look at that card and you may cast it if it's a creature card.",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Vivien"
+        }
+    },
+    {
+        "68284": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": "5",
+            "Mana cost": "{4}{G}{G}",
+            "Name": "Vivien of the Arkbow",
+            "Power": null,
+            "Text": "+2: Put two +1/+1 counters on up to one target creature.\n−3: Target creature you control deals damage equal to its power to target creature you don't control.\n−9: Creatures you control get +4/+4 and gain trample until end of turn.",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Vivien"
+        }
+    },
+    {
+        "68096": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": "5",
+            "Mana cost": "{3}{G}{G}",
+            "Name": "Vivien Reid",
+            "Power": null,
+            "Text": "+1: Look at the top four cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\n−3: Destroy target artifact, enchantment, or creature with flying.\n−8: You get an emblem with \"Creatures you control get +2/+2 and have vigilance, trample, and indestructible.\"",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Vivien"
+        }
+    },
+    {
+        "69632": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{G}",
+            "Name": "Vivien's Arkbow",
+            "Power": null,
+            "Text": "{X}, {T}, Discard a card: Look at the top X cards of your library. You may put a creature card with converted mana cost X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.",
+            "Toughness": null,
+            "Type": "Legendary Artifact"
+        }
+    },
+    {
+        "69633": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.6666666666666667,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{G}",
+            "Name": "Vivien's Grizzly",
+            "Power": "2",
+            "Text": "{3}{G}: Look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, put it on the bottom of your library.",
+            "Toughness": "3",
+            "Type": "Creature — Bear Spirit"
+        }
+    },
+    {
+        "68098": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{G}{G}",
+            "Name": "Vivien's Invocation",
+            "Power": null,
+            "Text": "Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order. When a creature is put onto the battlefield this way, it deals damage equal to its power to target creature an opponent controls.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "68292": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.6666666666666667,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{G}",
+            "Name": "Vivien's Jaguar",
+            "Power": "3",
+            "Text": "Reach (This creature can block creatures with flying.)\n{2}{G}: Return Vivien's Jaguar from your graveyard to your hand. Activate this ability only if you control a Vivien planeswalker.",
+            "Toughness": "2",
+            "Type": "Creature — Cat Spirit"
+        }
+    },
+    {
+        "69562": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.6666666666666666,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Vizier of the Scorpion",
+            "Power": "1",
+            "Text": "When Vizier of the Scorpion enters the battlefield, amass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)\nZombie tokens you control have deathtouch.",
+            "Toughness": "1",
+            "Type": "Creature — Zombie Wizard"
+        }
+    },
+    {
+        "69348": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{W/B}",
+            "Name": "Vizkopa Vampire",
+            "Power": "3",
+            "Text": "Lifelink",
+            "Toughness": "1",
+            "Type": "Creature — Vampire"
+        }
+    },
+    {
+        "67250": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}",
+            "Name": "Vodalian Arcanist",
+            "Power": "1",
+            "Text": "{T}: Add {C}. Spend this mana only to cast an instant or sorcery spell.",
+            "Toughness": "3",
+            "Type": "Creature — Merfolk Wizard"
+        }
+    },
+    {
+        "68014": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{R}{R}",
+            "Name": "Volcanic Dragon",
+            "Power": "4",
+            "Text": "Flying\nHaste (This creature can attack and {T} as soon as it comes under your control.)",
+            "Toughness": "4",
+            "Type": "Creature — Dragon"
+        }
+    },
+    {
+        "68016": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{R}",
+            "Name": "Volley Veteran",
+            "Power": "4",
+            "Text": "When Volley Veteran enters the battlefield, it deals damage to target creature an opponent controls equal to the number of Goblins you control.",
+            "Toughness": "2",
+            "Type": "Creature — Goblin Warrior"
+        }
+    },
+    {
+        "67576": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 1,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{2}",
+            "Name": "Voltaic Servant",
+            "Power": "1",
+            "Text": "At the beginning of your end step, untap target artifact.",
+            "Toughness": "3",
+            "Type": "Artifact Creature — Construct"
+        }
+    },
+    {
+        "66431": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.6,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{W}{B}",
+            "Name": "Vona, Butcher of Magan",
+            "Power": "4",
+            "Text": "Vigilance, lifelink\n{T}, Pay 7 life: Destroy target nonland permanent. Activate this ability only during your turn.",
+            "Toughness": "4",
+            "Type": "Legendary Creature — Vampire Knight"
+        }
+    },
+    {
+        "66797": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Vona's Hunger",
+            "Power": null,
+            "Text": "Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nEach opponent sacrifices a creature. If you have the city's blessing, instead each opponent sacrifices half the creatures they control, rounded up.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "66799": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.3333333333333333,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Voracious Vampire",
+            "Power": "2",
+            "Text": "Menace\nWhen Voracious Vampire enters the battlefield, target Vampire you control gets +1/+1 and gains menace until end of turn.",
+            "Toughness": "2",
+            "Type": "Creature — Vampire Knight"
+        }
+    },
+    {
+        "68674": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 1
+            },
+            "Color identity": [
+                "B",
+                "G"
+            ],
+            "Loyalty": "4",
+            "Mana cost": "{2}{B}{G}",
+            "Name": "Vraska, Golgari Queen",
+            "Power": null,
+            "Text": "+2: You may sacrifice another permanent. If you do, you gain 1 life and draw a card.\n-3: Destroy target nonland permanent with converted mana cost 3 or less.\n-9: You get an emblem with \"Whenever a creature you control deals combat damage to a player, that player loses the game.\"",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Vraska"
+        }
+    },
+    {
+        "68750": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "G"
+            ],
+            "Loyalty": "5",
+            "Mana cost": "{5}{B}{G}",
+            "Name": "Vraska, Regal Gorgon",
+            "Power": null,
+            "Text": "+2: Put a +1/+1 counter on up to one target creature. That creature gains menace until end of turn.\n−3: Destroy target creature.\n−10: For each creature card in your graveyard, put a +1/+1 counter on each creature you control.",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Vraska"
+        }
+    },
+    {
+        "66433": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "G"
+            ],
+            "Loyalty": "6",
+            "Mana cost": "{4}{B}{G}",
+            "Name": "Vraska, Relic Seeker",
+            "Power": null,
+            "Text": "+2: Create a 2/2 black Pirate creature token with menace.\n−3: Destroy target artifact, creature, or enchantment. Create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\"\n−10: Target player's life total becomes 1.",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Vraska"
+        }
+    },
+    {
+        "67025": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": "5",
+            "Mana cost": "{4}{B}{B}",
+            "Name": "Vraska, Scheming Gorgon",
+            "Power": null,
+            "Text": "+2: Creatures you control get +1/+0 until end of turn.\n−3: Destroy target creature.\n−10: Until end of turn, creatures you control gain deathtouch and \"Whenever this creature deals damage to an opponent, that player loses the game.\"",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Vraska"
+        }
+    },
+    {
+        "67029": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{B}",
+            "Name": "Vraska's Conquistador",
+            "Power": "2",
+            "Text": "Whenever Vraska's Conquistador attacks or blocks, if you control a Vraska planeswalker, target opponent loses 2 life and you gain 2 life.",
+            "Toughness": "1",
+            "Type": "Creature — Vampire Soldier"
+        }
+    },
+    {
+        "66223": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}{B}",
+            "Name": "Vraska's Contempt",
+            "Power": null,
+            "Text": "Exile target creature or planeswalker. You gain 2 life.",
+            "Toughness": null,
+            "Type": "Instant"
+        }
+    },
+    {
+        "69563": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 1.6666666666666667,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}",
+            "Name": "Vraska's Finisher",
+            "Power": "3",
+            "Text": "When Vraska's Finisher enters the battlefield, destroy target creature or planeswalker an opponent controls that was dealt damage this turn.",
+            "Toughness": "2",
+            "Type": "Creature — Gorgon Assassin"
+        }
+    },
+    {
+        "67031": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{B}{B}",
+            "Name": "Vraska's Scorn",
+            "Power": null,
+            "Text": "Target opponent loses 4 life. You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "68753": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{B}{G}",
+            "Name": "Vraska's Stoneglare",
+            "Power": null,
+            "Text": "Destroy target creature. You gain life equal to its toughness. You may search your library and/or graveyard for a card named Vraska, Regal Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "69765": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 1,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B",
+                "G"
+            ],
+            "Loyalty": "5",
+            "Mana cost": "{2}{B/G}{B/G}",
+            "Name": "Vraska, Swarm's Eminence",
+            "Power": null,
+            "Text": "Whenever a creature you control with deathtouch deals damage to a player or planeswalker, put a +1/+1 counter on that creature.\n−2: Create a 1/1 black Assassin creature token with deathtouch and \"Whenever this creature deals damage to a planeswalker, destroy that planeswalker.\"",
+            "Toughness": null,
+            "Type": "Legendary Planeswalker — Vraska"
+        }
+    },
+    {
+        "66049": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 1.75,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{5}{W}{W}{W}",
+            "Name": "Wakening Sun's Avatar",
+            "Power": "7",
+            "Text": "When Wakening Sun's Avatar enters the battlefield, if you cast it from your hand, destroy all non-Dinosaur creatures.",
+            "Toughness": "7",
+            "Type": "Creature — Dinosaur Avatar"
+        }
+    },
+    {
+        "66399": {
+            "Categories": {
+                "Boost": 1,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{2}{G}{G}",
+            "Name": "Waker of the Wilds",
+            "Power": "3",
+            "Text": "{X}{G}{G}: Put X +1/+1 counters on target land you control. That land becomes a 0/0 Elemental creature with haste. It's still a land.",
+            "Toughness": "3",
+            "Type": "Creature — Merfolk Shaman"
+        }
+    },
+    {
+        "67932": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{B}",
+            "Name": "Walking Corpse",
+            "Power": "2",
+            "Text": "",
+            "Toughness": "2",
+            "Type": "Creature — Zombie"
+        }
+    },
+    {
+        "66225": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{B}{B}",
+            "Name": "Walk the Plank",
+            "Power": null,
+            "Text": "Destroy target non-Merfolk creature.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "69187": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}",
+            "Name": "Wall of Lost Thoughts",
+            "Power": "0",
+            "Text": "Defender\nWhen Wall of Lost Thoughts enters the battlefield, target player puts the top four cards of their library into their graveyard.",
+            "Toughness": "4",
+            "Type": "Creature — Wall"
+        }
+    },
+    {
+        "68519": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 2.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}",
+            "Name": "Wall of Mist",
+            "Power": "0",
+            "Text": "Defender",
+            "Toughness": "5",
+            "Type": "Creature — Wall"
+        }
+    },
+    {
+        "69526": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 4.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{U}",
+            "Name": "Wall of Runes",
+            "Power": "0",
+            "Text": "Defender\nWhen Wall of Runes enters the battlefield, scry 1.",
+            "Toughness": "4",
+            "Type": "Creature — Wall"
+        }
+    },
+    {
+        "68100": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 3.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{G}",
+            "Name": "Wall of Vines",
+            "Power": "0",
+            "Text": "Defender (This creature can't attack.)\nReach (This creature can block creatures with flying.)",
+            "Toughness": "3",
+            "Type": "Creature — Plant Wall"
+        }
+    },
+    {
+        "69489": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 1,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "W"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{W}",
+            "Name": "Wanderer's Strike",
+            "Power": null,
+            "Text": "Exile target creature, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    },
+    {
+        "68723": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [],
+            "Loyalty": null,
+            "Mana cost": "{1}",
+            "Name": "Wand of Vertebrae",
+            "Power": null,
+            "Text": "{T}: Put the top card of your library into your graveyard.\n{2}, {T}, Exile Wand of Vertebrae: Shuffle up to five target cards from your graveyard into your library.",
+            "Toughness": null,
+            "Type": "Artifact"
+        }
+    },
+    {
+        "66227": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 3.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "B"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{B}",
+            "Name": "Wanted Scoundrels",
+            "Power": "4",
+            "Text": "When Wanted Scoundrels dies, target opponent creates two colorless Treasure artifact tokens with \"{T}, Sacrifice this artifact: Add one mana of any color.\"",
+            "Toughness": "3",
+            "Type": "Creature — Human Pirate"
+        }
+    },
+    {
+        "67404": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{3}{R}",
+            "Name": "Warcry Phoenix",
+            "Power": "2",
+            "Text": "Flying, haste\nWhenever you attack with three or more creatures, you may pay {2}{R}. If you do, return Warcry Phoenix from your graveyard to the battlefield tapped and attacking.",
+            "Toughness": "2",
+            "Type": "Creature — Phoenix"
+        }
+    },
+    {
+        "69634": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.6,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "G"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{4}{G}",
+            "Name": "Wardscale Crocodile",
+            "Power": "5",
+            "Text": "Hexproof (This creature can't be the target of spells or abilities your opponents control.)",
+            "Toughness": "3",
+            "Type": "Creature — Crocodile"
+        }
+    },
+    {
+        "66737": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 1.5,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "U"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{1}{U}",
+            "Name": "Warkite Marauder",
+            "Power": "2",
+            "Text": "Flying\nWhenever Warkite Marauder attacks, target creature defending player controls loses all abilities and has base power and toughness 0/1 until end of turn.",
+            "Toughness": "1",
+            "Type": "Creature — Human Pirate"
+        }
+    },
+    {
+        "67406": {
+            "Categories": {
+                "Boost": 0,
+                "Control": 0,
+                "Creature": 0.0,
+                "Polyvalence": 0,
+                "Tempo": 0,
+                "Value": 0
+            },
+            "Color identity": [
+                "R"
+            ],
+            "Loyalty": null,
+            "Mana cost": "{R}",
+            "Name": "Warlord's Fury",
+            "Power": null,
+            "Text": "Creatures you control gain first strike until end of turn.\nDraw a card.",
+            "Toughness": null,
+            "Type": "Sorcery"
+        }
+    }
+]

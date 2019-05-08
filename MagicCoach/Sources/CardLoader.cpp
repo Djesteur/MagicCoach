@@ -11,7 +11,7 @@ Entity CardLoader::getCard(const unsigned int id, const unsigned int owner, cons
 	}
 	else
 	{
-		m_loadedCard.insert(std::make_pair(id, loadFromFile("..\\MagicCardGetter\\Classifier\\cardsList.json", id, owner, controller)));
+		m_loadedCard.insert(std::make_pair(id, loadFromFile("cardsList.json", id, owner, controller)));
 	}
 
 	return m_loadedCard[id];
