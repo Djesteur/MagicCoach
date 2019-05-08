@@ -1,12 +1,14 @@
+import contractions
+import inflect
 import json
 import re
-from mtgsdk import Card
+import requests
 import nltk
+import unicodedata
+from mtgsdk import Card
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
-import unicodedata
-import contractions
 from word2number import w2n
 
 nltk.download("stopwords")
@@ -17,7 +19,7 @@ def normalize(cardText):
     if (cardText is not None):
         # Removing non ASCII characters
         cardText = unicodedata.normalize(
-            'NFKD', cardText).encode("ascii", "ignore").decode("utf-8", 'ignore')
+            'NFKD', cardText).encode("ascii", "ignore").decode("utf-8", "ignore")
 
         # Removing contractions
         cardText = contractions.fix(cardText, slang=False)
@@ -33,7 +35,7 @@ def normalize(cardText):
 
         # Removing stop words
         tokenizedText = [
-            word for word in tokenizedText if not word in stopwords.words('english')]
+            word for word in tokenizedText if not word in stopwords.words("english")]
 
         # Converting numbers
         inflectEngine = inflect.engine()
@@ -47,7 +49,8 @@ def normalize(cardText):
 
         # Lemmatization
         lemmatizer = WordNetLemmatizer()
-        cardText = [lemmatizer.lemmatize(word, pos = 'v') for word in tokenizedText]
+        cardText = [lemmatizer.lemmatize(word, pos='v')
+                    for word in tokenizedText]
 
         # Turning it back into a string
         cardText = "".join([" " + i for i in tokenizedText]).strip()
@@ -64,10 +67,10 @@ def normalize(cardText):
 # Ability to destroy
 # Defender keyword
 def control(card):
-    if ((card.text.find("counter ") != -1
-            and re.search("[+-][0-9]/[+-][0-9] counter ", card.text) is None)
-            or card.text.find("destroy") != -1
-            or card.text.find("defender") != -1):
+    if ((card["oracle_text"].find("counter ") != -1
+            and re.search("[+-][0-9]/[+-][0-9] counter ", card["oracle_text"]) is None)
+            or card["oracle_text"].find("destroy") != -1
+            or card["oracle_text"].find("defender") != -1):
         return 1
 
     return 0
@@ -76,7 +79,7 @@ def control(card):
 # Returns the card's note about its tempo capacities:
 # Ability to buy time
 def tempo(card):
-    if (card.text.find("tap target") != -1):
+    if (card["oracle_text"].find("tap target") != -1):
         return 1
 
     return 0
@@ -85,7 +88,7 @@ def tempo(card):
 # Returns the card's note about its polyvalence capacities:
 # Adapted to different contexts
 def polyvalence(card):
-    if (card.text.find("choose one") != -1):
+    if (card["oracle_text"].find("choose one") != -1):
         return 1
 
     return 0
@@ -98,7 +101,7 @@ def creature(card):
     statsSum = 0
 
     tokenText = re.search(
-        "create (one|two|three|four|five|six|seven|eight|nine) ([0-9])/([0-9]) .+ token", card.text)
+        "create (one|two|three|four|five|six|seven|eight|nine) ([0-9])/([0-9]) .+ token", card["oracle_text"])
 
     if tokenText is not None:
         tokenNumber = int(w2n.word_to_num(tokenText.group(1)))
@@ -106,16 +109,16 @@ def creature(card):
 
         statsSum += tokenNumber * tokenStats
 
-    if (card.power is not None
-            and card.power != "*"):
-        statsSum += int(card.power)
+    if (card["power"] is not None
+            and card["power"] != "*"):
+        statsSum += int(card["power"])
 
-    if (card.toughness is not None
-            and card.toughness != "*"):
-        statsSum += int(card.toughness)
+    if (card["toughness"] is not None
+            and card["toughness"] != "*"):
+        statsSum += int(card["toughness"])
 
-    if (card.cmc != 0):
-        return statsSum / card.cmc
+    if (card["cmc"] != 0):
+        return statsSum / card["cmc"]
     else:
         return statsSum
 
@@ -123,7 +126,7 @@ def creature(card):
 # Returns the card's note about its value capacities:
 # Ability to draw cards
 def value(card):
-    if (card.text.find("draw ") != -1):
+    if (card["oracle_text"].find("draw ") != -1):
         return 1
 
     return 0
@@ -132,8 +135,8 @@ def value(card):
 # Returns the card's note about its boost capacities:
 # Ability to improve cards, permanently or not
 def boost(card):
-    if (card.text.find("gains") != -1
-            or re.search("\+[0-9]/\+[0-9]", card.text) is not None):
+    if (card["oracle_text"].find("gains") != -1
+            or re.search("\+[0-9]/\+[0-9]", card["oracle_text"]) is not None):
         return 1
 
     return 0
@@ -141,9 +144,7 @@ def boost(card):
 
 # Returns the card's note about its capacities in all categories
 def analyseCard(card):
-    #card.text = normalize(card.text)
-    if card.text is None:
-        card.text = ""
+    #card["oracle_text"] = normalize(card["oracle_text"])
 
     return {
         "Control": control(card),
@@ -160,19 +161,33 @@ def createJson(cardsList):
     serialisedCard = []
 
     for card in cardsList:
+        if "mana_cost" not in card:
+            card.update({"mana_cost": None})
+        if "color_identity" not in card:
+            card.update({"color_identity": None})
+        if "oracle_text" not in card:
+            card.update({"oracle_text": ""})
+        if "power" not in card:
+            card.update({"power": None})
+        if "toughness" not in card:
+            card.update({"toughness": None})
+        if "loyalty" not in card:
+                card.update({"loyalty": None})
+
         serialisedCard.append(
             {
-                "Name": card.name,
-                "Id": card.id,
-                "Multiverse id": card.multiverse_id,
-                "Mana cost": card.mana_cost,
-                "Color identity": card.color_identity,
-                "Type": card.type,
-                "Loyalty": card.loyalty,
-                "Power": card.power,
-                "Toughness": card.toughness,
-                "Text": card.text,
-                "Categories": analyseCard(card)
+                card["arena_id"]:
+                {
+                    "Name": card["name"],
+                    "Mana cost": card["mana_cost"],
+                    "Color identity": card["color_identity"],
+                    "Type": card["type_line"],
+                    "Text": card["oracle_text"],
+                    "Power": card["power"],
+                    "Toughness": card["toughness"],
+                    "Loyalty": card["loyalty"],
+                    "Categories": analyseCard(card)
+                }
             }
         )
 
@@ -183,12 +198,21 @@ def createJson(cardsList):
 
 # Main function
 def main():
-    print("Retrieving cards...")
-    mtgaCards = Card.where(gameFormat="Standard").all()
-    print("Cards retrieved")
-
     print("Classifying cards...")
-    createJson(mtgaCards)
+
+    pageCount = 1
+    request = requests.get(
+        url="https://api.scryfall.com/cards/search?page=" + str(pageCount) + "&q=game%3Aarena&unique=cards")
+    cardsData = request.json()
+
+    while cardsData['has_more']:
+        createJson(cardsData["data"])
+
+        pageCount += 1
+        request = requests.get(
+            url="https://api.scryfall.com/cards/search?page=" + str(pageCount) + "&q=game%3Aarena&unique=cards")
+        cardsData = request.json()
+
     print("Cards classified")
 
 

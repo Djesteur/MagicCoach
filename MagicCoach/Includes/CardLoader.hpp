@@ -2,9 +2,13 @@
 #define CARDLOADER_HPP
 
 #include <map>
+#include <fstream>
+#include <json.h>
+#include <regex>
 
 #include "ComponentKeeper.hpp"
 #include "EntityCreator.hpp"
+#include "GameTypes.hpp"
 
 class CardLoader {
 
