@@ -1,2 +1,17 @@
-﻿  GameSystem.cpp
+﻿  CardLoader.cpp
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(90): warning C4129: '{' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(90): warning C4129: '}' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(91): warning C4129: '{' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(91): warning C4129: '}' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(92): warning C4129: '{' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(92): warning C4129: '}' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(93): warning C4129: '{' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(93): warning C4129: '}' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(94): warning C4129: '{' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(94): warning C4129: '}' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(95): warning C4129: '{' : caractère de séquence d'échappement non reconnu
+c:\users\thomas\documents\github\magiccoach\magiccoach\sources\cardloader.cpp(95): warning C4129: '}' : caractère de séquence d'échappement non reconnu
+  main.cpp
+  GameSystem.cpp
+  Génération de code en cours...
   MagicCoach.vcxproj -> C:\Users\Thomas\Documents\GitHub\MagicCoach\MagicCoach\x64\Debug\MagicCoach.exe

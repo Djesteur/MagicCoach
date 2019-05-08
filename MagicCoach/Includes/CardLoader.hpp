@@ -15,7 +15,7 @@ class CardLoader {
 	public:
 
 		CardLoader(ComponentKeeper &keeper, EntityCreator &creator);
-		//CardLoader(const CardLoader&) = delete;
+		CardLoader(const CardLoader&) = delete;
 		CardLoader &operator=(const CardLoader&) = delete;
 
 		Entity getCard(const unsigned int id, const unsigned int controller);
