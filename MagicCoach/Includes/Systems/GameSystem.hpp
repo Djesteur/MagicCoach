@@ -22,7 +22,7 @@
 
 struct WaitingMtgaID {
 
-	WaitingMtgaID::WaitingMtgaID(const int inst, const int play):
+	WaitingMtgaID(const int inst, const int play):
 		instanceID{inst},
 		player{play} {}
 

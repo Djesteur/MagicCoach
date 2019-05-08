@@ -152,7 +152,7 @@ void GameSystem::drawBoard(const unsigned int activePlayer) {
 
 	std::cout << "Player " << activePlayer << " has on board: " << std::endl;
 
-	for(unsigned int i{0}; i < m_playerCards[activePlayer].size(); i++) { drawEntity(m_playerCards[activePlayer][i]); }
+	for(unsigned int i{0}; i < m_playerCards[activePlayer].size(); i++) { m_keeper.drawEntity(m_playerCards[activePlayer][i]); }
 }
 
 void GameSystem::resetDamageTaken() {
@@ -180,7 +180,7 @@ void GameSystem::removeSummonSickness(const unsigned int activePlayer) {
 	}
 }
 
-bool canBePlayed(const int instanceID) {
+bool GameSystem::canBePlayed(const int instanceID) {
 
 	if(m_correspondenceInstanceMtga.find(instanceID) != m_correspondenceInstanceMtga.end()) {
 
@@ -190,18 +190,19 @@ bool canBePlayed(const int instanceID) {
 	return false;
 }
 
-void playCard(const int instanceID, const int player) {
+void GameSystem::playCard(const int instanceID, const int player) {
 
 	if(canBePlayed(instanceID)) {
 
-		m_playerCards[player].emplace(m_cardLoader.getCard(m_correspondenceInstanceMtga[instanceID], player));
-		std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(player, "Area"))->data() = Area::Battlefield;
+		Entity newCard{m_cardLoader.getCard(m_correspondenceInstanceMtga[instanceID], player, player)};
+		m_playerCards[player].emplace_back(newCard);
+		std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(newCard, "Area"))->data() = Area::Battlefield;
 	}
 }
 
-void addToWaitingID(const int instanceID, const int player) { m_idWaitingMtga.emplace(instanceID, player); }
+void GameSystem::addToWaitingID(const int instanceID, const int player) { m_idWaitingMtga.emplace(instanceID, player); }
 
-void checkMtgaID(const int instanceID, const int mtgaID) {
+void GameSystem::checkMtgaID(const int instanceID, const int mtgaID) {
 
 	if(m_correspondenceInstanceMtga.find(instanceID) == m_correspondenceInstanceMtga.end()) {
 
@@ -211,12 +212,12 @@ void checkMtgaID(const int instanceID, const int mtgaID) {
 	else { m_correspondenceInstanceMtga[instanceID] = mtgaID; }
 }
 
-void checkCardsToPlay() {
+void GameSystem::checkCardsToPlay() {
 
 	while(!m_correspondenceInstanceMtga.empty() 
-	&& m_correspondenceInstanceMtga[m_idWaitingMtga.top().instanceID] != -1) {
+	&& m_correspondenceInstanceMtga[m_idWaitingMtga.front().instanceID] != -1) {
 
-		playCard(m_idWaitingMtga.top().instanceID, m_idWaitingMtga.top().player);
+		playCard(m_idWaitingMtga.front().instanceID, m_idWaitingMtga.front().player);
 		m_idWaitingMtga.pop();
 	}
 }
