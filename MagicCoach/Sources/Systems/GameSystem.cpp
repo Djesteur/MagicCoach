@@ -284,11 +284,11 @@ void GameSystem::prepareTestingGame()
 	CardLoader loader{ m_keeper, m_creator };
 
 	// Add cards
-	newCard = loader.getCard(66249, 0); // Fathom Fleet Firebrand, controller 0
+	newCard = loader.getCard(66249, 0); // Fathom Fleet Firebrand, owner 0, controller 0
 	m_keeper.addEntity(newCard);
 
 	// Add lands
-	newCard = loader.getCard(69411, 0); // Mountain, controller 0
+	newCard = loader.getCard(69411, 0); // Mountain, owner 0, controller 0
 	m_keeper.addEntity(newCard);
 
 	// Add life points

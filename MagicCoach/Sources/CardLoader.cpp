@@ -3,7 +3,7 @@
 CardLoader::CardLoader(ComponentKeeper &keeper, EntityCreator &creator) : m_keeper{keeper},
 																		  m_creator{creator} {}
 
-Entity CardLoader::getCard(const unsigned int id, const unsigned int controller)
+Entity CardLoader::getCard(const unsigned int id, const unsigned int owner, const unsigned int controller)
 {
 	if (m_loadedCard.find(id) != m_loadedCard.end())
 	{
@@ -11,13 +11,13 @@ Entity CardLoader::getCard(const unsigned int id, const unsigned int controller)
 	}
 	else
 	{
-		m_loadedCard.insert(std::make_pair(id, loadFromFile("..\\MagicCardGetter\\Classifier\\cardsList.json", id, controller)));
+		m_loadedCard.insert(std::make_pair(id, loadFromFile("..\\MagicCardGetter\\Classifier\\cardsList.json", id, owner, controller)));
 	}
 
 	return m_loadedCard[id];
 }
 
-Entity CardLoader::loadFromFile(const std::string path, const unsigned int id, const unsigned int controller)
+Entity CardLoader::loadFromFile(const std::string path, const unsigned int id, const unsigned int owner, const unsigned int controller)
 {
 	Entity newCard{m_creator.newEntity()};
 	m_keeper.addEntity(newCard);
@@ -195,7 +195,11 @@ Entity CardLoader::loadFromFile(const std::string path, const unsigned int id, c
 	std::static_pointer_cast<IntegerComponent>(cardArea)->data() = Area::Library;
 	m_keeper.addComponent(newCard, "Area", cardArea);
 
-	// Adding the controller
+	// Adding the owner and controller
+	std::shared_ptr<Component> cardController{ newComponent(ComponentType::Integer) };
+	m_keeper.addComponent(newCard, "Owner", cardController);
+	std::static_pointer_cast<IntegerComponent>(cardController)->data() = owner;
+
 	std::shared_ptr<Component> cardController{newComponent(ComponentType::Integer)};
 	m_keeper.addComponent(newCard, "Controller", cardController);
 	std::static_pointer_cast<IntegerComponent>(cardController)->data() = controller;
