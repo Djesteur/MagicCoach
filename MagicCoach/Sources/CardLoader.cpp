@@ -196,9 +196,9 @@ Entity CardLoader::loadFromFile(const std::string path, const unsigned int id, c
 	m_keeper.addComponent(newCard, "Area", cardArea);
 
 	// Adding the owner and controller
-	std::shared_ptr<Component> cardController{ newComponent(ComponentType::Integer) };
-	m_keeper.addComponent(newCard, "Owner", cardController);
-	std::static_pointer_cast<IntegerComponent>(cardController)->data() = owner;
+	std::shared_ptr<Component> cardOwner{ newComponent(ComponentType::Integer) };
+	m_keeper.addComponent(newCard, "Owner", cardOwner);
+	std::static_pointer_cast<IntegerComponent>(cardOwner)->data() = owner;
 
 	std::shared_ptr<Component> cardController{newComponent(ComponentType::Integer)};
 	m_keeper.addComponent(newCard, "Controller", cardController);

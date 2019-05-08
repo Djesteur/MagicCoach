@@ -121,6 +121,7 @@
     <ClCompile Include="sources\EntityCreator.cpp" />
     <ClCompile Include="sources\IA.cpp" />
     <ClCompile Include="Sources\jsoncpp.cpp" />
+    <ClCompile Include="Sources\JsonMessage.cpp" />
     <ClCompile Include="sources\main.cpp" />
     <ClCompile Include="Sources\MtGALogParser.cpp" />
     <ClCompile Include="sources\systems\AttackSystem.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="includes\IA.hpp" />
     <ClInclude Include="Includes\json-forwards.h" />
     <ClInclude Include="Includes\json.h" />
+    <ClInclude Include="Includes\JsonMessage.hpp" />
     <ClInclude Include="Includes\MtGALogParser.hpp" />
     <ClInclude Include="includes\systems\AttackSystem.hpp" />
     <ClInclude Include="includes\systems\GameSystem.hpp" />

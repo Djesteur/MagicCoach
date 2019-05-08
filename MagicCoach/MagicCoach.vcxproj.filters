@@ -90,6 +90,9 @@
     <ClCompile Include="Sources\CardLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\JsonMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\ComponentKeeper.hpp">
@@ -168,6 +171,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Includes\CardLoader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\JsonMessage.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
