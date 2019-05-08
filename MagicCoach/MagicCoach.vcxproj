@@ -106,6 +106,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\CardLoader.cpp" />
     <ClCompile Include="sources\ComponentKeeper.cpp" />
     <ClCompile Include="sources\components\BooleanComponent.cpp" />
     <ClCompile Include="sources\components\Component.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Sources\Transmitter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Includes\CardLoader.hpp" />
     <ClInclude Include="includes\ComponentKeeper.hpp" />
     <ClInclude Include="includes\components\BooleanComponent.hpp" />
     <ClInclude Include="includes\components\Component.hpp" />

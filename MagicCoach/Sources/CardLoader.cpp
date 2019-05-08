@@ -3,22 +3,21 @@
 CardLoader::CardLoader(ComponentKeeper &keeper, EntityCreator &creator) : m_keeper{keeper},
 																		  m_creator{creator} {}
 
-Entity CardLoader::getCard(const unsigned int id)
+Entity CardLoader::getCard(const unsigned int id, const unsigned int controller)
 {
-
 	if (m_loadedCard.find(id) != m_loadedCard.end())
 	{
 		return m_loadedCard[id];
 	}
 	else
 	{
-		m_loadedCard.insert(std::make_pair(id, loadFromFile("filePath", id)));
+		m_loadedCard.insert(std::make_pair(id, loadFromFile("$(ProjectDir)\\..\\MagicCardGetter\\Classifier\\cardsList.json", id, controller)));
 	}
 
 	return m_loadedCard[id];
 }
 
-Entity CardLoader::loadFromFile(const std::string path, const unsigned int id)
+Entity CardLoader::loadFromFile(const std::string path, const unsigned int id, const unsigned int controller)
 {
 	Entity newCard{m_creator.newEntity()};
 	m_keeper.addEntity(newCard);
@@ -66,54 +65,54 @@ Entity CardLoader::loadFromFile(const std::string path, const unsigned int id)
 	std::regex greenCostPattern("\{G\}");
 	std::shared_ptr<Component> manaCostComponent{newComponent(ComponentType::IntegerArray)};
 
-	std::ptrdiff_t matchCount(std::distance(
+	std::ptrdiff_t matchCount = std::distance(
 		std::sregex_iterator(tempCardManaCost.begin(), tempCardManaCost.end(), neutralCostPattern),
-		std::sregex_iterator()));
+		std::sregex_iterator());
 	for (int i = 0; i < matchCount; i++)
 	{
 		std::static_pointer_cast<IntegerArrayComponent>(manaCostComponent)->data().emplace_back(Mana::AnyColor);
 		cmc ++;
 	}
 
-	std::ptrdiff_t matchCount(std::distance(
+	matchCount = std::distance(
 		std::sregex_iterator(tempCardManaCost.begin(), tempCardManaCost.end(), whiteCostPattern),
-		std::sregex_iterator()));
+		std::sregex_iterator());
 	for (int i = 0; i < matchCount; i++)
 	{
 		std::static_pointer_cast<IntegerArrayComponent>(manaCostComponent)->data().emplace_back(Mana::White);
 		cmc ++;
 	}
 
-	std::ptrdiff_t matchCount(std::distance(
+	matchCount = std::distance(
 		std::sregex_iterator(tempCardManaCost.begin(), tempCardManaCost.end(), blueCostPattern),
-		std::sregex_iterator()));
+		std::sregex_iterator());
 	for (int i = 0; i < matchCount; i++)
 	{
 		std::static_pointer_cast<IntegerArrayComponent>(manaCostComponent)->data().emplace_back(Mana::Blue);
 		cmc ++;
 	}
 
-	std::ptrdiff_t matchCount(std::distance(
+	matchCount = std::distance(
 		std::sregex_iterator(tempCardManaCost.begin(), tempCardManaCost.end(), blackCostPattern),
-		std::sregex_iterator()));
+		std::sregex_iterator());
 	for (int i = 0; i < matchCount; i++)
 	{
 		std::static_pointer_cast<IntegerArrayComponent>(manaCostComponent)->data().emplace_back(Mana::Black);
 		cmc ++;
 	}
 
-	std::ptrdiff_t matchCount(std::distance(
+	matchCount = std::distance(
 		std::sregex_iterator(tempCardManaCost.begin(), tempCardManaCost.end(), redCostPattern),
-		std::sregex_iterator()));
+		std::sregex_iterator());
 	for (int i = 0; i < matchCount; i++)
 	{
 		std::static_pointer_cast<IntegerArrayComponent>(manaCostComponent)->data().emplace_back(Mana::Red);
 		cmc ++;
 	}
 
-	std::ptrdiff_t matchCount(std::distance(
+	matchCount = std::distance(
 		std::sregex_iterator(tempCardManaCost.begin(), tempCardManaCost.end(), greenCostPattern),
-		std::sregex_iterator()));
+		std::sregex_iterator());
 	for (int i = 0; i < matchCount; i++)
 	{
 		std::static_pointer_cast<IntegerArrayComponent>(manaCostComponent)->data().emplace_back(Mana::Green);
@@ -156,27 +155,27 @@ Entity CardLoader::loadFromFile(const std::string path, const unsigned int id)
 	std::static_pointer_cast<IntegerComponent>(typeComponent)->data() = cardType;
 	m_keeper.addComponent(newCard, "Type", typeComponent);
 
-	// Area
+	// Adding the area
 	std::shared_ptr<Component> cardArea{newComponent(ComponentType::Integer)};
 	std::static_pointer_cast<IntegerComponent>(cardArea)->data() = Area::Library;
 	m_keeper.addComponent(newCard, "Area", cardArea);
 
-	// Controller?
+	// Adding the controller
 	std::shared_ptr<Component> cardController{newComponent(ComponentType::Integer)};
 	m_keeper.addComponent(newCard, "Controller", cardController);
-	std::static_pointer_cast<IntegerComponent>(cardController)->data() = 0;
+	std::static_pointer_cast<IntegerComponent>(cardController)->data() = controller;
 
-	// isTapped
+	// Is the card tapped
 	std::shared_ptr<Component> cardTapped{newComponent(ComponentType::Boolean)};
 	std::static_pointer_cast<BooleanComponent>(cardTapped)->data() = false;
 	m_keeper.addComponent(newCard, "IsTapped", cardTapped);
 
-	// summonSickness
+	// Summon sickness
 	std::shared_ptr<Component> cardSummon{newComponent(ComponentType::Boolean)};
 	std::static_pointer_cast<BooleanComponent>(cardSummon)->data() = true;
 	m_keeper.addComponent(newCard, "SummonSickness", cardSummon);
 
-	// damageTaken
+	// Damage taken
 	std::shared_ptr<Component> cardDamageTaken{newComponent(ComponentType::Integer)};
 	std::static_pointer_cast<IntegerComponent>(cardDamageTaken)->data() = 0;
 	m_keeper.addComponent(newCard, "DamageTaken", cardDamageTaken);

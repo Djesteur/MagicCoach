@@ -18,12 +18,12 @@ class CardLoader {
 		CardLoader(const CardLoader&) = delete;
 		CardLoader &operator=(const CardLoader&) = delete;
 
-		Entity getCard(const unsigned int id);
+		Entity getCard(const unsigned int id, const unsigned int controller);
 		//Make a copy of loaded card, and return it
 
 	private:
 
-		Entity loadFromFile(const std::string path, const unsigned int id);
+		Entity loadFromFile(const std::string path, const unsigned int id, const unsigned int controller);
 
 		ComponentKeeper &m_keeper;
 		EntityCreator &m_creator; 
