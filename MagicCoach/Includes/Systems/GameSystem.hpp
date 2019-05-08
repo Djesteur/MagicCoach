@@ -18,7 +18,16 @@
 #include "Systems/AttackSystem.hpp"
 
 #include "Transmitter.hpp"
+#include "CardLoader.hpp"
 
+struct WaitingMtgaID {
+
+	WaitingMtgaID::WaitingMtgaID(const int inst, const int play):
+		instanceID{inst},
+		player{play} {}
+
+	int instanceID, player;
+};
 
 class GameSystem : public System {
 
@@ -32,15 +41,15 @@ class GameSystem : public System {
 
 		void receiveStepInfo(const Information lastInfo);
 
-		void drawXCards(const unsigned int player, const unsigned int x);
-		void drawCard(const unsigned int player);
-
-		void prepareBrandonGame();
-		void iaAttackAll(const unsigned int activePlayer);
-		void iaPlayAll(const unsigned int activePlayer);
 		void drawBoard(const unsigned int activePlayer);
 		void resetDamageTaken();
 		void removeSummonSickness(const unsigned int activePlayer);
+
+		bool canBePlayed(const int instanceID);
+		void playCard(const int instanceID, const int player);
+		void addToWaitingID(const int instanceID, const int player);
+		void checkMtgaID(const int instanceID, const int mtgaID);
+		void checkCardsToPlay();
 
 		EntityCreator &m_creator;
 		Entity m_gameEntity;
@@ -56,6 +65,11 @@ class GameSystem : public System {
 		AttackSystem m_attackSystem;
 
 		Transmitter &m_transmitter;
+
+		CardLoader m_cardLoader;
+
+		std::map<int, int> m_correspondenceInstanceMtga;
+		std::queue<WaitingMtgaID> m_idWaitingMtga;
 };
 
 #endif
