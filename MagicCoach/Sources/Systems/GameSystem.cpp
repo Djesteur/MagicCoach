@@ -22,7 +22,6 @@ void GameSystem::playGame() {
 	int activePlayer{0};
 
 	while(!haveToQuit) {
-
 		activePlayer = std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(m_gameEntity, "ActivePlayer"))->data();
 
 		//TODO: une fonction qui resynchronise vraiment selon les données reçues
@@ -272,6 +271,36 @@ void GameSystem::prepareBrandonGame() {
 
 	//Sort library
 
+	m_library[0] = m_playerCards[0];
+	m_library[1] = m_playerCards[1];
+
+	std::random_shuffle(m_library[0].begin(), m_library[0].end());
+	std::random_shuffle(m_library[1].begin(), m_library[1].end());
+}
+
+void GameSystem::prepareTestingGame()
+{
+	Entity newCard;
+	CardLoader loader{ m_keeper, m_creator };
+
+	// Add cards
+	newCard = loader.getCard(66249, 0); // Fathom Fleet Firebrand, controller 0
+	m_keeper.addEntity(newCard);
+
+	// Add lands
+	newCard = loader.getCard(69411, 0); // Mountain, controller 0
+	m_keeper.addEntity(newCard);
+
+	// Add life points
+	std::shared_ptr<Component> lifePoint1{ newComponent(ComponentType::Integer) };
+	std::static_pointer_cast<IntegerComponent>(lifePoint1)->data() = 20;
+	m_keeper.addComponent(m_player1, "LifePoint", lifePoint1);
+
+	std::shared_ptr<Component> lifePoint2{ newComponent(ComponentType::Integer) };
+	std::static_pointer_cast<IntegerComponent>(lifePoint2)->data() = 20;
+	m_keeper.addComponent(m_player2, "LifePoint", lifePoint2);
+
+	// Sort library
 	m_library[0] = m_playerCards[0];
 	m_library[1] = m_playerCards[1];
 

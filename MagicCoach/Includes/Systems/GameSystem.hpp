@@ -7,6 +7,7 @@
 #include <ctime>
 #include <cstdlib>
 
+#include "CardLoader.hpp"
 #include "EntityCreator.hpp"
 #include "GameTypes.hpp"
 
@@ -36,6 +37,7 @@ class GameSystem : public System {
 		void drawCard(const unsigned int player);
 
 		void prepareBrandonGame();
+		void prepareTestingGame();
 		void iaAttackAll(const unsigned int activePlayer);
 		void iaPlayAll(const unsigned int activePlayer);
 		void drawBoard(const unsigned int activePlayer);
