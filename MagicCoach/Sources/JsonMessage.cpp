@@ -35,27 +35,37 @@ bool JsonMessage::getAction(Transmitter & trans) {
 			info.type = InformationType::MatchOver;
 			cout << "Match over \n";
 		} else if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("gameObjects")) {
-			for (array<int, 4> obj : getGameObjects()) {
-				Information infoObj = Information();
-				infoObj.player = info.player;
-				infoObj.values.push_back(obj[0]);
-				infoObj.values.push_back(obj[1]);
-				infoObj.values.push_back(obj[2]);
-				infoObj.values.push_back(obj[3]);
-				infoObj.type = InformationType::SynchroID;
-				trans.addInfoForCoach(infoObj);
+			vector<array<int, 4>> objs = getGameObjects();
+			if (objs.size() > 0) {
+				for (array<int, 4> obj : objs) {
+					Information infoObj = Information();
+					infoObj.player = info.player;
+					infoObj.values.push_back(obj[0]);
+					infoObj.values.push_back(obj[1]);
+					infoObj.values.push_back(obj[2]);
+					infoObj.values.push_back(obj[3]);
+					infoObj.type = InformationType::SynchroID;
+					cout << "Parser: SynchroID, InstanceId : " << obj[0] << " | grpid : " << obj[1] << "\n";
+					trans.addInfoForCoach(infoObj);
+				}
+				//on quit ici car pas plus pour ce message
+				return true;
 			}
-			//on quit ici car pas plus pour ce message
-			return true;
 		} else if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("action")) {
-			for (int obj : getCast()) {
-				Information infoObj = Information();
-				infoObj.player = info.player;
-				infoObj.values.push_back(obj);
-				infoObj.type = InformationType::PlayCard;
-				trans.addInfoForCoach(infoObj);
+			vector<int> objs = getCast();
+			if (objs.size() > 0) {
+				for (int obj : getCast()) {
+					Information infoObj = Information();
+					infoObj.player = info.player;
+					infoObj.values.push_back(obj);
+					infoObj.type = InformationType::PlayCard;
+					cout << "Parser: Play card, InstanceID " << obj << "\n";
+					trans.addInfoForCoach(infoObj);
+				}
+				return true;
 			}
-			return true;
+		} else {
+			return false; //rien trouver
 		}
 	}
 
@@ -136,35 +146,39 @@ unsigned int JsonMessage::getActivePlayer() {
 }
 
 vector<array<int, 4>> JsonMessage::getGameObjects() {
-	vector<array<int, 4>> objs = vector<array<int, 4>>();
+	vector<array<int, 4>> valeurs = vector<array<int, 4>>();
 	if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("gameObjects")) {
-		for (Json::Value obj; root["gameStateMessage"]["gameObjects"];) {
-			if (obj.isMember("instanceId") && obj.isMember("grpId") && obj.isMember("ownerSeatId") && obj.isMember("controllerSeatId") ) {
+		cout << "Parser: gameObjects found \n";
+		Json::Value objs = root["gameStateMessage"]["gameObjects"];
+		for (int i = 0; i < objs.size(); i++) {
+			if (objs[i].isMember("instanceId") && objs[i].isMember("grpId") && objs[i].isMember("ownerSeatId") && objs[i].isMember("controllerSeatId") ) {
 				array<int, 4> valObj = {
-					obj["instanceId"].asInt(),
-					obj["grpId"].asInt(),
-					obj["ownerSeatId"].asInt(),
-					obj["controllerSeatId"].asInt()
+					objs[i]["instanceId"].asInt(),
+					objs[i]["grpId"].asInt(),
+					objs[i]["ownerSeatId"].asInt(),
+					objs[i]["controllerSeatId"].asInt()
 				};
-				objs.push_back(valObj);
+				valeurs.push_back(valObj);
 			}
 		}
 	}
-	return objs;
+	return valeurs;
 }
 
 vector<int> JsonMessage::getCast() {
-	vector<int> objs = vector<int>();
+	vector<int> valeurs = vector<int>();
 	if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("action")) {
-		for (Json::Value obj; root["gameStateMessage"]["actions"];) {
-			if (obj.isMember("seatId") && obj.isMember("action") && obj["action"].isMember("instanceId")) {
-				if (obj["action"].isMember("actionType") && root["action"]["actionType"].asString() == "ActionType_Cast") {
-					objs.push_back(obj["action"]["instanceId"].asInt());
+		cout << "Parser: action found\n";
+		Json::Value objs = root["gameStateMessage"]["actions"];
+		for (int i = 0; i < objs.size(); i++) {
+			if (objs[i].isMember("seatId") && objs[i].isMember("action") && objs[i]["action"].isMember("instanceId")) {
+				if (objs[i]["action"].isMember("actionType") && root["action"]["actionType"].asString() == "ActionType_Cast") {
+					valeurs.push_back(objs[i]["action"]["instanceId"].asInt());
 				}
 			}
 		}
 	}
-	return objs;
+	return valeurs;
 }
 
 int JsonMessage::stepToInt(string step, string phase) {
