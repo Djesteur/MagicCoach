@@ -5,7 +5,6 @@ import re
 import requests
 import nltk
 import unicodedata
-from mtgsdk import Card
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -158,7 +157,8 @@ def analyseCard(card):
 
 # Creates a .json file where all data about cards are stored
 def createJson(cardsList):
-    serialisedCard = []
+    jsonString = {}
+    serialisedCards = []
 
     for card in cardsList:
         if "mana_cost" not in card:
@@ -172,27 +172,27 @@ def createJson(cardsList):
         if "toughness" not in card:
             card.update({"toughness": None})
         if "loyalty" not in card:
-                card.update({"loyalty": None})
+            card.update({"loyalty": None})
 
-        serialisedCard.append(
+        serialisedCards.append(
             {
-                card["arena_id"]:
-                {
-                    "Name": card["name"],
-                    "Mana cost": card["mana_cost"],
-                    "Color identity": card["color_identity"],
-                    "Type": card["type_line"],
-                    "Text": card["oracle_text"],
-                    "Power": card["power"],
-                    "Toughness": card["toughness"],
-                    "Loyalty": card["loyalty"],
-                    "Categories": analyseCard(card)
-                }
+                "Id": card["arena_id"],
+                "Name": card["name"],
+                "Mana cost": card["mana_cost"],
+                "Color identity": card["color_identity"],
+                "Type": card["type_line"],
+                "Text": card["oracle_text"],
+                "Power": card["power"],
+                "Toughness": card["toughness"],
+                "Loyalty": card["loyalty"],
+                "Categories": analyseCard(card)
             }
         )
 
+    jsonString.update({"cards": serialisedCards})
+
     with open('cardsList.json', 'w', encoding='utf-8') as outfile:
-        json.dump(serialisedCard, outfile, sort_keys=True,
+        json.dump(jsonString, outfile, sort_keys=True,
                   indent=4, ensure_ascii=False)
 
 
@@ -200,18 +200,21 @@ def createJson(cardsList):
 def main():
     print("Classifying cards...")
 
+    cardsList = []
     pageCount = 1
     request = requests.get(
         url="https://api.scryfall.com/cards/search?page=" + str(pageCount) + "&q=game%3Aarena&unique=cards")
     cardsData = request.json()
 
     while cardsData['has_more']:
-        createJson(cardsData["data"])
+        cardsList.extend(cardsData["data"])
 
         pageCount += 1
         request = requests.get(
             url="https://api.scryfall.com/cards/search?page=" + str(pageCount) + "&q=game%3Aarena&unique=cards")
         cardsData = request.json()
+
+    createJson(cardsList)
 
     print("Cards classified")
 
