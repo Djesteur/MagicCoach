@@ -1,5 +1,6 @@
 #include "JsonMessage.hpp"
 
+/*Class utiliser pour parser les message des logs*/
 
 using namespace std;
 

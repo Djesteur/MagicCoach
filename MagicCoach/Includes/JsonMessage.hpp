@@ -17,6 +17,8 @@
 
 #include "Transmitter.hpp"
 
+/*Class utiliser pour parser les message des logs*/
+
 class JsonMessage {
 private:
 	std::string message;

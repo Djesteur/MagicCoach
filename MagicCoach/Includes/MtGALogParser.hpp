@@ -18,6 +18,8 @@
 #include "Transmitter.hpp"
 #include "JsonMessage.hpp"
 
+/*Parser général*/
+
 bool getLogInformations(std::string, bool*);
 bool skipLine(int, std::ifstream &);
 bool getJSON(std::string, std::ifstream &, unsigned int &, int &);

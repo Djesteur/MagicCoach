@@ -1,5 +1,6 @@
 #include "MtGALogParser.hpp"
 
+/*Parser général*/
 
 using namespace std;
 
