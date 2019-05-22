@@ -229,7 +229,7 @@ vector<int> JsonMessage::getCast() {
 		Json::Value objs = root["gameStateMessage"]["actions"];
 		for (int i = 0; i < objs.size(); i++) {
 			if (objs[i].isMember("action") && objs[i]["action"].isMember("instanceId")) {
-				if (objs[i]["action"].isMember("actionType") && objs[i]["action"]["actionType"].asString() == "ActionType_Play") {
+				if (objs[i]["action"].isMember("actionType") && objs[i]["action"]["actionType"].asString() == "ActionType_Cast") {
 					valeurs.push_back(objs[i]["action"]["instanceId"].asInt());
 				}
 			}
