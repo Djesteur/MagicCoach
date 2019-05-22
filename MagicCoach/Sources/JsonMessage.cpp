@@ -187,7 +187,9 @@ unsigned int JsonMessage::getActivePlayer() {
 array<vector<vector<int>>, 2> JsonMessage::getGameObjects() {
 	array<vector<vector<int>>, 2> valeurs = array<vector<vector<int>>, 2>();
 	if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("gameObjects")) {
-		cout << "Parser: gameObjects found \n";
+		if (debug) {
+			cout << "Parser: gameObjects found \n";
+		}
 		Json::Value objs = root["gameStateMessage"]["gameObjects"];
 		for (int i = 0; i < objs.size(); i++) {
 			if (objs[i].isMember("instanceId") && objs[i].isMember("grpId") && objs[i].isMember("ownerSeatId") && objs[i].isMember("controllerSeatId") ) {
@@ -220,8 +222,10 @@ array<vector<vector<int>>, 2> JsonMessage::getGameObjects() {
 
 vector<int> JsonMessage::getCast() {
 	vector<int> valeurs = vector<int>();
-	if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("action")) {
-		cout << "Parser: action found\n";
+	if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("actions")) {
+		if (debug) {
+			cout << "Parser: action found\n";
+		}
 		Json::Value objs = root["gameStateMessage"]["actions"];
 		for (int i = 0; i < objs.size(); i++) {
 			if (objs[i].isMember("seatId") && objs[i].isMember("action") && objs[i]["action"].isMember("instanceId")) {
