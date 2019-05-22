@@ -20,14 +20,14 @@
 
 /*Parser général*/
 
-bool getLogInformations(std::string, bool*);
+bool getLogInformations(std::string, bool*, bool);
 bool skipLine(int, std::ifstream &);
 bool getJSON(std::string, std::ifstream &, unsigned int &, int &);
 bool jumpLine(std::string);
-bool secondePasse(std::string, int &, unsigned int &, bool&, Transmitter&);
+bool secondePasse(std::string, int &, unsigned int &, bool&, Transmitter&, bool);
 int choixSortie(std::string);
-std::vector<std::string> getMessageInJson();
-void startParsing(Transmitter&);
+std::vector<std::string> getMessageInJson(bool);
+void startParsing(Transmitter&, bool);
 unsigned int getNbLine(std::string);
 unsigned int getNbLine(std::string, int &);
 int getFileSize(std::string);

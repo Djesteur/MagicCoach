@@ -25,9 +25,10 @@ private:
 	Json::Value root;
 	Json::Reader reader;
 	bool parsingSuccess;
+	bool debug;
 
 public:
-	JsonMessage(std::string);
+	JsonMessage(std::string, bool);
 
 	bool getAction(Transmitter &);
 

@@ -115,14 +115,15 @@ bool jumpLine(string line) {
 }
 
 //bool getLogInformations(string fileName, bool* continuerProgramme) {
-bool getLogInformations(string fileName, Transmitter &trans) {
+bool getLogInformations(string fileName, Transmitter &trans, bool debug) {
 
 	int lastPosition = 0;
 	unsigned int lastLine = getNbLine(fileName, lastPosition);
 
-	cout << "Parser: " << lastLine << " lignes Skip ! | File size : " << lastPosition << "\n";
-
-	cout << "Parser: Passage en ecoute. \n";
+	if (debug) {
+		cout << "Parser: " << lastLine << " lignes Skip ! | File size : " << lastPosition << "\n";
+		cout << "Parser: Passage en ecoute. \n";
+	}
 
 	clock_t start = clock();
 	clock_t lastTick = start;
@@ -141,8 +142,10 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 			//if (lastLine < nbLineFile) {
 			if (lastPosition < getFileSize(fileName)){
 				//cout << "Nb line file : " << nbLineFile << "\n";
-				cout << "Parser: Passe num: " << passe <<"\n";
-				secondePasse(fileName, lastPosition, lastLine, onMatch, trans);
+				if (debug) {
+					cout << "Parser: Passe num: " << passe << "\n";
+				}
+				secondePasse(fileName, lastPosition, lastLine, onMatch, trans, debug);
 				passe++;
 			}
 
@@ -159,7 +162,7 @@ bool getLogInformations(string fileName, Transmitter &trans) {
 
 }
 
-bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, bool & onMatch, Transmitter &trans) {
+bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, bool & onMatch, Transmitter &trans, bool debug) {
 
 	unsigned int saveLastLine = lastLine;
 
@@ -181,7 +184,9 @@ bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, 
 		if (line.find("Event.MatchCreated") != string::npos) {// AVANT JUMP
 			onMatch = true;
 			line = "{";
-			cout << "Parser: Debut de match detecter ! Passage en parsing match.\n";
+			if (debug) {
+				cout << "Parser: Debut de match detecter ! Passage en parsing match.\n";
+			}
 		}
 
 		/*
@@ -199,8 +204,8 @@ bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, 
 					return false;
 				}
 
-				for (string s : getMessageInJson()) {
-					JsonMessage m = JsonMessage(s);
+				for (string s : getMessageInJson(debug)) {
+					JsonMessage m = JsonMessage(s, debug);
 					m.getAction(trans);
 				}
 			} else {
@@ -213,7 +218,9 @@ bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, 
 	file.close();
 
 	int nbLineRead = (lastLine - saveLastLine);
-	cout << "Parser: Ligne lues pendant la passe : " << nbLineRead << " | File size: " << lastPosition <<"\n";
+	if (debug) {
+		cout << "Parser: Ligne lues pendant la passe : " << nbLineRead << " | File size: " << lastPosition << "\n";
+	}
 	return true;
 
 }
@@ -237,7 +244,7 @@ int choixSortie(string line) {
 	return 1;//pas a trier
 }
 
-vector<string> getMessageInJson() {
+vector<string> getMessageInJson(bool debug) {
 
 	ifstream tmpJson;
 	tmpJson.open("tmpJson.json");
@@ -337,8 +344,8 @@ int getFileSize(string fileName) {
 }
 
 //Fonction de demarage du parsing.
-void startParsing(Transmitter &trans) {
+void startParsing(Transmitter &trans, bool debug) {
 	string userHome = getenv("USERPROFILE");
 	string folder = userHome + "/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt";
-	getLogInformations(folder, trans); //lis les premier ligne et start l'ecoute
+	getLogInformations(folder, trans, debug); //lis les premier ligne et start l'ecoute
 }

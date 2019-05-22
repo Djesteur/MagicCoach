@@ -4,9 +4,10 @@
 
 using namespace std;
 
-JsonMessage::JsonMessage(string json) {
+JsonMessage::JsonMessage(string json, bool deb) {
 	message = json;
 	parsingSuccess = reader.parse(json, root);
+	debug = deb;
 }
 
 bool JsonMessage::getAction(Transmitter & trans) {
@@ -27,14 +28,20 @@ bool JsonMessage::getAction(Transmitter & trans) {
 		if (phase != "NOTHING") {
 			info.type = InformationType::CurrentStep;
 			info.values.push_back(stepToInt(step, phase));
-			cout << "Phase: " << phase << " | ";
-			cout << "Step : " << step << "\n";
+			if (debug) {
+				cout << "Phase: " << phase << " | ";
+				cout << "Step : " << step << "\n";
+			}
 		} else if (getGameOver()) {
 			info.type = InformationType::GameOver;
-			cout << "Game over \n";
+			if (debug) {
+				cout << "Game over \n";
+			}
 		} else if (getMatchOver()) {
 			info.type = InformationType::MatchOver;
-			cout << "Match over \n";
+			if (debug) {
+				cout << "Match over \n";
+			}
 		} else if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("gameObjects")) {
 			array<vector<vector<int>>, 2> objs = getGameObjects(); /* [0] : SynchroID | [1] : Attaquant | Qui contient une liste de chaque carte qui contient elle même une liste des info de dedant : type info -> carte -> info carte */
 			if (objs[0].size() > 0) {
@@ -46,7 +53,9 @@ bool JsonMessage::getAction(Transmitter & trans) {
 					infoObj.values.push_back(obj[2]); // Owner
 					infoObj.values.push_back(obj[3]); // controller
 					infoObj.type = InformationType::SynchroID;
-					cout << "Parser: SynchroID, InstanceId : " << obj[0] << " | grpid : " << obj[1] << "\n";
+					if (debug) {
+						cout << "Parser: SynchroID, InstanceId : " << obj[0] << " | grpid : " << obj[1] << "\n";
+					}
 					trans.addInfoForCoach(infoObj);
 				}
 				if (objs[1].size() > 0) {
@@ -55,15 +64,23 @@ bool JsonMessage::getAction(Transmitter & trans) {
 						infoObj.player = info.player;
 						infoObj.values.push_back(obj[0]); // InstanceID
 						infoObj.values.push_back(obj[1]); // Bool bloquer ou non
-						cout << "Parser: Attacker, InstanceId : " << obj[0];
+						if (debug) {
+							cout << "Parser: Attacker, InstanceId : " << obj[0];
+						}
 						if (obj[1] == 1) { // si la carte est bloquer
-							cout << " | blocker : ";
+							if (debug) {
+								cout << " | blocker : ";
+							}
 							for (int j = 2; j < obj.size(); j++) {
-								cout << obj[j] << " | ";
+								if (debug) {
+									cout << obj[j] << " | ";
+								}
 								infoObj.values.push_back(obj[j]); // on met tous les bloquer dans l'ordre a la suite
 							}
 						}
-						cout << "\n";
+						if (debug) {
+							cout << "\n";
+						}
 						infoObj.type = InformationType::DeclaringAttackers;
 						trans.addInfoForCoach(infoObj);
 					}
@@ -79,7 +96,9 @@ bool JsonMessage::getAction(Transmitter & trans) {
 					infoObj.player = info.player;
 					infoObj.values.push_back(obj);
 					infoObj.type = InformationType::PlayCard;
-					cout << "Parser: Play card, InstanceID " << obj << "\n";
+					if (debug) {
+						cout << "Parser: Play card, InstanceID " << obj << "\n";
+					}
 					trans.addInfoForCoach(infoObj);
 				}
 				return true;
