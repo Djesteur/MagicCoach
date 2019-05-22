@@ -88,7 +88,7 @@ bool JsonMessage::getAction(Transmitter & trans) {
 				//on quit ici car pas plus pour ce message
 				return true;
 			}
-		} else if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("action")) {
+		} else if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("actions")) {
 			vector<int> objs = getCast();
 			if (objs.size() > 0) {
 				for (int obj : getCast()) {
