@@ -184,10 +184,14 @@ array<vector<vector<int>>, 2> JsonMessage::getGameObjects() {
 					vector<int> valObjDeux = vector<int>();
 					valObjDeux.push_back(objs[i]["instanceId"].asInt());
 					if (objs[i].isMember("blockState") && objs[i]["blockState"].asString() == "BlockState_Blocked" && objs[i].isMember("attackInfo") && objs[i]["attackInfo"].isMember("orderedBlockers")) { // si la carte est bloquer
+						valObjDeux.push_back(1);
 						for (Json::Value idBlock : objs[i]["attackInfo"]["orderedBlockers"]) {
 							valObjDeux.push_back(idBlock["instanceId"].asInt());
 						}
+					} else {
+						valObjDeux.push_back(0);
 					}
+					valeurs[1].push_back(valObj);
 				}
 			}
 		}
