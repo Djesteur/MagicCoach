@@ -36,18 +36,37 @@ bool JsonMessage::getAction(Transmitter & trans) {
 			info.type = InformationType::MatchOver;
 			cout << "Match over \n";
 		} else if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("gameObjects")) {
-			vector<array<int, 4>> objs = getGameObjects();
-			if (objs.size() > 0) {
-				for (array<int, 4> obj : objs) {
+			array<vector<vector<int>>, 2> objs = getGameObjects(); /* [0] : SynchroID | [1] : Attaquant | Qui contient une liste de chaque carte qui contient elle même une liste des info de dedant : type info -> carte -> info carte */
+			if (objs[0].size() > 0) {
+				for (vector<int> obj : objs[0]) { //Synchro des id
 					Information infoObj = Information();
 					infoObj.player = info.player;
-					infoObj.values.push_back(obj[0]);
-					infoObj.values.push_back(obj[1]);
-					infoObj.values.push_back(obj[2]);
-					infoObj.values.push_back(obj[3]);
+					infoObj.values.push_back(obj[0]); // Instanceid
+					infoObj.values.push_back(obj[1]); // grpid
+					infoObj.values.push_back(obj[2]); // Owner
+					infoObj.values.push_back(obj[3]); // controller
 					infoObj.type = InformationType::SynchroID;
 					cout << "Parser: SynchroID, InstanceId : " << obj[0] << " | grpid : " << obj[1] << "\n";
 					trans.addInfoForCoach(infoObj);
+				}
+				if (objs[1].size() > 0) {
+					for (vector<int> obj : objs[1]) { //Attaquant
+						Information infoObj = Information();
+						infoObj.player = info.player;
+						infoObj.values.push_back(obj[0]); // InstanceID
+						infoObj.values.push_back(obj[1]); // Bool bloquer ou non
+						cout << "Parser: Attacker, InstanceId : " << obj[0];
+						if (obj[1] == 1) { // si la carte est bloquer
+							cout << " | blocker : ";
+							for (int j = 2; j < obj.size(); j++) {
+								cout << obj[j] << " | ";
+								infoObj.values.push_back(obj[j]); // on met tous les bloquer dans l'ordre a la suite
+							}
+						}
+						cout << "\n";
+						infoObj.type = InformationType::DeclaringAttackers;
+						trans.addInfoForCoach(infoObj);
+					}
 				}
 				//on quit ici car pas plus pour ce message
 				return true;
@@ -146,20 +165,30 @@ unsigned int JsonMessage::getActivePlayer() {
 	return 0;
 }
 
-vector<array<int, 4>> JsonMessage::getGameObjects() {
-	vector<array<int, 4>> valeurs = vector<array<int, 4>>();
+array<vector<vector<int>>, 2> JsonMessage::getGameObjects() {
+	array<vector<vector<int>>, 2> valeurs = array<vector<vector<int>>, 2>();
 	if (root.isMember("gameStateMessage") && root["gameStateMessage"].isMember("gameObjects")) {
 		cout << "Parser: gameObjects found \n";
 		Json::Value objs = root["gameStateMessage"]["gameObjects"];
 		for (int i = 0; i < objs.size(); i++) {
 			if (objs[i].isMember("instanceId") && objs[i].isMember("grpId") && objs[i].isMember("ownerSeatId") && objs[i].isMember("controllerSeatId") ) {
-				array<int, 4> valObj = {
+				vector<int> valObj = {
 					objs[i]["instanceId"].asInt(),
 					objs[i]["grpId"].asInt(),
 					objs[i]["ownerSeatId"].asInt(),
 					objs[i]["controllerSeatId"].asInt()
 				};
-				valeurs.push_back(valObj);
+				valeurs[0].push_back(valObj);
+				//gestion des attaquant
+				if (objs[i].isMember("attackState") && objs[i]["attackState"].asString() == "AttackState_Attacking") { // si la carte attaque
+					vector<int> valObjDeux = vector<int>();
+					valObjDeux.push_back(objs[i]["instanceId"].asInt());
+					if (objs[i].isMember("blockState") && objs[i]["blockState"].asString() == "BlockState_Blocked" && objs[i].isMember("attackInfo") && objs[i]["attackInfo"].isMember("orderedBlockers")) { // si la carte est bloquer
+						for (Json::Value idBlock : objs[i]["attackInfo"]["orderedBlockers"]) {
+							valObjDeux.push_back(idBlock["instanceId"].asInt());
+						}
+					}
+				}
 			}
 		}
 	}

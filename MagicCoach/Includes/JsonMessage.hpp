@@ -40,7 +40,7 @@ public:
 	bool getMatchOver();
 	bool getGameStageStart();
 
-	std::vector<std::array<int, 4>> getGameObjects();
+	std::array<std::vector<std::vector<int>>, 2> getGameObjects();
 	std::vector<int> getCast();
 
 	int stepToInt(std::string, std::string);
