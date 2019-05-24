@@ -48,7 +48,7 @@ class GameSystem : public System {
 		bool canBePlayed(const int instanceID);
 		void playCard(const int instanceID, const int player);
 		void addToWaitingID(const int instanceID, const int player);
-		void checkMtgaID(const int instanceID, const int mtgaID);
+		void addMtgaID(const int instanceID, const int mtgaID);
 		void checkCardsToPlay();
 
 		EntityCreator &m_creator;

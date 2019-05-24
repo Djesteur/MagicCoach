@@ -48,20 +48,53 @@ void GameSystem::playGame() {
 					break;
 
 				case InformationType::PlayCard:
-					if(canBePlayed(lastInfo.values[0])) { playCard(lastInfo.values[0], lastInfo.player); }
-					else { addToWaitingID(lastInfo.values[0], lastInfo.player); }
+					std::cout << "Emulator: player want to play " << lastInfo.values[0];
+					if(canBePlayed(lastInfo.values[0])) { 
+						playCard(lastInfo.values[0], lastInfo.player);
+						std::cout << ", can be played." << std::endl;
+					}
+					else { 
+						addToWaitingID(lastInfo.values[0], lastInfo.player); 
+						std::cout << ", waiting MTGA ID of this card." << std::endl;
+					}
 					break;
 
 				case InformationType::SynchroID:
-					checkMtgaID(lastInfo.values[0], lastInfo.values[1]);
+					std::cout << "Emulator: Synchro: " << lastInfo.values[0] << " corresponding to mtgaID: " << lastInfo.values[1] << std::endl;
+					addMtgaID(lastInfo.values[0], lastInfo.values[1]);
 					checkCardsToPlay();
 					break;
 
 				case InformationType::GameOver:
+				case InformationType::StopListen:
+				case InformationType::MatchOver:
 					haveToQuit = true;
 					break;
 
-				default:
+
+				case InformationType::DeclaringAttackers:
+					std::cout << "Emulator: Attaking with " << lastInfo.values.size() << " creatures." << std::endl;
+					for (int id : lastInfo.values) {
+
+						if (canBePlayed(id)) {
+							Entity attacking = m_cardLoader.getCard(id, lastInfo.player, lastInfo.player);
+							m_keeper.drawEntity(attacking);
+						}
+					}
+					break;
+
+				case InformationType::DeclaringBlockers:
+					std::cout << "Emulator: Blocking with " << lastInfo.values.size() << " creatures." << std::endl;
+					for (int id : lastInfo.values) {
+
+						if (canBePlayed(id)) {
+							Entity attacking = m_cardLoader.getCard(id, lastInfo.player, lastInfo.player);
+							m_keeper.drawEntity(attacking);
+						}
+					}
+					break;
+
+				case InformationType::Draw:
 					break;
 			}
 		}
@@ -197,12 +230,17 @@ void GameSystem::playCard(const int instanceID, const int player) {
 		Entity newCard{m_cardLoader.getCard(m_correspondenceInstanceMtga[instanceID], player, player)};
 		m_playerCards[player].emplace_back(newCard);
 		std::static_pointer_cast<IntegerComponent>(m_keeper.getComponent(newCard, "Area"))->data() = Area::Battlefield;
+		//drawBoard(player);
 	}
 }
 
-void GameSystem::addToWaitingID(const int instanceID, const int player) { m_idWaitingMtga.emplace(instanceID, player); }
+void GameSystem::addToWaitingID(const int instanceID, const int player) { 
+	
+	m_idWaitingMtga.emplace(instanceID, player);
+	m_correspondenceInstanceMtga.insert(std::make_pair(instanceID, -1));
+}
 
-void GameSystem::checkMtgaID(const int instanceID, const int mtgaID) {
+void GameSystem::addMtgaID(const int instanceID, const int mtgaID) {
 
 	if(m_correspondenceInstanceMtga.find(instanceID) == m_correspondenceInstanceMtga.end()) {
 
@@ -214,8 +252,7 @@ void GameSystem::checkMtgaID(const int instanceID, const int mtgaID) {
 
 void GameSystem::checkCardsToPlay() {
 
-	while(!m_correspondenceInstanceMtga.empty() 
-	&& m_correspondenceInstanceMtga[m_idWaitingMtga.front().instanceID] != -1) {
+	while(!m_idWaitingMtga.empty() && canBePlayed(m_idWaitingMtga.front().instanceID)) {
 
 		playCard(m_idWaitingMtga.front().instanceID, m_idWaitingMtga.front().player);
 		m_idWaitingMtga.pop();
