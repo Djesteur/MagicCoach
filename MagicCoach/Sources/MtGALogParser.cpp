@@ -184,9 +184,7 @@ bool secondePasse(string fileName, int & lastPosition ,unsigned int & lastLine, 
 		if (line.find("Event.MatchCreated") != string::npos) {// AVANT JUMP
 			onMatch = true;
 			line = "{";
-			if (debug) {
-				cout << "Parser: Debut de match detecter ! Passage en parsing match.\n";
-			}
+			cout << "Parser: Debut de match detecter !\n";
 		}
 
 		/*

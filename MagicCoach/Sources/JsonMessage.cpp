@@ -114,9 +114,9 @@ bool JsonMessage::getAction(Transmitter & trans) {
 				}
 				for (int obj : objs) {
 					infoObj.values.push_back(obj);
-					cout << obj << " | ";
+					if (debug) { cout << obj << " | "; }
 				}
-				cout << "\n";
+				if (debug) { cout << "\n"; }
 				trans.addInfoForCoach(infoObj);
 				return true;
 			}
