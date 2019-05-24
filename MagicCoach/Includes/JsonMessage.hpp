@@ -41,7 +41,7 @@ public:
 	bool getMatchOver();
 	bool getGameStageStart();
 
-	std::array<std::vector<std::vector<int>>, 2> getGameObjects();
+	std::array<std::vector<std::vector<int>>, 3> getGameObjects();
 	std::vector<int> getCast();
 
 	std::vector<int> getDeclareAttack();
