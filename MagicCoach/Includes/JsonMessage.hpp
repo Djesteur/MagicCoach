@@ -44,6 +44,8 @@ public:
 	std::array<std::vector<std::vector<int>>, 2> getGameObjects();
 	std::vector<int> getCast();
 
+	std::vector<int> getDeclareAttack();
+
 	int stepToInt(std::string, std::string);
 
 	~JsonMessage();

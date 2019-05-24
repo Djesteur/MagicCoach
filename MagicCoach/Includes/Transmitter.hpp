@@ -12,6 +12,7 @@ enum class InformationType {
 	CurrentStep,
 	DeclaringAttackers,
 	DeclaringBlockers,
+	AttackingAttackers,
 	StopListen,
 	GameOver,
 	SynchroID,//instanceid, grpid(mtgaid), owner, controller
