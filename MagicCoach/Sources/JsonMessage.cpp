@@ -106,16 +106,18 @@ bool JsonMessage::getAction(Transmitter & trans) {
 		} */else if (root.isMember("declareAttackersReq") && root["declareAttackersReq"].isMember("attackers")) {//Declare attack
 			vector<int> objs = getDeclareAttack();
 			if (objs.size() > 0) {
-				for (int obj : objs) {
-					Information infoObj = Information();
-					infoObj.player = info.player;
-					infoObj.values.push_back(obj);
-					infoObj.type = InformationType::DeclaringAttackers;
-					if (debug) {
-						cout << "Parser: Declare attack, InstanceID " << obj << "\n";
-					}
-					trans.addInfoForCoach(infoObj);
+				Information infoObj = Information();
+				infoObj.player = info.player;
+				infoObj.type = InformationType::DeclaringAttackers;
+				if (debug) {
+					cout << "Parser: Declare attack, InstanceID : ";
 				}
+				for (int obj : objs) {
+					infoObj.values.push_back(obj);
+					cout << obj << " | ";
+				}
+				cout << "\n";
+				trans.addInfoForCoach(infoObj);
 				return true;
 			}
 		} else {
