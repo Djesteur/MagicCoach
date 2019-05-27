@@ -77,7 +77,7 @@ void GameSystem::playGame() {
 					for (int id : lastInfo.values) {
 
 						if (canBePlayed(id)) {
-							Entity attacking = m_cardLoader.getCard(id, lastInfo.player, lastInfo.player);
+							Entity attacking = m_cardLoader.getCard(m_correspondenceInstanceMtga[id], lastInfo.player, lastInfo.player);
 							m_keeper.drawEntity(attacking);
 						}
 					}
@@ -88,7 +88,7 @@ void GameSystem::playGame() {
 					for (int id : lastInfo.values) {
 
 						if (canBePlayed(id)) {
-							Entity attacking = m_cardLoader.getCard(id, lastInfo.player, lastInfo.player);
+							Entity attacking = m_cardLoader.getCard(m_correspondenceInstanceMtga[id], lastInfo.player, lastInfo.player);
 							m_keeper.drawEntity(attacking);
 						}
 					}
