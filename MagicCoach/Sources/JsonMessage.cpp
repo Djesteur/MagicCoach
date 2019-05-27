@@ -246,7 +246,7 @@ array<vector<vector<int>>, 3> JsonMessage::getGameObjects() {
 					valeurs[1].push_back(valObjDeux);//on ajoute dans la liste des attaquant
 				}*/
 				vector<int> valObjTrois = vector<int>();
-				valeurs[3].push_back(valObjTrois);
+				valeurs[2].push_back(valObjTrois);
 			}
 		}
 	}
